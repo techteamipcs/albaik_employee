@@ -18,90 +18,7 @@
 			</a>
 		</li>
 		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/banner' || currentLocation =='banner' || currentLocation =='displayonhome' || currentLocation =='featured' || currentLocation =='event' || currentLocation =='blog' || currentLocation =='shopby'">
-			<a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-				<span class="menu-icon">
-					<i class="mdi mdi-laptop"></i>
-				</span>
-				<span class="menu-title">Employee</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="ui-basic">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/banner' || currentLocation =='banner'" [routerLink]="['/banner/view']" routerLinkActive="router-link-active" >Employee</a></li>
-					<!-- <li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/shopby' || currentLocation =='shopby'" [routerLink]="['/shopby/view']" routerLinkActive="router-link-active" >Employee</a></li> -->
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item menu-items" [class.active]="currentRoute === '/product' || currentLocation =='product' || currentLocation =='collection' || currentLocation =='subcategory' || currentLocation =='category'
-    || currentLocation =='size' || currentLocation =='colour' || currentLocation =='attribute'">
-			<a class="nav-link" data-toggle="collapse" href="#ui-cat" aria-expanded="false" aria-controls="ui-cat">
-				<span class="menu-icon">
-					<i class="mdi mdi-collage"></i>
-				</span>
-				<span class="menu-title">Department</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="ui-cat">
-				<ul class="nav flex-column sub-menu">
-					<!-- <li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/category' || currentLocation =='category'" [routerLink]="['/category/view']" routerLinkActive="router-link-active">Department</a></li> -->
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/subcategory' || currentLocation =='subcategory'" [routerLink]="['/subcategory/view']" routerLinkActive="router-link-active">Department</a></li>
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/customer' || currentLocation =='customer' || currentLocation =='customer-groups'">
-			<a class="nav-link" href="#cust" data-toggle="collapse" aria-expanded="false"
-				aria-controls="auth">
-				<span class="menu-icon">
-					<i class="mdi mdi-account-multiple"></i>
-				</span>
-				<span class="menu-title">Role/Access Control</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="cust">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/customer' || currentLocation =='customer'" [routerLink]="['/customer/view']" routerLinkActive="router-link-active"> Role/Access </a></li>
-					<!-- <li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/customer-groups' || currentLocation =='customer-groups'"[routerLink]="['/customer-groups/view']" routerLinkActive="router-link-active"> Customers Group </a></li> -->
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item menu-items" [class.active]="currentRoute === '/wallet' || currentLocation =='wallet' || currentLocation =='promocode' || currentLocation =='page' || currentLocation =='media'
-    || currentLocation =='response' || currentLocation =='testimonial'">
-			<a class="nav-link" href="#auth" data-toggle="collapse" aria-expanded="false" aria-controls="auth">
-				<span class="menu-icon">
-					<i class="mdi mdi-store"></i>
-				</span>
-				<span class="menu-title">Schedule Engine</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="auth">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/page' || currentLocation =='page'" [routerLink]="['/page/view']" routerLinkActive="router-link-active"> Schedule Engine </a></li>
-					<!-- <li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/media' || currentLocation =='media'" [routerLink]="['/media/view']" routerLinkActive="router-link-active"> Media </a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/response' || currentLocation =='response'" [routerLink]="['/response/view']" routerLinkActive="router-link-active"> Response </a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/testimonial' || currentLocation =='testimonial'" [routerLink]="['/testimonial/view']" routerLinkActive="router-link-active"> Testimonial </a></li> -->
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item menu-items" [class.active]="currentRoute === '/product' || currentLocation =='product' || currentLocation =='collection' || currentLocation =='subcategory' || currentLocation =='category'
-    || currentLocation =='size' || currentLocation =='colour' || currentLocation =='attribute'">
-			<a class="nav-link" data-toggle="collapse" href="#shift" aria-expanded="false" aria-controls="shift">
-				<span class="menu-icon">
-					<i class="mdi mdi-collage"></i>
-				</span>
-				<span class="menu-title">Shift</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="shift">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/category' || currentLocation =='category'" [routerLink]="['/category/view']" routerLinkActive="router-link-active">Shift</a></li>
-					<!-- <li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/subcategory' || currentLocation =='subcategory'" [routerLink]="['/subcategory/view']" routerLinkActive="router-link-active">Product Category</a></li> -->
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/customer' || currentLocation =='customer' || currentLocation =='customer-groups'">
+			[class.active]="currentRoute === '/attendance' || currentLocation =='attendance'">
 			<a class="nav-link" href="#atte" data-toggle="collapse" aria-expanded="false"
 				aria-controls="auth">
 				<span class="menu-icon">
@@ -112,11 +29,109 @@
 			</a>
 			<div class="collapse" id="atte">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/customer' || currentLocation =='customer'" [routerLink]="['/customer/view']" routerLinkActive="router-link-active"> Attendance </a></li>
+					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/attendance' || currentLocation =='attendance'" [routerLink]="['/attendance/view']" routerLinkActive="router-link-active"> Attendance </a></li>
 				</ul>
 			</div>
 		</li>
-		<li class="nav-item menu-items" [class.active]="currentRoute === '/payments' || currentLocation =='payments'">
+		<li class="nav-item menu-items"
+			[class.active]="currentRoute === '/certification' || currentLocation =='certification'">
+			<a class="nav-link" [routerLink]="['/certification/view']" routerLinkActive="router-link-active">
+				<span class="menu-icon">
+					<i class="mdi mdi-beats"></i>
+				</span>
+				<span class="menu-title">Certifications</span>
+			</a>
+		</li>
+		<li class="nav-item menu-items" [class.active]="currentRoute === '/department' || currentLocation =='department'">
+			<a class="nav-link" data-toggle="collapse" href="#ui-cat" aria-expanded="false" aria-controls="ui-cat">
+				<span class="menu-icon">
+					<i class="mdi mdi-collage"></i>
+				</span>
+				<span class="menu-title">Department</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="ui-cat">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/department' || currentLocation =='department'" [routerLink]="['/department/view']" routerLinkActive="router-link-active">Department</a></li>
+				</ul>
+			</div>
+		</li>
+		<li class="nav-item menu-items"
+			[class.active]="currentRoute === '/employee' || currentLocation =='employee'">
+			<a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+				<span class="menu-icon">
+					<i class="mdi mdi-laptop"></i>
+				</span>
+				<span class="menu-title">Employee</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="ui-basic">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/employee' || currentLocation =='employee'" [routerLink]="['/employee/view']" routerLinkActive="router-link-active" >Employee</a></li>
+				</ul>
+			</div>
+		</li>
+		<li class="nav-item menu-items" [class.active]="currentRoute === '/leaverequest' || currentLocation =='leaverequest'">
+			<a class="nav-link" [routerLink]="['/leaverequest/view']" routerLinkActive="router-link-active">
+				<span class="menu-icon">
+					<i class="mdi mdi-backup-restore"></i>
+				</span>
+				<span class="menu-title">Leave Requests</span>
+			</a>
+		</li>
+		<li class="nav-item menu-items" [class.active]="currentRoute === '/manager' || currentLocation =='manager'">
+			<a class="nav-link" [routerLink]="['/manager/view']" routerLinkActive="router-link-active">
+				<span class="menu-icon">
+					<i class="mdi mdi-account"></i>
+				</span>
+				<span class="menu-title">Manager</span>
+			</a>
+		</li>
+		<li class="nav-item menu-items"
+			[class.active]="currentRoute === '/role' || currentLocation =='role'">
+			<a class="nav-link" href="#cust" data-toggle="collapse" aria-expanded="false"
+				aria-controls="auth">
+				<span class="menu-icon">
+					<i class="mdi mdi-account-multiple"></i>
+				</span>
+				<span class="menu-title">Role/Access Control</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="cust">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/role' || currentLocation =='role'" [routerLink]="['/role/view']" routerLinkActive="router-link-active"> Role/Access </a></li>
+				</ul>
+			</div>
+		</li>
+		<!-- <li class="nav-item menu-items" [class.active]="currentRoute === '/schedule' || currentLocation =='schedule'">
+			<a class="nav-link" href="#shedule" data-toggle="collapse" aria-expanded="false" aria-controls="shedule">
+				<span class="menu-icon">
+					<i class="mdi mdi-store"></i>
+				</span>
+				<span class="menu-title">Schedule Engine</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="shedule">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/schedule' || currentLocation =='schedule'" [routerLink]="['/schedule/view']" routerLinkActive="router-link-active"> Schedule Engine </a></li>
+				</ul>
+			</div>
+		</li> -->
+		<li class="nav-item menu-items" [class.active]="currentRoute === '/shift' || currentLocation =='shift'">
+			<a class="nav-link" data-toggle="collapse" href="#shift" aria-expanded="false" aria-controls="shift">
+				<span class="menu-icon">
+					<i class="mdi mdi-collage"></i>
+				</span>
+				<span class="menu-title">Shift</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="shift">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/shift' || currentLocation =='shift'" [routerLink]="['/shift/view']" routerLinkActive="router-link-active">Shift</a></li>
+				</ul>
+			</div>
+		</li>		
+		<!-- <li class="nav-item menu-items" [class.active]="currentRoute === '/payments' || currentLocation =='payments'">
 			<a class="nav-link" data-toggle="collapse" href="#payment" aria-expanded="false" aria-controls="auth">
 				<span class="menu-icon">
 					<i class="mdi mdi-cash-multiple"></i>
@@ -127,90 +142,6 @@
 			<div class="collapse" id="payment">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/payments' || currentLocation =='payments'" [routerLink]="['/payments/view']" routerLinkActive="router-link-active"> Payments </a></li>
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item menu-items" [class.active]="currentRoute === '/return' || currentLocation =='return'">
-			<a class="nav-link" [routerLink]="['/return/view']" routerLinkActive="router-link-active">
-				<span class="menu-icon">
-					<i class="mdi mdi-backup-restore"></i>
-				</span>
-				<span class="menu-title">Leave Requests</span>
-			</a>
-		</li>
-		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/cart' || currentLocation =='cart' || currentLocation =='order' || currentLocation =='shipping' || currentLocation =='wishlist'">
-			<a class="nav-link" [routerLink]="['/return/view']" routerLinkActive="router-link-active">
-				<span class="menu-icon">
-					<i class="mdi mdi-beats"></i>
-				</span>
-				<span class="menu-title">Certifications</span>
-			</a>
-		</li>
-		<!-- <li class="nav-item menu-items"
-			[class.active]="currentRoute === '/banner' || currentLocation =='banner' || currentLocation =='displayonhome' || currentLocation =='featured' || currentLocation =='event' || currentLocation =='blog' || currentLocation =='shopby'">
-			<a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-				<span class="menu-icon">
-					<i class="mdi mdi-laptop"></i>
-				</span>
-				<span class="menu-title">Home Page</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="ui-basic">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/banner' || currentLocation =='banner'" [routerLink]="['/banner/view']" routerLinkActive="router-link-active" >Banners</a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/shopby' || currentLocation =='shopby'" [routerLink]="['/shopby/view']" routerLinkActive="router-link-active" >Shop By Category</a></li>
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item menu-items" [class.active]="currentRoute === '/product' || currentLocation =='product' || currentLocation =='collection' || currentLocation =='subcategory' || currentLocation =='category'
-    || currentLocation =='size' || currentLocation =='colour' || currentLocation =='attribute'">
-			<a class="nav-link" data-toggle="collapse" href="#ui-cat" aria-expanded="false" aria-controls="ui-cat">
-				<span class="menu-icon">
-					<i class="mdi mdi-collage"></i>
-				</span>
-				<span class="menu-title">Catalog</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="ui-cat">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/category' || currentLocation =='category'" [routerLink]="['/category/view']" routerLinkActive="router-link-active">Collections</a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/subcategory' || currentLocation =='subcategory'" [routerLink]="['/subcategory/view']" routerLinkActive="router-link-active">Product Category</a></li>
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/customer' || currentLocation =='customer' || currentLocation =='customer-groups'">
-			<a class="nav-link" href="#cust" data-toggle="collapse" aria-expanded="false"
-				aria-controls="auth">
-				<span class="menu-icon">
-					<i class="mdi mdi-account-multiple"></i>
-				</span>
-				<span class="menu-title">Customers</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="cust">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/customer' || currentLocation =='customer'" [routerLink]="['/customer/view']" routerLinkActive="router-link-active"> Customers </a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/customer-groups' || currentLocation =='customer-groups'"[routerLink]="['/customer-groups/view']" routerLinkActive="router-link-active"> Customers Group </a></li>
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item menu-items" [class.active]="currentRoute === '/wallet' || currentLocation =='wallet' || currentLocation =='promocode' || currentLocation =='page' || currentLocation =='media'
-    || currentLocation =='response' || currentLocation =='testimonial'">
-			<a class="nav-link" href="#auth" data-toggle="collapse" aria-expanded="false" aria-controls="auth">
-				<span class="menu-icon">
-					<i class="mdi mdi-store"></i>
-				</span>
-				<span class="menu-title">Store</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="auth">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/page' || currentLocation =='page'" [routerLink]="['/page/view']" routerLinkActive="router-link-active"> SEO page </a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/media' || currentLocation =='media'" [routerLink]="['/media/view']" routerLinkActive="router-link-active"> Media </a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/response' || currentLocation =='response'" [routerLink]="['/response/view']" routerLinkActive="router-link-active"> Response </a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/testimonial' || currentLocation =='testimonial'" [routerLink]="['/testimonial/view']" routerLinkActive="router-link-active"> Testimonial </a></li>
 				</ul>
 			</div>
 		</li> -->
