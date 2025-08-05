@@ -1,1 +1,69 @@
-<p>view-shift works!</p>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Shift</h3>
+        </div>
+        <div class="card-body">
+          <div class="col-md-12 mb-4">
+            <div class="row">
+              <div class="col-md-6">
+                <input class="form-control mt-4" type="text" (keyup)="searchShift()" name="search"
+                  [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching by name">
+              </div>
+              <div class="col-md-6"><button type="button" class="btn btn-button pull-right ml-auto mt-4"
+                  routerLink="/shift/add">Add Shift</button></div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead>
+                <tr>
+                  <th>SL No</th>
+                  <th>Shift Name</th>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                  <th>Duration</th>
+                  <th>Department</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td colspan="5" *ngIf="msg_danger">
+                  <div class="alert alert-dismissable" style="text-align: center;">
+                    Shift List is Empty
+                  </div>
+                </td>
+                <tr *ngFor="let listShift of shiftData | filter:searchText; let i = index">
+                  <td *ngIf="currentPage == 1">{{i+1}}</td>
+                  <td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+                  <td>{{listShift.name}}</td>
+                  <td>{{listShift.startTime}}</td>
+                  <td>{{listShift.endTime}}</td>
+                  <td>{{listShift.breakDuration}}</td>
+                  <td>{{listShift.department}}</td>
+                  <td>{{listShift.status == true ? 'Active':'Inactive' }}</td>
+                  <td>
+                    <a routerLink="/shift/edit/{{listShift._id}}" style="cursor:pointer"><i class="mdi mdi-lead-pencil"
+                        aria-hidden="true"></i>
+                    </a>
+                    <a style="cursor:pointer;padding-left: 15px;" (click)="deleteShift(listShift._id)"><i
+                        class="mdi mdi-close-box" aria-hidden="true"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pcommece-pagination" *ngIf="totalRecord > 0 && !searchText">
+              <app-pagination #pagination [initialPage]="currentPage" [count]="totalRecord"
+                (changePage)="onListChangeShift($event)"></app-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

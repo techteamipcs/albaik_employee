@@ -1,1 +1,92 @@
-<p>add-shift works!</p>
+<div class="content-wrapper">
+	<div class="page-header">
+		<h3 class="page-title"> Shift </h3>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Shift</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Edit Shift</li>
+			</ol>
+		</nav>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-sm-10 col-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title" *ngIf="id">Edit Shift</h4>
+					<h4 class="card-title" *ngIf="!id">Add New Shift</h4>
+					<div class="alert alert-success alert-dismissable" style="margin-left: 0;" *ngIf="msg_success">
+						{{throw_msg}}
+					</div>
+					<div class="alert alert-danger alert-dismissable" style="margin-left: 0;" *ngIf="msg_danger">
+						{{throw_msg}}
+					</div>
+					<!-- form start -->
+					<form [formGroup]="addShiftForm" (ngSubmit)="onSubmit()" method="post" novalidate>
+						<div class="box-body">
+
+							<div class="form-group">
+								<label for="Name">Name</label>
+								<input type="text" name="name" autocomplete="off" formControlName="name" class="form-control"
+									placeholder="Enter Shift Name">
+								<span *ngIf="submitted && hasError('name','required')" class="alert-danger">
+									Name is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="startTime">Start Time</label>
+								<input type="text" name="startTime" autocomplete="off" formControlName="startTime" class="form-control"
+									placeholder="Enter Start Time">
+								<span *ngIf="submitted && hasError('startTime','required')" class="alert-danger">
+									Start Time is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="endTime">End Time</label>
+								<input type="text" name="endTime" autocomplete="off" formControlName="endTime" class="form-control"
+									placeholder="Enter End Time">
+								<span *ngIf="submitted && hasError('endTime','required')" class="alert-danger">
+									End Time is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="breakDuration">Break Duration</label>
+								<input type="number" name="breakDuration" autocomplete="off" formControlName="breakDuration"
+									class="form-control" placeholder="Enter Break Duration">
+								<span *ngIf="submitted && hasError('breakDuration','required')" class="alert-danger">
+									Break Duration is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="department">department</label>
+								<input type="text" name="department" autocomplete="off" formControlName="department"
+									class="form-control" placeholder="Enter Department">
+								<span *ngIf="submitted && hasError('department','required')" class="alert-danger">
+									Department is required</span>
+							</div>
+							<div class="form-group">
+								<label for="status">Status</label>
+								<select name="status" formControlName="status" class="form-control">
+									<option value="">Select Status</option>
+									<option value="true">Active</option>
+									<option value="false">Inactive</option>
+								</select>
+								<span *ngIf="submitted && hasError('status','required')" class="alert-danger">
+									Select Status
+								</span>
+							</div>
+						</div>
+
+						<div class="box-footer">
+							<button type="submit" class="btn btn-button">Submit</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
