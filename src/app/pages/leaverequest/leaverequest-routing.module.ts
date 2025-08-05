@@ -14,6 +14,7 @@ const routes: Routes = [
     path: 'edit/:id',
     component: AddLeaverequestComponent,
     canActivate: [AuthGuard],
+    data: { title: 'edit' },
   },
   {
     path: 'view',

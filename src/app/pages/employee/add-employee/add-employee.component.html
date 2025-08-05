@@ -1,1 +1,121 @@
-<p>add-employee works!</p>
+<div class="container mt--7">
+	<div class="row">
+		<div class="col-xl-12 order-xl-1">
+			<div class="card  shadow">
+				<div class="card-header border-0">
+					<div class="row align-items-center">
+						<div class="col-md-8 col-sm-10 col-12">
+							<h3 class="mb-0">Edit Employee</h3>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<!-- form start -->
+					<form [formGroup]="addemployeeForm" (ngSubmit)="onSubmit()" method="post" novalidate>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Select Status</label>
+							<select name="status" formControlName="status" class="form-control">
+								<option value="">Select Status</option>
+								<option value="true">Active</option>
+								<option value="false">Deactive</option>
+							</select>
+							<span *ngIf="submitted && hasError('status','required')" class="alert-danger">Please Select Status</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Username</label>
+							<input type="text" name="username" autocomplete="off" formControlName="username" class="form-control"
+								placeholder="title">
+							<span *ngIf="submitted && hasError('username','required')" class="alert-danger">Username is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Employee Id</label>
+							<input type="text" name="employee_id" autocomplete="off" formControlName="employee_id" class="form-control"
+								placeholder="Employee Id">
+							<span *ngIf="submitted && hasError('employee_id','required')" class="alert-danger">Employee Id is
+								required</span>
+						</div>
+						<div class="form-group">
+                <label for="exampleInputEmail1">Select Employee Role</label>
+                <select name="role" formControlName="role" class="form-control">
+                  <option value="">Select Employee role</option>
+                  <option value="{{item._id}}" *ngFor="let item of rolesData">{{item.name}}</option>
+                </select>
+            </div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email</label>
+							<input type="email" name="email" autocomplete="off" formControlName="email" class="form-control"
+								placeholder="Email">
+							<span *ngIf="submitted && hasError('email','required')" class="alert-danger">Email Date is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Password</label>
+							<input type="password" name="password" autocomplete="off" formControlName="password"
+								class="form-control" placeholder="Password">
+							<span *ngIf="submitted && hasError('password','required')" class="alert-danger">Password is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">First Name</label>
+							<input type="text" name="first_name" autocomplete="off" formControlName="first_name" class="form-control"
+								placeholder="First Name">
+							<span *ngIf="submitted && hasError('first_name','required')" class="alert-danger">First Name is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Last Name</label>
+							<input type="text" name="last_name" autocomplete="off" formControlName="last_name" class="form-control"
+								placeholder="Last Name">
+							<span *ngIf="submitted && hasError('last_name','required')" class="alert-danger">Last Name is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Employment Type</label>
+							<select name="employmentType" formControlName="employmentType" class="form-control">
+								<option value="">Select Employment Type</option>
+								<option value="Full-Time">Full-Time</option>
+								<option value="Part-Time">Part-Time</option>
+								<option value="Contract">Contract</option>
+							</select>
+							<span *ngIf="submitted && hasError('employmentType','required')" class="alert-danger">Please Select Employment Type</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Hire Date</label>
+							<input type="date" name="hireDate" autocomplete="off" formControlName="hireDate" class="form-control"
+								placeholder="Hire Date">
+							<span *ngIf="submitted && hasError('hireDate','required')" class="alert-danger">Hire Date is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Shift Preferences</label>
+							<select name="shiftPreferences" formControlName="shiftPreferences" class="form-control">
+								<option value="">Select Shift Preferences</option>
+								<option value="Morning">Morning</option>
+								<option value="Afternoon">Afternoon</option>
+								<option value="Evening">Evening</option>
+								<option value="Night">Night</option>
+							</select>
+							<span *ngIf="submitted && hasError('shiftPreferences','required')" class="alert-danger">Please Select Shift Preferences</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Payment Type</label>
+							<select name="paymentType" formControlName="paymentType" class="form-control">
+								<option value="">Select Shift Preferences</option>
+								<option value="Morning">Morning</option>
+								<option value="Afternoon">Afternoon</option>
+								<option value="Evening">Evening</option>
+								<option value="Night">Night</option>
+							</select>
+							<span *ngIf="submitted && hasError('paymentType','required')" class="alert-danger">Please Select Payment Type</span>
+						</div>
+						<div class="box-footer d-flex">
+							<button type="submit" class="btn btn-button mr-2">Submit</button>
+							<button type="cancel" (click)="onCancel()" class="btn btn-button">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,1 +1,70 @@
-<p>add-department works!</p>
+<div class="container mt--7">
+	<div class="row">
+		<div class="col-xl-12 order-xl-1">
+			<div class="card  shadow">
+				<div class="card-header border-0">
+					<div class="row align-items-center">
+						<div class="col-md-8 col-sm-10 col-12">
+							<h3 class="mb-0">Edit Department</h3>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<!-- form start -->
+					<form [formGroup]="adddepartmentForm" (ngSubmit)="onSubmit()" method="post" novalidate>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Select Status</label>
+							<select name="status" formControlName="status" class="form-control">
+								<option value="">Select Status</option>
+								<option value="true">Active</option>
+								<option value="false">Deactive</option>
+							</select>
+							<span *ngIf="submitted && hasError('status','required')" class="alert-danger">Please Select Status</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Title</label>
+							<input type="text" name="title" autocomplete="off" formControlName="title" class="form-control"
+								placeholder="title">
+							<span *ngIf="submitted && hasError('title','required')" class="alert-danger">Title is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Issued Date</label>
+							<input type="date" name="issuedDate" autocomplete="off" formControlName="issuedDate" class="form-control"
+								placeholder="Issued Date">
+							<span *ngIf="submitted && hasError('issuedDate','required')" class="alert-danger">Issued Date is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Expiry Date</label>
+							<input type="date" name="expiryDate" autocomplete="off" formControlName="expiryDate" class="form-control"
+								placeholder="Expiry Date">
+							<span *ngIf="submitted && hasError('expiryDate','required')" class="alert-danger">Expiry Date is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Sequence Number</label>
+							<input type="text" name="department_id" autocomplete="off" formControlName="department_id" class="form-control"
+								placeholder="Sequence Number">
+							<span *ngIf="submitted && hasError('department_id','required')" class="alert-danger">Sequence Number is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Verified</label>
+							<select name="verified" formControlName="verified" class="form-control">
+								<option value="">Select verified</option>
+								<option value="true">Yes</option>
+								<option value="false">No</option>
+							</select>
+							<span *ngIf="submitted && hasError('verified','required')" class="alert-danger">Please Select verify</span>
+						</div>
+						<div class="box-footer d-flex">
+							<button type="submit" class="btn btn-button mr-2">Submit</button>
+							<button type="cancel" (click)="onCancel()" class="btn btn-button">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

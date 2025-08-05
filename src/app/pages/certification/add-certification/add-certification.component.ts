@@ -44,7 +44,7 @@ export class AddCertificationComponent {
 			expiryDate: [''],
   		verified: [''],
 			status: ['', Validators.required],
-			sequence_number: [''],
+			certification_id: [''],
 		});
 		this.token = localStorage.getItem('ghoastrental-token');
 		this.imagePath = environment.baseUrl + '/public/';
@@ -98,9 +98,12 @@ export class AddCertificationComponent {
 					let data = response?.result;
 					this.certificationData = response?.result;
 					this.addcertificationForm.patchValue({
-						name: data?.name,
-						sequence_number: data?.sequence_number,
-						status: data?.status
+						title: data?.title,
+						issuedDate: data?.issuedDate,
+						expiryDate: data?.expiryDate,
+						verified: data?.verified,
+						status: data?.status,
+						certification_id: data?.certification_id,
 					});
 				} else {
 

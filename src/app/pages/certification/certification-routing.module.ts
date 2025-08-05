@@ -14,6 +14,7 @@ const routes: Routes = [
     path: 'edit/:id',
     component: AddCertificationComponent,
     canActivate: [AuthGuard],
+    data: { title: 'edit' },
   },
   {
     path: 'view',

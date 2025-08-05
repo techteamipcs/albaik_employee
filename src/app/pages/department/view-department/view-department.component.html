@@ -1,1 +1,98 @@
-<p>view-department works!</p>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+	<!-- Table -->
+	<div class="row">
+		<div class="col">
+			<div class="card shadow">
+				<div class="card-header border-0">
+					<h3 class="mb-0">Department List</h3>
+				</div>
+				<div class="card-body">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-6">
+								<!-- <input class="form-control mt-4" type="text" (keyup)="searchDepartment()" name="search" [(ngModel)]="searchText"
+                                        autocomplete="off" placeholder="&#61442;  Start searching a Department by name"> -->
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-button pull-right ml-auto mb-4"
+									routerLink="/department/add">Add Department</button></div>
+						</div>
+						<div class="col-md-6">
+							<h4 class="title"></h4>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table align-items-center table-flush">
+							<thead>
+								<tr>
+									<th>SL No</th>
+									<th>Department Title</th>
+									<th>Issued Date</th>
+									<th>Expiry Date</th>
+                  <th>Status</th>
+									<th>Sequence Number</th>									
+									<th>Created At</th>
+									<th>Updated At</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<td colspan="5" *ngIf="DepartmentData.length == 0">
+									<div class="alert alert-dismissable" style="text-align: center;">
+										Department List is Empty
+									</div>
+								</td>
+								<tr *ngFor="let listDepartment of DepartmentData; let i = index">
+									<td *ngIf="currentPage == 1">{{i+1}}</td>
+									<td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+									<td>{{listDepartment.title}}</td>
+									<td>{{listDepartment.issuedDate | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listDepartment.expiryDate | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listDepartment.status == true ? 'Enabled':'Disable' }}</td>
+                  <td>{{listDepartment.department_id}}</td>
+									<!-- <td>{{listDepartment.isApproved == true ? 'Yes':'No'}}</td> -->
+									<td>{{listDepartment.created_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listDepartment.updated_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>
+										<a routerLink="/department/edit/{{listDepartment._id}}" style="cursor:pointer"><i
+												class="mdi mdi-lead-pencil" aria-hidden="true"></i>
+										</a>
+										<a style="cursor:pointer;padding-left: 15px;" (click)="open(content,listDepartment)"><i
+												class="mdi mdi-close-box" aria-hidden="true"></i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="pcommece-pagination" *ngIf="totalRecord > 0 ">
+							<app-pagination #pagination [initialPage]="currentPage" [count]="totalRecord"
+								(changePage)="onListChangePage($event)"></app-pagination>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<ng-template #content let-modal style="z-index: 0;">
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-title">Department</h4>
+			<button type="button" class="btn btn-button" aria-describedby="modal-title"
+				(click)="modal.dismiss('Cross click')">close</button>
+		</div>
+		<div class="modal-body">
+			<p *ngIf="selectedDepartment">
+				<strong>Are you sure you want to delete <span class="text-primary">"{{selectedDepartment.name}}"</span>
+					Department?</strong>
+			</p>
+			<p>
+				All information associated to this Department will be permanently deleted.
+				<span class="text-danger">This operation can not be undone.</span>
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-button" (click)="modal.dismiss('cancel click')">Cancel</button>
+			<button type="button" class="btn btn-button" (click)="deleteDepartment()">Ok</button>
+		</div>
+	</ng-template>
