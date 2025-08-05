@@ -1,18 +1,16 @@
-import { Component, OnInit, ViewEncapsulation, EventEmitter, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControl, AbstractControl } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
-// Services
 import { ShiftService } from '../../../providers/shift/shift.service';
+
 @Component({
 	selector: 'app-add-shift',
 	templateUrl: './add-shift.component.html',
 	styleUrls: ['./add-shift.component.scss']
 })
-export class AddShiftComponent {
-
-	// Data Assign
+export class AddShiftComponent implements OnInit {
 
 	addShiftForm: FormGroup;
 	throw_msg: any;
@@ -21,9 +19,8 @@ export class AddShiftComponent {
 	msg_danger: boolean = false;
 	tagtexist: any;
 
-	// Edit Action Here
 	id: any;
-	isEdit = this.route.snapshot.data.title === 'edit' ? true : false;
+	isEdit: boolean = false;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -38,21 +35,38 @@ export class AddShiftComponent {
 			endTime: ['', Validators.required],
 			breakDuration: ['', Validators.required],
 			department: ['', Validators.required],
-			status: ['', Validators.required],
-
+			status: [true],
 		}, {
 			validators: [this.startBeforeEndValidator]
 		});
-
 	}
 
 	public hasError = (controlName: string, errorName: string) => {
 		return this.addShiftForm.controls[controlName].hasError(errorName);
 	};
 
+	startBeforeEndValidator(group: AbstractControl): { [key: string]: boolean } | null {
+		const start = group.get('startTime')?.value;
+		const end = group.get('endTime')?.value;
+		if (start && end && start >= end) {
+			return { startAfterEnd: true };
+		}
+		return null;
+	}
+
+	formatTimeToAmPm(time: string): string {
+		if (!time) return '';
+		const [hourStr, minute] = time.split(':');
+		let hour = parseInt(hourStr, 10);
+		const ampm = hour >= 12 ? 'PM' : 'AM';
+		hour = hour % 12 || 12;
+		return `${hour}:${minute} ${ampm}`;
+	}
 
 	ngOnInit(): void {
 		this.id = this.route.snapshot.paramMap.get('id');
+		this.isEdit = !!this.id;
+
 		if (this.isEdit) {
 			this.patchingdata(this.id);
 		}
@@ -70,10 +84,8 @@ export class AddShiftComponent {
 						endTime: data?.endTime?.substring(0, 5),
 						breakDuration: data?.breakDuration,
 						department: data?.department,
-						status: data?.status,
+						status: data?.status === true || data?.status === 'active'
 					});
-				} else {
-
 				}
 			},
 		);
@@ -81,19 +93,20 @@ export class AddShiftComponent {
 
 	onSubmit() {
 		this.submitted = true;
-		let obj = this.addShiftForm.value;
-		let id = this.id;
 
 		if (this.addShiftForm.invalid) {
 			return;
 		}
 
+		let obj = this.addShiftForm.value;
+		// obj.startTime = this.formatTimeToAmPm(obj.startTime);
+		// obj.endTime = this.formatTimeToAmPm(obj.endTime);
+		let id = this.id;
+
 		if (this.isEdit) {
 			this.shiftService.editShiftdata(obj, id).subscribe(
 				(response) => {
 					if (response.code == 200) {
-						// this.throw_msg = response.message
-						// this.msg_success = true;
 						this.toastr.successToastr(response.message);
 						setTimeout(() => {
 							this.router.navigate(['/shift/view']);
@@ -107,8 +120,6 @@ export class AddShiftComponent {
 			this.shiftService.addShiftdata(obj).subscribe(
 				(response) => {
 					if (response.code == 200) {
-						// this.throw_msg = response.message
-						// this.msg_success = true;
 						this.toastr.successToastr(response.message);
 						setTimeout(() => {
 							this.router.navigate(['/shift/view']);
@@ -119,15 +130,6 @@ export class AddShiftComponent {
 				},
 			);
 		}
-	}
-
-	startBeforeEndValidator(group: AbstractControl): { [key: string]: boolean } | null {
-		const start = group.get('startTime')?.value;
-		const end = group.get('endTime')?.value;
-		if (start && end && start >= end) {
-			return { startAfterEnd: true };
-		}
-		return null;
 	}
 
 	onCancel() {
