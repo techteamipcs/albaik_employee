@@ -40,7 +40,10 @@ export class AddShiftComponent {
 			department: ['', Validators.required],
 			status: ['', Validators.required],
 
+		}, {
+			validators: [this.startBeforeEndValidator]
 		});
+
 	}
 
 	public hasError = (controlName: string, errorName: string) => {
@@ -63,8 +66,8 @@ export class AddShiftComponent {
 					let data = response?.result;
 					this.addShiftForm.patchValue({
 						name: data?.name,
-						startTime: data?.startTime,
-						endTime: data?.endTime,
+						startTime: data?.startTime?.substring(0, 5),
+						endTime: data?.endTime?.substring(0, 5),
 						breakDuration: data?.breakDuration,
 						department: data?.department,
 						status: data?.status,
@@ -116,6 +119,15 @@ export class AddShiftComponent {
 				},
 			);
 		}
+	}
+
+	startBeforeEndValidator(group: AbstractControl): { [key: string]: boolean } | null {
+		const start = group.get('startTime')?.value;
+		const end = group.get('endTime')?.value;
+		if (start && end && start >= end) {
+			return { startAfterEnd: true };
+		}
+		return null;
 	}
 
 	onCancel() {

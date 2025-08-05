@@ -35,7 +35,7 @@
 
 							<div class="form-group">
 								<label for="startTime">Start Time</label>
-								<input type="text" name="startTime" autocomplete="off" formControlName="startTime" class="form-control"
+								<input type="time" name="startTime" formControlName="startTime" class="form-control"
 									placeholder="Enter Start Time">
 								<span *ngIf="submitted && hasError('startTime','required')" class="alert-danger">
 									Start Time is required
@@ -44,11 +44,15 @@
 
 							<div class="form-group">
 								<label for="endTime">End Time</label>
-								<input type="text" name="endTime" autocomplete="off" formControlName="endTime" class="form-control"
+								<input type="time" name="endTime" formControlName="endTime" class="form-control"
 									placeholder="Enter End Time">
 								<span *ngIf="submitted && hasError('endTime','required')" class="alert-danger">
 									End Time is required
 								</span>
+							</div>
+
+							<div *ngIf="submitted && addShiftForm.errors?.startAfterEnd" class="alert-danger">
+								End Time must be later than Start Time
 							</div>
 
 							<div class="form-group">
