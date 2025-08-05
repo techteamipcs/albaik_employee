@@ -1,1 +1,98 @@
-<p>view-attendance works!</p>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+	<!-- Table -->
+	<div class="row">
+		<div class="col">
+			<div class="card shadow">
+				<div class="card-header border-0">
+					<h3 class="mb-0">Attendance List</h3>
+				</div>
+				<div class="card-body">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-6">
+								<!-- <input class="form-control mt-4" type="text" (keyup)="searchAttendance()" name="search" [(ngModel)]="searchText"
+                                        autocomplete="off" placeholder="&#61442;  Start searching a Attendance by name"> -->
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-button pull-right ml-auto mb-4"
+									routerLink="/attendance/add">Add Attendance</button></div>
+						</div>
+						<div class="col-md-6">
+							<h4 class="title"></h4>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table align-items-center table-flush">
+							<thead>
+								<tr>
+									<th>SL No</th>
+									<th>Attendance Name</th>
+									<th>Address</th>
+									<th>City/Emirate</th>
+									<th>State</th>
+									<th>Status</th>
+									<th>Created At</th>
+									<th>Updated At</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<td colspan="5" *ngIf="AttendanceData.length == 0">
+									<div class="alert alert-dismissable" style="text-align: center;">
+										Attendance List is Empty
+									</div>
+								</td>
+								<tr *ngFor="let listAttendance of AttendanceData; let i = index">
+									<td *ngIf="currentPage == 1">{{i+1}}</td>
+									<td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+									<td>{{listAttendance.name}}</td>
+									<td>{{listAttendance.address}}</td>
+									<td>{{listAttendance.city}}</td>
+									<td>{{listAttendance.state}}</td>
+									<td>{{listAttendance.status == true ? 'Enabled':'Disable' }}</td>
+									<!-- <td>{{listAttendance.isApproved == true ? 'Yes':'No'}}</td> -->
+									<td>{{listAttendance.created_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listAttendance.updated_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>
+										<a routerLink="/attendance/edit/{{listAttendance._id}}" style="cursor:pointer"><i
+												class="mdi mdi-lead-pencil" aria-hidden="true"></i>
+										</a>
+										<a style="cursor:pointer;padding-left: 15px;" (click)="open(content,listAttendance)"><i
+												class="mdi mdi-close-box" aria-hidden="true"></i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="pcommece-pagination" *ngIf="totalRecord > 0 ">
+							<app-pagination #pagination [initialPage]="currentPage" [count]="totalRecord"
+								(changePage)="onListChangePage($event)"></app-pagination>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<ng-template #content let-modal style="z-index: 0;">
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-title">Attendance</h4>
+			<button type="button" class="btn btn-button" aria-describedby="modal-title"
+				(click)="modal.dismiss('Cross click')">close</button>
+		</div>
+		<div class="modal-body">
+			<p *ngIf="selectedAttendance">
+				<strong>Are you sure you want to delete <span class="text-primary">"{{selectedAttendance.name}}"</span>
+					Attendance?</strong>
+			</p>
+			<p>
+				All information associated to this Attendance will be permanently deleted.
+				<span class="text-danger">This operation can not be undone.</span>
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-button" (click)="modal.dismiss('cancel click')">Cancel</button>
+			<button type="button" class="btn btn-button" (click)="deleteAttendance()">Ok</button>
+		</div>
+	</ng-template>

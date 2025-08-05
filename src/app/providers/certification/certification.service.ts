@@ -6,15 +6,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class AttendanceService {
+export class CertificationService {
 
-  
   constructor(
     private http: HttpClient
   ) { }
 
-  getAttendanceDetails = (data: any): Observable<any> => {
-    const endpoint = environment.baseUrl + '/api/attendance/viewAttendance';
+  getCertificationDetails = (data: any): Observable<any> => {
+    const endpoint = environment.baseUrl + '/api/certification/viewCertification';
     return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
       catchError((err) => {
         return throwError(err);
@@ -22,8 +21,8 @@ export class AttendanceService {
     );
   };
 
-  getAttendanceWithId = (moreData: any): Observable<any> => {
-    const endpoint = environment.baseUrl + '/api/attendance/getAttendanceById';
+  getCertificationWithId = (moreData: any): Observable<any> => {
+    const endpoint = environment.baseUrl + '/api/certification/getCertificationById';
     return this.http
       .post(endpoint, moreData, this.getRequestHeaders())
       .pipe(
@@ -33,8 +32,8 @@ export class AttendanceService {
       );
   };
 
-  addAttendance = (moreData: any): Observable<any> => {
-    const endpoint = environment.baseUrl + '/api/attendance/addAttendance';
+  addCertification = (moreData: any): Observable<any> => {
+    const endpoint = environment.baseUrl + '/api/certification/addCertification';
     return this.http
       .post(endpoint, moreData, this.getRequestHeaders())
       .pipe(
@@ -44,8 +43,8 @@ export class AttendanceService {
       );
   };
 
-  editAttendancedata = (moreData: any, Id: any): Observable<any> => {
-    let endpoint = environment.baseUrl + '/api/attendance/editAttendance';
+  editCertificationdata = (moreData: any, Id: any): Observable<any> => {
+    let endpoint = environment.baseUrl + '/api/certification/editCertification';
     if (Id) {
       endpoint += `?id=${Id}`;
     }
@@ -56,8 +55,8 @@ export class AttendanceService {
     );
   };
 
-  deleteattendance = (data: any): Observable<any> => {
-    const endpoint = environment.baseUrl + '/api/attendance/deleteAttendance';
+  deletecertification = (data: any): Observable<any> => {
+    const endpoint = environment.baseUrl + '/api/certification/deleteCertification';
     return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
       catchError((err) => {
         return throwError(err);
@@ -65,8 +64,8 @@ export class AttendanceService {
     );
   };
 
-  getallAttendanceDetails = (data: any): Observable<any> => {
-    const endpoint = environment.baseUrl + '/api/attendance/getAllAttendance';
+  getallCertificationDetails = (data: any): Observable<any> => {
+    const endpoint = environment.baseUrl + '/api/certification/getAllCertification';
     return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
       catchError((err) => {
         return throwError(err);
