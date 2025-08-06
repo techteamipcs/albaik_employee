@@ -4,15 +4,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { DepartmentService } from '../../../providers/department/department.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { ManagerService } from 'src/app/providers/manager/manager.service';
+import { EmployeeService } from 'src/app/providers/employee/employee.service';
 
 @Component({
-  selector: 'app-add-department',
-  templateUrl: './add-department.component.html',
-  styleUrls: ['./add-department.component.scss']
+	selector: 'app-add-department',
+	templateUrl: './add-department.component.html',
+	styleUrls: ['./add-department.component.scss']
 })
 export class AddDepartmentComponent {
 
-  imagePath: any;
+	imagePath: any;
 	imageArr: any = [];
 	// Data Assign
 	artData: any;
@@ -30,22 +32,26 @@ export class AddDepartmentComponent {
 	dropdownSettings = {};
 	url: any;
 	departmentData: any;
-	managerData:any = [];
-	employeeData:any = [];
+	managerData: any = [];
+	employeeData: any = [];
+	managerList: any = [];
+	employeeList: any = [];
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private formBuilder: FormBuilder,
 		private departmentService: DepartmentService,
 		private toastr: ToastrManager,
+		public managerService: ManagerService,
+		public employeeService: EmployeeService
 	) {
 		this.adddepartmentForm = this.formBuilder.group({
-			title: ['', Validators.required],
-			issuedDate: [''],
-			expiryDate: [''],
-  		verified: [''],
+			name: ['', Validators.required],
+			managers: [''],
+			employees: [''],
+			verified: [''],
 			status: ['', Validators.required],
-			department_id: [''],
+			department_id: ['ALBKDEPT-'],
 		});
 		this.token = localStorage.getItem('ghoastrental-token');
 		this.imagePath = environment.baseUrl + '/public/';
@@ -57,6 +63,8 @@ export class AddDepartmentComponent {
 	};
 
 	ngOnInit(): void {
+		this.getManagerData();
+		this.getEmployeeData();
 		this.id = this.route.snapshot.paramMap.get('id');
 		if (this.isEdit) {
 			this.patchingdata(this.id);
@@ -98,11 +106,22 @@ export class AddDepartmentComponent {
 				if (response.code == 200) {
 					let data = response?.result;
 					this.departmentData = response?.result;
+					let tempmanager: any = [];
+          if (data?.managers) {
+            data.managers.forEach((item, index) => {
+              tempmanager.push({ _id: item._id, name: item.username });
+            });
+          }
+					let tempemployee: any = [];
+          if (data?.employees) {
+            data.employees.forEach((item, index) => {
+              tempemployee.push({ _id: item._id, name: item.username });
+            });
+          }
 					this.adddepartmentForm.patchValue({
-						title: data?.title,
-						issuedDate: data?.issuedDate,
-						expiryDate: data?.expiryDate,
-						verified: data?.verified,
+						name: data?.name,
+						managers: tempmanager,
+						employees: tempemployee,
 						status: data?.status,
 						department_id: data?.department_id,
 					});
@@ -163,5 +182,61 @@ export class AddDepartmentComponent {
 	onCancel() {
 		this.router.navigate(['/department/view']);
 	}
-  
+
+	getManagerData() {
+		const obj = {};
+		this.managerService.getallManagerDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.managerData = response.result;
+						this.managerList = [];
+
+						this.managerData.forEach((item) => {
+							const manager = {
+								_id: item._id,
+								name: item.username,
+							};
+							this.managerList.push(manager);
+						});
+					}
+					else {
+						this.msg_danger = true;
+					}
+
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
+
+	getEmployeeData() {
+		const obj = {};
+		this.employeeService.getallEmployeeDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.employeeData = response.result;
+						this.employeeList = [];
+
+							this.employeeData.forEach((item) => {
+								const employee = {
+									_id: item._id,
+									name: item.username,
+								};
+								this.employeeList.push(employee);
+							});	
+					}
+					else {
+						this.msg_danger = true;
+					}
+
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
+
 }
