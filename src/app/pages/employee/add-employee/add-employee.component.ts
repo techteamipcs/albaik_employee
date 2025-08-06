@@ -8,6 +8,7 @@ import { RoleService } from 'src/app/providers/role/role.service';
 import { CertificationService } from 'src/app/providers/certification/certification.service';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ManagerService } from 'src/app/providers/manager/manager.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-employee',
@@ -158,7 +159,7 @@ imagePath: any;
 						file_no: data?.file_no,
 						basic_orientation: data?.basic_orientation,
 						position: data?.position,
-						hireDate: data?.hireDate,
+						hireDate: moment(data?.hireDate).format('YYYY-MM-DD'),
 						availability: data?.availability,
 						shiftPreferences: data?.shiftPreferences,
 						skills: data?.skills,

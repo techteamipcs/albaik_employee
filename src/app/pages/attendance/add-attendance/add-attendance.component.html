@@ -16,14 +16,15 @@
 							<label for="exampleInputEmail1">Select Status</label>
 							<select name="status" formControlName="status" class="form-control">
 								<option value="">Select Status</option>
-								<option value="true">Active</option>
-								<option value="false">Deactive</option>
+								<option value="present">Present</option>
+								<option value="absent">Absent</option>
+								<option value="leave">Leave</option>
 							</select>
 							<span *ngIf="submitted && hasError('status','required')" class="alert-danger">Please Select Status</span>
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Select User Type</label>
-							<select name="userType" formControlName="userType" class="form-control">
+							<select name="userType"  #selectUser (change)="onChangeUserType($event,selectUser.value)" formControlName="userType" class="form-control">
 								<option value="">Select User Type</option>
 								<option value="Employee">Employee</option>
 								<option value="Manager">Manager</option>								
@@ -34,8 +35,7 @@
 							<label for="exampleInputEmail1">Select User </label>
 							<select name="userId" formControlName="userId" class="form-control">
 								<option value="">Select User Type</option>
-								<option value="userId">Employee</option>
-								<option value="Manager">Manager</option>								
+								<option value="{{item._id}}" *ngFor="let item of userData">{{item.username}}</option>						
 							</select>
 							<span *ngIf="submitted && hasError('userId','required')" class="alert-danger">Please Select User</span>
 						</div>
@@ -44,13 +44,6 @@
 							<input type="date" name="date" autocomplete="off" formControlName="date" class="form-control"
 								placeholder="Date Name">
 							<span *ngIf="submitted && hasError('date','required')" class="alert-danger">Attendance Name is
-								required</span>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Address</label>
-							<textarea type="text" name="address" autocomplete="off" formControlName="address" class="form-control"
-								placeholder="Address" rows="3"></textarea>
-							<span *ngIf="submitted && hasError('address','required')" class="alert-danger">Address Title is
 								required</span>
 						</div>
 						<div class="form-group">

@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AttendanceService } from '../../../providers/attendance/attendance.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { ManagerService } from 'src/app/providers/manager/manager.service';
+import { EmployeeService } from 'src/app/providers/employee/employee.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-attendance',
@@ -31,12 +34,15 @@ export class AddAttendanceComponent {
 	attendanceData: any;
 	managerData:any = [];
 	employeeData:any = [];
+	userData:any = [];
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private formBuilder: FormBuilder,
 		private attendanceService: AttendanceService,
 		private toastr: ToastrManager,
+		public managerService : ManagerService,
+		public employeeService: EmployeeService
 	) {
 		this.addattendanceForm = this.formBuilder.group({
 			userType: ['', Validators.required],
@@ -50,6 +56,7 @@ export class AddAttendanceComponent {
 		this.token = localStorage.getItem('ghoastrental-token');
 		this.imagePath = environment.baseUrl + '/public/';
 		this.url = environment.Url + '/assets';
+		
 	}
 
 	public hasError = (controlName: string, errorName: string) => {
@@ -58,6 +65,8 @@ export class AddAttendanceComponent {
 
 	ngOnInit(): void {
 		this.id = this.route.snapshot.paramMap.get('id');
+		this.getManagerData();
+		this.getEmployeeData();
 		if (this.isEdit) {
 			this.patchingdata(this.id);
 			this.applyAction = 'Update';
@@ -74,6 +83,7 @@ export class AddAttendanceComponent {
 			itemsShowLimit: 6,
 			allowSearchFilter: true
 		};
+		
 	}
 
 	onItemSelect(item: any) {
@@ -95,13 +105,18 @@ export class AddAttendanceComponent {
 		let obj = { id: id };
 		this.attendanceService.getAttendanceWithId(obj).subscribe(
 			(response) => {
-				if (response.code == 200 && response?.result.length > 0) {
-					let data = response?.result[0];
-					this.attendanceData = response?.result[0];
+				if (response.code == 200) {
+					let data = response?.result;
+					this.attendanceData = response?.result;
+					if(data.userType == "Employee"){
+						this.userData = this.employeeData;
+					} else {
+						this.userData = this.managerData;
+					}
 					this.addattendanceForm.patchValue({
 						userType: data?.userType,
 						userId: data?.userId,
-						date: data?.date,
+						date: moment(data?.date).format('YYYY-MM-DD'),
 						checkIn: data?.checkIn,
 						checkOut: data?.checkOut,	
 						status: data?.status,
@@ -164,4 +179,60 @@ export class AddAttendanceComponent {
 	onCancel() {
 		this.router.navigate(['/attendance/view']);
 	}
+
+	getManagerData()
+		{
+			const obj = {  };
+			this.managerService.getallManagerDetails(obj).subscribe(
+					(response)=> {
+						if (response.code == 200) 
+						{
+							if(response.result != null && response.result != '')
+							{
+								this.managerData = response.result; 
+							}
+							else
+							{
+								this.msg_danger   = true;
+							}
+						 
+						} else {
+							this.toastr.errorToastr(response.message);
+						}
+					},
+				);
+		}
+
+		getEmployeeData()
+		{
+			const obj = {  };
+			this.employeeService.getallEmployeeDetails(obj).subscribe(
+					(response)=> {
+						if (response.code == 200) 
+						{
+							if(response.result != null && response.result != '')
+							{
+								this.employeeData = response.result; 
+							}
+							else
+							{
+								this.msg_danger   = true;
+							}
+						 
+						} else {
+							this.toastr.errorToastr(response.message);
+						}
+					},
+				);
+		}
+
+		onChangeUserType(event,value){
+			if(value == "Employee"){
+				this.userData = this.employeeData;
+			} else {
+				this.userData = this.managerData;
+			}
+		}
+
+
 }
