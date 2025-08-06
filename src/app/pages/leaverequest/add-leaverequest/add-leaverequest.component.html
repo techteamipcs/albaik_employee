@@ -1,1 +1,105 @@
-<p>add-leaverequest works!</p>
+<div class="content-wrapper">
+	<div class="page-header">
+		<h3 class="page-title"> Leave </h3>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Leave</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Edit Leave</li>
+			</ol>
+		</nav>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-sm-10 col-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title" *ngIf="id">Edit Leave</h4>
+					<h4 class="card-title" *ngIf="!id">Add New Leave</h4>
+					<div class="alert alert-success alert-dismissable" style="margin-left: 0;" *ngIf="msg_success">
+						{{throw_msg}}
+					</div>
+					<div class="alert alert-danger alert-dismissable" style="margin-left: 0;" *ngIf="msg_danger">
+						{{throw_msg}}
+					</div>
+					<!-- form start -->
+					<form [formGroup]="addLeaveForm" (ngSubmit)="onSubmit()" method="post" novalidate>
+						<div class="box-body">
+
+							<div class="form-group">
+								<label for="title">Title</label>
+								<input type="text" name="title" autocomplete="off" formControlName="title" class="form-control"
+									placeholder="Enter Leave Title">
+								<span *ngIf="submitted && hasError('title','required')" class="alert-danger">
+									Title is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="employee">Employee</label>
+								<input type="text" name="employee" autocomplete="off" formControlName="employee" class="form-control"
+									placeholder="Enter Employee">
+								<span *ngIf="submitted && hasError('employee','required')" class="alert-danger">
+									Employee is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="provider">Provider</label>
+								<input type="text" name="provider" formControlName="provider" class="form-control"
+									placeholder="Enter Provider">
+								<span *ngIf="submitted && hasError('provider','required')" class="alert-danger">
+									Provider is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="text">Issued Date</label>
+								<input type="date" name="issuedDate" formControlName="issuedDate" class="form-control"
+									placeholder="Enter Issued Date">
+								<span *ngIf="submitted && hasError('issuedDate','required')" class="alert-danger">
+									Issued Date is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="expiryDate">Expiry Date</label>
+								<input type="date" name="expiryDate" autocomplete="off" formControlName="expiryDate"
+									class="form-control" placeholder="Enter Expiry Date">
+								<span *ngIf="submitted && hasError('expiryDate','required')" class="alert-danger">
+									Expiry Date is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="approved">Approved Status</label>
+								<select name="approved" formControlName="approved" class="form-control">
+									<option value="">Select Status</option>
+									<option value="true">Active</option>
+									<option value="false">Inactive</option>
+								</select>
+								<span *ngIf="submitted && hasError('approved','required')" class="alert-danger">
+									Approved Status is required
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="approved_by">Approved By</label>
+								<input type="text" name="approved_by" autocomplete="off" formControlName="approved_by"
+									class="form-control" placeholder="Enter Approved By">
+								<span *ngIf="submitted && hasError('approved_by','required')" class="alert-danger">
+									Approved By is required
+								</span>
+							</div>
+
+						</div>
+
+						<div class="box-footer d-flex">
+							<button type="submit" class="btn btn-button">Submit</button>
+							<button type="cancel" (click)="onCancel()" class="btn btn-button ml-2">Cancel</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
