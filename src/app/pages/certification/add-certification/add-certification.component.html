@@ -29,6 +29,17 @@
 								required</span>
 						</div>
 						<div class="form-group">
+							<label for="exampleInputEmail1">Select Type</label>
+							<select name="type" formControlName="type" class="form-control">
+								<option value="">Select Type</option>
+								<option value="CLR Training">CLR Training</option>
+								<option value="Factory Training">Factory Training</option>
+								<option value="Station Training">Station Training</option>
+								<option value="TL Station Training">TL Station Training</option>
+							</select>
+							<span *ngIf="submitted && hasError('type','required')" class="alert-danger">Please Select type</span>
+						</div>
+						<div class="form-group">
 							<label for="exampleInputEmail1">Issued Date</label>
 							<input type="date" name="issuedDate" autocomplete="off" formControlName="issuedDate" class="form-control"
 								placeholder="Issued Date">
@@ -43,10 +54,17 @@
 								required</span>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Sequence Number</label>
+							<label for="exampleInputEmail1">Certification Number</label>
 							<input type="text" name="certification_id" autocomplete="off" formControlName="certification_id" class="form-control"
+								placeholder="Certification Number">
+							<span *ngIf="submitted && hasError('certification_id','required')" class="alert-danger">Certification Number is
+								required</span>
+						</div>
+						<div class="form-group" *ngIf="isEdit">
+							<label for="exampleInputEmail1">Sequence Number</label>
+							<input type="text" name="sequence_number" autocomplete="off" formControlName="sequence_number" class="form-control"
 								placeholder="Sequence Number">
-							<span *ngIf="submitted && hasError('certification_id','required')" class="alert-danger">Sequence Number is
+							<span *ngIf="submitted && hasError('sequence_number','required')" class="alert-danger">Sequence Number is
 								required</span>
 						</div>
 						<div class="form-group">

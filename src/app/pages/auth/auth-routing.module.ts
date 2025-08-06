@@ -15,6 +15,7 @@ const routes: Routes = [
     path:'edit-profile/:id',
     component:EditProfileComponent,
     canActivate: [AuthGuard],
+    data: { title: 'edit' },
   },
   {
     path:'view-user',

@@ -28,10 +28,11 @@
 								<tr>
 									<th>SL No</th>
 									<th>Certification Title</th>
+									<th>Certification Type</th>
 									<th>Issued Date</th>
 									<th>Expiry Date</th>
                   <th>Status</th>
-									<th>Sequence Number</th>									
+									<th>Certification ID</th>									
 									<th>Created At</th>
 									<th>Updated At</th>
 									<th>Action</th>
@@ -47,6 +48,7 @@
 									<td *ngIf="currentPage == 1">{{i+1}}</td>
 									<td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
 									<td>{{listCertification.title}}</td>
+									<td>{{listCertification.type}}</td>
 									<td>{{listCertification.issuedDate | date:'dd/MM/YYYY HH:MM:a'}}</td>
 									<td>{{listCertification.expiryDate | date:'dd/MM/YYYY HH:MM:a'}}</td>
 									<td>{{listCertification.status == true ? 'Enabled':'Disable' }}</td>

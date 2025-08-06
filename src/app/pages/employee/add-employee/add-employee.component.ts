@@ -5,6 +5,9 @@ import { environment } from 'src/environments/environment';
 import { EmployeeService } from '../../../providers/employee/employee.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { RoleService } from 'src/app/providers/role/role.service';
+import { CertificationService } from 'src/app/providers/certification/certification.service';
+import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ManagerService } from 'src/app/providers/manager/manager.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -32,25 +35,39 @@ imagePath: any;
 	managerData:any = [];
 	employeeData:any = [];
 	rolesData:any = [];
+	certificatesData:any = [];
+	selectedcertificatesData:any = [];
+	closeResult = '';
+	searchText = '';
+	totalRecord: number = 0;
+	currentPage: number = 1;
+  currentLimit: number = 10;
+	certifiedObject: FormGroup;
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private formBuilder: FormBuilder,
 		private employeeService: EmployeeService,
 		private toastr: ToastrManager,
-		public roleService: RoleService
+		public roleService: RoleService,
+		public certificationService: CertificationService,
+		private modalService: NgbModal,
+		public managerService: ManagerService
 	) {
 		this.addemployeeForm = this.formBuilder.group({
 			username: ['', Validators.required],
 			role: [''],
 			email: [''],
   		password: [''],
-			employee_id: [''],
+			employee_id: ['ALBKEMP-'],
 			first_name: [''],
 			last_name: [''],
 			department: [''],
 			certifications: [''],
   		employmentType: [''],
+			file_no: [''],
+			basic_orientation: [''],
+			position: [''],
 			hireDate: [''],
 			availability: [''],
 			shiftPreferences: [''],
@@ -64,10 +81,20 @@ imagePath: any;
 			postal_code: [''],
 			status:['']
 		});
+		this.certifiedObject = this.formBuilder.group({
+			id: [''],
+			title: [''],
+			scored: [''],
+			issuedBy: [''],
+			issuedDate: [new Date()],
+			validTill: [new Date()],
+		});
 		this.token = localStorage.getItem('ghoastrental-token');
 		this.imagePath = environment.baseUrl + '/public/';
 		this.url = environment.Url + '/assets';
 		this.get_roleData();
+		this.get_Cirtifications();
+		this.getManagerData();
 	}
 
 	public hasError = (controlName: string, errorName: string) => {
@@ -118,13 +145,32 @@ imagePath: any;
 					let data = response?.result;
 					this.employeeData = response?.result;
 					this.addemployeeForm.patchValue({
-						title: data?.title,
-						issuedDate: data?.issuedDate,
-						expiryDate: data?.expiryDate,
-						verified: data?.verified,
+						username: data?.username,
+						role: data?.role,
+						email: data?.email,
 						status: data?.status,
 						employee_id: data?.employee_id,
+						first_name: data?.first_name,
+						last_name: data?.last_name,
+						department: data?.department,
+						certifications: data?.certifications,
+						employmentType: data?.employmentType,
+						file_no: data?.file_no,
+						basic_orientation: data?.basic_orientation,
+						position: data?.position,
+						hireDate: data?.hireDate,
+						availability: data?.availability,
+						shiftPreferences: data?.shiftPreferences,
+						skills: data?.skills,
+						salary: data?.salary,
+						paymentType: data?.paymentType,
+						bankDetails: data?.bankDetails,
+						address: data?.address,
+						city: data?.city,
+						country: data?.country,
+						postal_code: data?.postal_code,
 					});
+					this.selectedcertificatesData = data?.certifications;
 				} else {
 
 				}
@@ -137,6 +183,12 @@ imagePath: any;
 		let obj = this.addemployeeForm.value;
 		let id = this.id;
 		obj['token'] = this.token;
+		obj['certifications'] = this.selectedcertificatesData;
+		let availability = [{
+			month:'jan',
+			daysAvailable:[1,2,3,4,5]
+		}];
+		obj['availability'] = availability;
 		if (this.addemployeeForm.invalid) {
 			return;
 		}
@@ -204,4 +256,92 @@ imagePath: any;
         },
       );
   }
+
+	getManagerData()
+  {
+    const obj = {  };
+    this.managerService.getallManagerDetails(obj).subscribe(
+        (response)=> {
+          if (response.code == 200) 
+          {
+            if(response.result != null && response.result != '')
+            {
+              this.managerData = response.result; 
+            }
+            else
+            {
+              this.msg_danger   = true;
+            }
+           
+          } else {
+            this.toastr.errorToastr(response.message);
+          }
+        },
+      );
+  }
+
+	get_Cirtifications()
+  {
+    const obj = {  };
+    this.certificationService.getallCertificationDetails(obj).subscribe(
+        (response)=> {
+          if (response.code == 200) 
+          {
+            if(response.result != null && response.result != '')
+            {
+              this.certificatesData = response.result; 
+            }
+            else
+            {
+              this.msg_danger   = true;
+            }
+           
+          } else {
+            this.toastr.errorToastr(response.message);
+          }
+        },
+      );
+  }
+
+	openRelatedProductModal(content: any) {
+    this.get_Cirtifications();
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: "myCustomModalClass", size: 'xl',  backdrop: 'static' })
+      .result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+  }
+
+		private getDismissReason(reason: any): string {
+			if (reason === ModalDismissReasons.ESC) {
+				return 'by pressing ESC';
+			} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+				return 'by clicking on a backdrop';
+			} else {
+				return `with: ${reason}`;
+			}
+		}
+
+		onSubmitCertificate(){
+			if(!this.certifiedObject.valid){
+				return;
+			} else {
+				let title = '';
+				if(this.certificatesData && this.certificatesData.length > 0){
+					let temp = this.certificatesData.filter((cert) => cert._id == this.certifiedObject.value.id);
+					if(temp.length > 0){
+						title = temp[0].title; 
+						this.certifiedObject.value['title'] = title+'-'+temp[0].type;
+					}
+				}
+				this.selectedcertificatesData.push(this.certifiedObject.value);
+				this.modalService.dismissAll();
+			}
+			
+		}
+
+		removeCertificate(index){
+			this.selectedcertificatesData.splice(index, 1);
+		}
 }

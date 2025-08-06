@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { CertificationService } from '../../../providers/certification/certification.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-certification',
@@ -44,7 +45,9 @@ export class AddCertificationComponent {
 			expiryDate: [''],
   		verified: [''],
 			status: ['', Validators.required],
-			certification_id: [''],
+			certification_id: ['ALBKCERT-'],
+			type: [''],
+			sequence_number: ['']
 		});
 		this.token = localStorage.getItem('ghoastrental-token');
 		this.imagePath = environment.baseUrl + '/public/';
@@ -99,11 +102,14 @@ export class AddCertificationComponent {
 					this.certificationData = response?.result;
 					this.addcertificationForm.patchValue({
 						title: data?.title,
-						issuedDate: data?.issuedDate,
-						expiryDate: data?.expiryDate,
+						issuedDate: moment(data?.issuedDate).format('YYYY-MM-DD'),
+						expiryDate: moment(data?.expiryDate).format('YYYY-MM-DD'),
 						verified: data?.verified,
 						status: data?.status,
 						certification_id: data?.certification_id,
+						type: data?.type,
+						sequence_number: data?.sequence_number
+
 					});
 				} else {
 
