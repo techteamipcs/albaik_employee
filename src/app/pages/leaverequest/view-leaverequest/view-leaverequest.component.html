@@ -44,8 +44,8 @@
 									<td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
 									<td>{{listLeave.title}}</td>
 									<td>{{listLeave.provider}}</td>
-									<td>{{listLeave.issuedDate}}</td>
-									<td>{{listLeave.expiryDate}}</td>
+									<td>{{listLeave.issuedDate | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listLeave.expiryDate | date:'dd/MM/YYYY HH:MM:a'}}</td>
 									<td>{{listLeave.approved_by}}</td>
 									<td>{{listLeave.employee}}</td>
 									<td>{{listLeave.approved == true ? 'Active':'Inactive' }}</td>

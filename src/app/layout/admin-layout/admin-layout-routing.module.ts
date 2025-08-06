@@ -78,6 +78,11 @@ const routes: Routes = [
 		path: 'shift',
 		loadChildren: () => import("./../../pages/shift/shift.module").then((m) => m.ShiftModule),
 		data: { title: 'Shift' },
+	},
+	{
+		path: 'meal',
+		loadChildren: () => import("./../../pages/meal/meal.module").then((m) => m.MealModule),
+		data: { title: 'Meal' },
 	}
 ];
 

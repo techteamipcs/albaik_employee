@@ -3,7 +3,8 @@
 	<div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top text-center">
 		<a class="sidebar-brand brand-logo text-decoration-none  pl-0" href="index.html">AL-BAIK</a>
 		<!-- <img src="assets/images/logo.svg" alt="logo" /> -->
-		<a class="sidebar-brand brand-logo-mini pl-0" href="index.html"><img src="assets/images/arovan-logo.png" alt="logo" /></a>
+		<a class="sidebar-brand brand-logo-mini pl-0" href="index.html"><img src="assets/images/arovan-logo.png"
+				alt="logo" /></a>
 	</div>
 	<ul class="nav">
 		<li class="nav-item nav-category">
@@ -17,10 +18,8 @@
 				<span class="menu-title">Dashboard</span>
 			</a>
 		</li>
-		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/attendance' || currentLocation =='attendance'">
-			<a class="nav-link" href="#atte" data-toggle="collapse" aria-expanded="false"
-				aria-controls="auth">
+		<li class="nav-item menu-items" [class.active]="currentRoute === '/attendance' || currentLocation =='attendance'">
+			<a class="nav-link" href="#atte" data-toggle="collapse" aria-expanded="false" aria-controls="auth">
 				<span class="menu-icon">
 					<i class="mdi mdi-account-multiple"></i>
 				</span>
@@ -29,7 +28,9 @@
 			</a>
 			<div class="collapse" id="atte">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/attendance' || currentLocation =='attendance'" [routerLink]="['/attendance/view']" routerLinkActive="router-link-active"> Attendance </a></li>
+					<li class="nav-item"> <a class="nav-link"
+							[class.active]="currentRoute === '/attendance' || currentLocation =='attendance'"
+							[routerLink]="['/attendance/view']" routerLinkActive="router-link-active"> Attendance </a></li>
 				</ul>
 			</div>
 		</li>
@@ -52,12 +53,13 @@
 			</a>
 			<div class="collapse" id="ui-cat">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/department' || currentLocation =='department'" [routerLink]="['/department/view']" routerLinkActive="router-link-active">Department</a></li>
+					<li class="nav-item"> <a class="nav-link"
+							[class.active]="currentRoute === '/department' || currentLocation =='department'"
+							[routerLink]="['/department/view']" routerLinkActive="router-link-active">Department</a></li>
 				</ul>
 			</div>
 		</li>
-		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/employee' || currentLocation =='employee'">
+		<li class="nav-item menu-items" [class.active]="currentRoute === '/employee' || currentLocation =='employee'">
 			<a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
 				<span class="menu-icon">
 					<i class="mdi mdi-laptop"></i>
@@ -67,11 +69,14 @@
 			</a>
 			<div class="collapse" id="ui-basic">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/employee' || currentLocation =='employee'" [routerLink]="['/employee/view']" routerLinkActive="router-link-active" >Employee</a></li>
+					<li class="nav-item"> <a class="nav-link"
+							[class.active]="currentRoute === '/employee' || currentLocation =='employee'"
+							[routerLink]="['/employee/view']" routerLinkActive="router-link-active">Employee</a></li>
 				</ul>
 			</div>
 		</li>
-		<li class="nav-item menu-items" [class.active]="currentRoute === '/leaverequest' || currentLocation =='leaverequest'">
+		<li class="nav-item menu-items"
+			[class.active]="currentRoute === '/leaverequest' || currentLocation =='leaverequest'">
 			<a class="nav-link" [routerLink]="['/leaverequest/view']" routerLinkActive="router-link-active">
 				<span class="menu-icon">
 					<i class="mdi mdi-backup-restore"></i>
@@ -87,10 +92,8 @@
 				<span class="menu-title">Manager</span>
 			</a>
 		</li>
-		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/role' || currentLocation =='role'">
-			<a class="nav-link" href="#cust" data-toggle="collapse" aria-expanded="false"
-				aria-controls="auth">
+		<li class="nav-item menu-items" [class.active]="currentRoute === '/role' || currentLocation =='role'">
+			<a class="nav-link" href="#cust" data-toggle="collapse" aria-expanded="false" aria-controls="auth">
 				<span class="menu-icon">
 					<i class="mdi mdi-account-multiple"></i>
 				</span>
@@ -99,7 +102,9 @@
 			</a>
 			<div class="collapse" id="cust">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/role' || currentLocation =='role'" [routerLink]="['/role/view']" routerLinkActive="router-link-active"> Role/Access </a></li>
+					<li class="nav-item"> <a class="nav-link"
+							[class.active]="currentRoute === '/role' || currentLocation =='role'" [routerLink]="['/role/view']"
+							routerLinkActive="router-link-active"> Role/Access </a></li>
 				</ul>
 			</div>
 		</li>
@@ -127,26 +132,25 @@
 			</a>
 			<div class="collapse" id="shift">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/shift' || currentLocation =='shift'" [routerLink]="['/shift/view']" routerLinkActive="router-link-active">Shift</a></li>
+					<li class="nav-item"> <a class="nav-link"
+							[class.active]="currentRoute === '/shift' || currentLocation =='shift'" [routerLink]="['/shift/view']"
+							routerLinkActive="router-link-active">Shift</a></li>
 				</ul>
 			</div>
-		</li>		
-		<!-- <li class="nav-item menu-items" [class.active]="currentRoute === '/payments' || currentLocation =='payments'">
-			<a class="nav-link" data-toggle="collapse" href="#payment" aria-expanded="false" aria-controls="auth">
+		</li>
+
+		<li class="nav-item menu-items" [class.active]="currentRoute === '/meal' || currentLocation =='meal'">
+			<a class="nav-link" [routerLink]="['/meal/view']" routerLinkActive="router-link-active" >
 				<span class="menu-icon">
 					<i class="mdi mdi-cash-multiple"></i>
 				</span>
-				<span class="menu-title">Payments</span>
-				<i class="menu-arrow"></i>
+				<span class="menu-title">Meal</span>
 			</a>
-			<div class="collapse" id="payment">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/payments' || currentLocation =='payments'" [routerLink]="['/payments/view']" routerLinkActive="router-link-active"> Payments </a></li>
-				</ul>
-			</div>
-		</li> -->
+		</li>
+
 		<li class="nav-item menu-items" [class.active]="currentRoute === '/auth' || currentLocation =='auth'">
-			<a class="nav-link" [class.active]="currentRoute === '/auth' || currentLocation =='auth'" [routerLink]="['/auth/view-user']" routerLinkActive="router-link-active">
+			<a class="nav-link" [class.active]="currentRoute === '/auth' || currentLocation =='auth'"
+				[routerLink]="['/auth/view-user']" routerLinkActive="router-link-active">
 				<span class="menu-icon">
 					<i class="mdi mdi-account"></i>
 				</span>
@@ -164,9 +168,15 @@
 			</a>
 			<div class="collapse" id="others">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/config' || currentLocation =='config'" [routerLink]="['/config']" routerLinkActive="router-link-active"> Config </a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/contact' || currentLocation =='contact'" [routerLink]="['/contact/list']" routerLinkActive="router-link-active"> Contact </a></li>
-					<li class="nav-item"> <a class="nav-link" [class.active]="currentRoute === '/subscriber' || currentLocation =='subscriber'" [routerLink]="['/subscriber/view']" routerLinkActive="router-link-active"> Subscriber </a></li>
+					<li class="nav-item"> <a class="nav-link"
+							[class.active]="currentRoute === '/config' || currentLocation =='config'" [routerLink]="['/config']"
+							routerLinkActive="router-link-active"> Config </a></li>
+					<li class="nav-item"> <a class="nav-link"
+							[class.active]="currentRoute === '/contact' || currentLocation =='contact'"
+							[routerLink]="['/contact/list']" routerLinkActive="router-link-active"> Contact </a></li>
+					<li class="nav-item"> <a class="nav-link"
+							[class.active]="currentRoute === '/subscriber' || currentLocation =='subscriber'"
+							[routerLink]="['/subscriber/view']" routerLinkActive="router-link-active"> Subscriber </a></li>
 				</ul>
 			</div>
 		</li>

@@ -1,0 +1,97 @@
+<div class="container mt--7">
+	<div class="row">
+		<div class="col-xl-12 order-xl-1">
+			<div class="card  shadow">
+				<div class="card-header border-0">
+					<div class="row align-items-center">
+						<div class="col-md-8 col-sm-10 col-12">
+							<h3 class="mb-0">Edit Meal</h3>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<!-- form start -->
+					<form [formGroup]="addmealForm" (ngSubmit)="onSubmit()" method="post" novalidate>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Meal is Available</label>
+							<select name="isAvailable" formControlName="isAvailable" class="form-control">
+								<option value="">Select Status</option>
+								<option value="true">Active</option>
+								<option value="false">Deactive</option>
+							</select>
+							<span *ngIf="submitted && hasError('isAvailable','required')" class="alert-danger">Please Meal Status</span>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">name</label>
+							<input type="text" name="name" autocomplete="off" formControlName="name" class="form-control"
+								placeholder="title">
+							<span *ngIf="submitted && hasError('name','required')" class="alert-danger">
+								Name is required
+							</span>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">Description</label>
+							<input type="text" name="description" autocomplete="off" formControlName="description" class="form-control"
+								placeholder="Description">
+							<span *ngIf="submitted && hasError('description','required')" class="alert-danger">
+								Description is required
+							</span>
+						</div>
+
+						<div class="form-group">
+							<label for="category">Category</label>
+							<input type="text" name="category" autocomplete="off" formControlName="category" class="form-control"
+								placeholder="Category">
+							<span *ngIf="submitted && hasError('category','required')" class="alert-danger">
+								Category is required
+							</span>
+						</div>
+
+						<div class="form-group">
+							<label for="ingredients">Ingredients</label>
+							<input type="text" name="ingredients" autocomplete="off" formControlName="ingredients"
+								class="form-control" placeholder="ingredients">
+							<span *ngIf="submitted && hasError('ingredients','required')" class="alert-danger">
+								Ingredients is required
+							</span>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">Preparation Time</label>
+							<input type="text" name="preparationTime" autocomplete="off" formControlName="preparationTime" class="form-control"
+								placeholder="PreparationTime">
+							<span *ngIf="submitted && hasError('preparationTime','required')" class="alert-danger">
+								Preparation Time is required
+							</span>
+						</div>
+
+						<div class="form-group">
+							<label for="price">Price</label>
+							<input type="text" name="price" autocomplete="off" formControlName="price" class="form-control"
+								placeholder="Price">
+							<span *ngIf="submitted && hasError('price','required')" class="alert-danger">
+								Price is required
+							</span>
+						</div>
+
+						<div class="form-group">
+							<label for="requiredEmployees">Required no of Employees</label>
+							<input type="text" name="requiredEmployees" autocomplete="off" formControlName="requiredEmployees" class="form-control"
+								placeholder="Hire Date">
+							<span *ngIf="submitted && hasError('requiredEmployees','required')" class="alert-danger">
+								Required no of Employees is required
+							</span>
+						</div>
+
+						<div class="box-footer d-flex">
+							<button type="submit" class="btn btn-button mr-2">Submit</button>
+							<button type="cancel" (click)="onCancel()" class="btn btn-button">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
