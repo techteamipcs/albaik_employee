@@ -36,6 +36,7 @@ export class AddShiftComponent implements OnInit {
 			breakDuration: ['', Validators.required],
 			department: ['', Validators.required],
 			status: [true],
+			sequence_number: ['']
 		}, {
 			validators: [this.startBeforeEndValidator]
 		});
@@ -84,7 +85,8 @@ export class AddShiftComponent implements OnInit {
 						endTime: data?.endTime?.substring(0, 5),
 						breakDuration: data?.breakDuration,
 						department: data?.department,
-						status: data?.status === true || data?.status === 'active'
+						status: data?.status === true || data?.status === 'active',
+						sequence_number: data?.sequence_number
 					});
 				}
 			},

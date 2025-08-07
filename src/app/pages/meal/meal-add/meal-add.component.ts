@@ -46,7 +46,8 @@ export class MealAddComponent {
 			preparationTime: [''],
 			price: [''],
 			isAvailable: ['',Validators.required],
-			requiredEmployees: ['']
+			requiredEmployees: [''],
+			sequence_number: ['']
 		});
 		this.token = localStorage.getItem('albaik-token');
 		this.imagePath = environment.baseUrl + '/public/';
@@ -88,6 +89,7 @@ export class MealAddComponent {
 						price: data?.price,
 						isAvailable: data?.isAvailable,
 						requiredEmployees: data?.requiredEmployees,
+						sequence_number: data?.sequence_number
 					});
 				} else {
 

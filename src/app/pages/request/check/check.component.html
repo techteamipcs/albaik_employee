@@ -1,0 +1,28 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-xl-12 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="container">
+              <h1 class="greeting">Hi!</h1>
+              <p class="subheading">Choose expected meals today!</p>
+              <div class="button-group">
+                <button class="btn {{isallMealsActive}}" (click)="selectMeals('all','')">All Meals</button>
+                <button class="btn {{item.ismealsActive}}" (click)="selectMeals('meal',item)" *ngFor="let item of mealsData">{{item.name}}</button>
+              </div>
+              <div class="button-group">
+                <button class="btn {{isallShiftsActive}}" (click)="selectShifts('all','')">All Shifts</button>
+                <button class="btn {{item.isshiftActive}}" (click)="selectShifts('shift',item)" *ngFor="let item of shiftData">{{item.name}}</button>
+              </div>
+              <div class="output-box">
+                <input class="output-number" [(ngModel)]="orders">
+              </div>
+              <button class="check-btn" (click)="onSubmit()">CHECK</button>
+            </div>    
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -83,6 +83,11 @@ const routes: Routes = [
 		path: 'meal',
 		loadChildren: () => import("./../../pages/meal/meal.module").then((m) => m.MealModule),
 		data: { title: 'Meal' },
+	},
+	{
+		path: 'request',
+		loadChildren: () => import("./../../pages/request/request.module").then((m) => m.RequestModule),
+		data: { title: 'Request' },
 	}
 ];
 

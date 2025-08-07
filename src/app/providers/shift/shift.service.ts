@@ -62,6 +62,15 @@ export class ShiftService {
 		);
 	};
 
+	getallShiftDetails = (data: any): Observable<any> => {
+		const endpoint = environment.baseUrl + '/api/shift/getAllShift';
+		return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
+			catchError((err) => {
+				return throwError(err);
+			})
+		);
+	};
+
 	/**
 	 * Returns the headers for the HTTP request.
 	 * @returns {Object} The headers object.
