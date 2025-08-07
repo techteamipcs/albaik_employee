@@ -23,9 +23,9 @@
 						</div>
 
 						<div class="form-group">
-							<label for="exampleInputEmail1">name</label>
+							<label for="exampleInputEmail1">Name</label>
 							<input type="text" name="name" autocomplete="off" formControlName="name" class="form-control"
-								placeholder="title">
+								placeholder="Name">
 							<span *ngIf="submitted && hasError('name','required')" class="alert-danger">
 								Name is required
 							</span>
@@ -33,8 +33,10 @@
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">Description</label>
-							<input type="text" name="description" autocomplete="off" formControlName="description" class="form-control"
-								placeholder="Description">
+							<!-- <input type="text" name="description" autocomplete="off" formControlName="description" class="form-control"
+								placeholder="Description"> -->
+							<textarea name="description" autocomplete="off" formControlName="description" class="form-control"
+								placeholder="Description"> </textarea>
 							<span *ngIf="submitted && hasError('description','required')" class="alert-danger">
 								Description is required
 							</span>
@@ -49,19 +51,38 @@
 							</span>
 						</div>
 
+
 						<div class="form-group">
-							<label for="ingredients">Ingredients</label>
-							<input type="text" name="ingredients" autocomplete="off" formControlName="ingredients"
-								class="form-control" placeholder="ingredients">
-							<span *ngIf="submitted && hasError('ingredients','required')" class="alert-danger">
-								Ingredients is required
+							<label for="requiredEmployees">Required no of Employees</label>
+							<input type="number" name="requiredEmployees" autocomplete="off" formControlName="requiredEmployees"
+								class="form-control" placeholder="Required no of Employees">
+							<span *ngIf="submitted && hasError('requiredEmployees','required')" class="alert-danger">
+								Required no of Employees is required
 							</span>
 						</div>
 
 						<div class="form-group">
+							<label for="exampleInputEmail1">Employee <span class="required">*</span> : </label>
+							<div class="col-md-8 col-sm-10 col-12">
+								<ng-multiselect-dropdown id="select" [placeholder]="'Select Employee'" [settings]="dropdownSettings"
+									[data]="employeeList" [formControl]="f.employees">
+								</ng-multiselect-dropdown>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="Ingredients">Ingredients <span class="required">*</span> : </label>
+							<div class="col-md-8 col-sm-10 col-12">
+								<ng-multiselect-dropdown id="select" [placeholder]="'Select Ingredients'" [settings]="dropdownSettings"
+									[data]="ingredientsList" [formControl]="f.ingredients">
+								</ng-multiselect-dropdown>
+							</div>
+						</div>
+
+						<div class="form-group">
 							<label for="exampleInputEmail1">Preparation Time</label>
-							<input type="text" name="preparationTime" autocomplete="off" formControlName="preparationTime" class="form-control"
-								placeholder="PreparationTime">
+							<input type="number" name="preparationTime" autocomplete="off" formControlName="preparationTime"
+								class="form-control" placeholder="Preparation Time">
 							<span *ngIf="submitted && hasError('preparationTime','required')" class="alert-danger">
 								Preparation Time is required
 							</span>
@@ -69,22 +90,12 @@
 
 						<div class="form-group">
 							<label for="price">Price</label>
-							<input type="text" name="price" autocomplete="off" formControlName="price" class="form-control"
+							<input type="number" name="price" autocomplete="off" formControlName="price" class="form-control"
 								placeholder="Price">
 							<span *ngIf="submitted && hasError('price','required')" class="alert-danger">
 								Price is required
 							</span>
 						</div>
-
-						<div class="form-group">
-							<label for="requiredEmployees">Required no of Employees</label>
-							<input type="text" name="requiredEmployees" autocomplete="off" formControlName="requiredEmployees" class="form-control"
-								placeholder="Hire Date">
-							<span *ngIf="submitted && hasError('requiredEmployees','required')" class="alert-danger">
-								Required no of Employees is required
-							</span>
-						</div>
-
 						<div class="form-group" *ngIf="isEdit">
 							<label for="sequence_number">Sequence Number</label>
 							<input type="text" name="sequence_number" autocomplete="off" formControlName="sequence_number" class="form-control"
