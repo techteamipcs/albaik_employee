@@ -268,7 +268,7 @@ export class CheckComponent {
 						this.toastr.successToastr(response.message);
 
 						setTimeout(() => {
-							this.router.navigate(['/support-request/']);
+							this.router.navigate(['/request/support-request']);
 						}, 2000);
 					}
 					else {
@@ -287,7 +287,7 @@ export class CheckComponent {
 						this.msg_success = true;
 						this.toastr.successToastr(response.message);
 						setTimeout(() => {
-							this.router.navigate(['/support-request/']);
+							this.router.navigate(['/request/support-request']);
 						}, 2000);
 					} else {
 						this.throw_msg = response.message

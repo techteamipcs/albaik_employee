@@ -52,6 +52,7 @@ export class AddDepartmentComponent {
 			verified: [''],
 			status: ['', Validators.required],
 			department_id: ['ALBKDEPT-'],
+			sequence_number: [''],
 		});
 		this.token = localStorage.getItem('ghoastrental-token');
 		this.imagePath = environment.baseUrl + '/public/';
@@ -124,6 +125,7 @@ export class AddDepartmentComponent {
 						employees: tempemployee,
 						status: data?.status,
 						department_id: data?.department_id,
+						sequence_number: data?.sequence_number
 					});
 				} else {
 

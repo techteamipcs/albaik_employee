@@ -1,1 +1,61 @@
-<p>support-request works!</p>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="col-md-12">
+            <div class="content-wrapper">
+              <div class="row">
+                <div class="col-xl-12 col-sm-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="container">
+                          <div class="button-group">
+                            <button class="btn {{isallMealsActive}}" (click)="selectMeals('all','')">All Meals</button>
+                            <button class="btn {{item.ismealsActive}}" (click)="selectMeals('meal',item)"
+                              *ngFor="let item of mealsData">{{item.name}}</button>
+                          </div>
+                          <div class="button-group">
+                            <button class="btn {{isallShiftsActive}}" (click)="selectShifts('all','')">All
+                              Shifts</button>
+                            <button class="btn {{item.isshiftActive}}" (click)="selectShifts('shift',item)"
+                              *ngFor="let item of shiftData">{{item.name}}</button>
+                          </div>
+                          <div class="output-box">
+                            <input class="output-number" [(ngModel)]="orders">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h4 class="title">Support Request</h4>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead>
+                <tr>
+                  <th>SL No</th>
+                  <th>Departments</th>
+                  <th>Profile type</th>
+                  <th>Head Count</th>
+                  <th>Time in</th>
+                  <th>Time out</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
