@@ -7,6 +7,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { RoleService } from 'src/app/providers/role/role.service';
 import { MealService } from 'src/app/providers/meal/meal.service';
 import { EmployeeService } from 'src/app/providers/employee/employee.service';
+import { DepartmentService } from 'src/app/providers/department/department.service';
 @Component({
 	selector: 'app-meal-add',
 	templateUrl: './meal-add.component.html',
@@ -36,12 +37,15 @@ export class MealAddComponent implements OnInit {
 		'Black pepper powder', 'Salt', 'Oil'
 	];
 	dropdownSettings = {};
+	departmentData: any = [];
+	departmentList: any = [];
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private formBuilder: FormBuilder,
 		private mealService: MealService,
 		private toastr: ToastrManager,
+		public departmentService: DepartmentService,
 		public employeeService: EmployeeService
 	) {
 		this.addmealForm = this.formBuilder.group({
@@ -54,6 +58,8 @@ export class MealAddComponent implements OnInit {
 			employees: [''],
 			isAvailable: ['', Validators.required],
 			requiredEmployees: [''],
+			package: [''],
+			machine: [''],
 			sequence_number: ['']
 
 		});
@@ -65,6 +71,7 @@ export class MealAddComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getEmployeeData();
+		this.getDepartmentData();
 		this.id = this.route.snapshot.paramMap.get('id');
 		if (this.isEdit) {
 			this.patchingdata(this.id);
@@ -116,6 +123,8 @@ export class MealAddComponent implements OnInit {
 					ingredients: data.ingredients || [],
 					employees: tempemployee,
 					sequence_number: data?.sequence_number,
+					machine: data?.machine,
+					package: data?.package,
 				});
 			} else {
 
@@ -190,6 +199,53 @@ export class MealAddComponent implements OnInit {
 			},
 		);
 	}
+
+	getDepartmentData() {
+		const obj = {};
+		this.departmentService.getallDepartmentDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.departmentData = response.result;
+						this.departmentList = [];
+
+						this.departmentData.forEach((item) => {
+							const department = {
+								_id: item._id,
+								name: item.name,
+							};
+							this.departmentList.push(department);
+						});
+					}
+					else {
+						this.msg_danger = true;
+					}
+
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
+
+	// getDepartment() {
+	// 	const obj = {};
+	// 	this.departmentService.getallDepartmentDetails(obj).subscribe(
+	// 		(response) => {
+	// 			if (response.code == 200) {
+	// 				if (response.result != null && response.result != '') {
+	// 					this.departmentData = response.result;
+	// 				}
+	// 				else {
+	// 					this.msg_danger = true;
+	// 				}
+
+	// 			} else {
+	// 				this.toastr.errorToastr(response.message);
+	// 			}
+	// 		},
+	// 	);
+	// }
 
 	onCancel(): void {
 		this.router.navigate(['/meal/view']);
