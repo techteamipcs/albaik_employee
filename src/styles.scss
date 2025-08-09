@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/scss/spacing';
 /* styles.scss */
 :root {
   // --background-color: #ffffff;
@@ -248,4 +249,27 @@ a{
 .auth .sign-up a, .auth .forgot-pass {
   color: var(--custom-text-color);
   text-decoration: none;
+}
+.primarybtn{
+  // background-color: #ff8800;
+  background-color: transparent;
+  color: #797979;
+  border: 1px solid #E4E4E4;
+  border-radius: 25px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 161px;
+  height: 51px;
+  &.active {
+    background-color: #ff8800;
+    color: #fff;
+    border: 1px solid #ff8800;
+  }
+}
+
+.primarybtn:hover {
+  background-color: darken(#ff8800, 5%);
+  color: #fff;
+  border: 1px solid #ff8800;
 }

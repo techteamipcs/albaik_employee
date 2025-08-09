@@ -45,6 +45,7 @@ export class CheckComponent {
 	isallMealsActive = 'active';
 	isallShiftsActive = 'active';
 	existedRequest:any;
+	isPopupOpen = false;
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -206,6 +207,7 @@ export class CheckComponent {
 			});
 		}
 		if(type != 'all'){
+			 this.isPopupOpen = true;
 			this.isallMealsActive = '';
 			this.mealsData.forEach((item) => {
 				if(data._id == item._id){
@@ -298,7 +300,9 @@ export class CheckComponent {
 			);
 		}
 	}
-
+closePopup() {
+    this.isPopupOpen = false;
+  }
 
 
 }
