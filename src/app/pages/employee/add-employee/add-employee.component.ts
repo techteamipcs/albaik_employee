@@ -9,6 +9,8 @@ import { CertificationService } from 'src/app/providers/certification/certificat
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ManagerService } from 'src/app/providers/manager/manager.service';
 import * as moment from 'moment';
+import { PositionService } from 'src/app/providers/position/position.service';
+import { DepartmentService } from 'src/app/providers/department/department.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -44,6 +46,8 @@ imagePath: any;
 	currentPage: number = 1;
   currentLimit: number = 10;
 	certifiedObject: FormGroup;
+	positionData:any = [];
+	departmentData:any = [];
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -53,7 +57,9 @@ imagePath: any;
 		public roleService: RoleService,
 		public certificationService: CertificationService,
 		private modalService: NgbModal,
-		public managerService: ManagerService
+		public managerService: ManagerService,
+		public positionService: PositionService,
+		public departmentService: DepartmentService
 	) {
 		this.addemployeeForm = this.formBuilder.group({
 			username: ['', Validators.required],
@@ -63,7 +69,7 @@ imagePath: any;
 			employee_id: ['ALBKEMP-'],
 			first_name: [''],
 			last_name: [''],
-			department: [''],
+			departments: [''],
 			certifications: [''],
   		employmentType: [''],
 			file_no: [''],
@@ -96,6 +102,8 @@ imagePath: any;
 		this.get_roleData();
 		this.get_Cirtifications();
 		this.getManagerData();
+		this.getPositionData();
+		this.getDepartmentData();
 	}
 
 	public hasError = (controlName: string, errorName: string) => {
@@ -153,12 +161,12 @@ imagePath: any;
 						employee_id: data?.employee_id,
 						first_name: data?.first_name,
 						last_name: data?.last_name,
-						department: data?.department,
+						departments: data?.department_id,
 						certifications: data?.certifications,
 						employmentType: data?.employmentType,
 						file_no: data?.file_no,
 						basic_orientation: data?.basic_orientation,
-						position: data?.position,
+						position: data?.position_id,
 						hireDate: moment(data?.hireDate).format('YYYY-MM-DD'),
 						availability: data?.availability,
 						shiftPreferences: data?.shiftPreferences,
@@ -291,6 +299,52 @@ imagePath: any;
             if(response.result != null && response.result != '')
             {
               this.certificatesData = response.result; 
+            }
+            else
+            {
+              this.msg_danger   = true;
+            }
+           
+          } else {
+            this.toastr.errorToastr(response.message);
+          }
+        },
+      );
+  }
+
+	getDepartmentData()
+  {
+    const obj = {  };
+    this.departmentService.getallDepartmentDetails(obj).subscribe(
+        (response)=> {
+          if (response.code == 200) 
+          {
+            if(response.result != null && response.result != '')
+            {
+              this.departmentData = response.result; 
+            }
+            else
+            {
+              this.msg_danger   = true;
+            }
+           
+          } else {
+            this.toastr.errorToastr(response.message);
+          }
+        },
+      );
+  }
+
+	getPositionData()
+  {
+    const obj = {  };
+    this.positionService.getallPositionDetails(obj).subscribe(
+        (response)=> {
+          if (response.code == 200) 
+          {
+            if(response.result != null && response.result != '')
+            {
+              this.positionData = response.result; 
             }
             else
             {

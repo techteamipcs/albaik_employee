@@ -128,6 +128,22 @@
 									Employment Type</span>
 							</div>
 							<div class="form-group">
+								<label for="exampleInputEmail1">Department</label>
+								<select name="departments" formControlName="departments" class="form-control">
+									<option value="">Select Department</option>
+									<option value="{{item._id}}" *ngFor="let item of departmentData">{{item.name}}</option>
+								</select>
+								<span *ngIf="submitted && hasError('departments','required')" class="alert-danger">Please Select Department</span>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Position</label>
+								<select name="position" formControlName="position" class="form-control">
+									<option value="">Select Position</option>
+									<option value="{{item._id}}" *ngFor="let item of positionData">{{item.name}}</option>
+								</select>
+								<span *ngIf="submitted && hasError('position','required')" class="alert-danger">Please Select Position</span>
+							</div>
+							<div class="form-group">
 								<label for="exampleInputEmail1">File Number</label>
 								<input type="number" name="file_no" autocomplete="off" formControlName="file_no"
 									class="form-control" placeholder="File Number">
@@ -140,25 +156,6 @@
 									class="form-control" placeholder="Basic Orientation">
 								<span *ngIf="submitted && hasError('basic_orientation','required')" class="alert-danger">Basic Orientation is
 									required</span>
-							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail1">Position</label>
-								<select name="position" formControlName="position" class="form-control">
-									<option value="">Select Employment Type</option>
-									<option value="CR">CR</option>
-									<option value="TM">TM</option>
-									<option value="TM-CTR">TM-CTR</option>									
-									<option value="TM-Cleaning">TM-Cleaning</option>
-									<option value="TM-SDW">TM-SDW</option>
-									<option value="TM-NSF">TM-NSF</option>
-									<option value="TM-Factory">TM-Factory</option>
-									<option value="TM-PFC">TM-PFC</option>
-									<option value="TM-DNG">TM-DNG</option>
-									<option value="TM-FF">TM-FF</option>
-									<option value="TM-CSR">TM-CSR</option>
-									<option value="TM-TNJ">TM-TNJ</option>
-								</select>
-								<span *ngIf="submitted && hasError('position','required')" class="alert-danger">Please Select Position</span>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1">Hire Date</label>

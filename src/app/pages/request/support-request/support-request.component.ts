@@ -45,6 +45,7 @@ export class SupportRequestComponent {
     isallMealsActive = 'active';
     isallShiftsActive = 'active';
     existedRequest:any;
+		serviceRequestData: any = [];
     departments: any = [];
     constructor(
       private router: Router,
@@ -63,12 +64,31 @@ export class SupportRequestComponent {
       this.url = environment.Url + '/assets';
     }
     ngOnInit(): void {
+		this.getServiceRequestData();
 		this.getExistedRequestData();
 		this.getManagerData();
 		this.getEmployeeData();
 		this.getMealsData();
 		this.getShiftData();
   }
+
+	getServiceRequestData() {
+		const obj = {};
+		this.requestService.getServiceRequest(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.serviceRequestData = response.result;
+					}
+					else {
+						this.msg_danger = true;
+					}
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
 
 	getExistedRequestData() {
 		const obj = {};

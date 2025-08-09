@@ -6,14 +6,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class RequestService {
+export class PositionService {
 
   constructor(
       private http: HttpClient
     ) { }
   
-    getRequestDetails = (data: any): Observable<any> => {
-      const endpoint = environment.baseUrl + '/api/request/viewRequest';
+    getPositionDetails = (data: any): Observable<any> => {
+      const endpoint = environment.baseUrl + '/api/position/viewPosition';
       return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
         catchError((err) => {
           return throwError(err);
@@ -21,8 +21,8 @@ export class RequestService {
       );
     };
   
-    getRequestWithId = (moreData: any): Observable<any> => {
-      const endpoint = environment.baseUrl + '/api/request/getRequestById';
+    getPositionWithId = (moreData: any): Observable<any> => {
+      const endpoint = environment.baseUrl + '/api/position/getPositionById';
       return this.http
         .post(endpoint, moreData, this.getRequestHeaders())
         .pipe(
@@ -32,8 +32,8 @@ export class RequestService {
         );
     };
   
-    addRequest = (moreData: any): Observable<any> => {
-      const endpoint = environment.baseUrl + '/api/request/addRequest';
+    addPosition = (moreData: any): Observable<any> => {
+      const endpoint = environment.baseUrl + '/api/position/addPosition';
       return this.http
         .post(endpoint, moreData, this.getRequestHeaders())
         .pipe(
@@ -43,8 +43,8 @@ export class RequestService {
         );
     };
   
-    editRequestdata = (moreData: any, Id: any): Observable<any> => {
-      let endpoint = environment.baseUrl + '/api/request/editRequest';
+    editPositiondata = (moreData: any, Id: any): Observable<any> => {
+      let endpoint = environment.baseUrl + '/api/position/editPosition';
       if (Id) {
         endpoint += `?id=${Id}`;
       }
@@ -55,8 +55,8 @@ export class RequestService {
       );
     };
   
-    deleterequest = (data: any): Observable<any> => {
-      const endpoint = environment.baseUrl + '/api/request/deleteRequest';
+    deleteposition = (data: any): Observable<any> => {
+      const endpoint = environment.baseUrl + '/api/position/deletePosition';
       return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
         catchError((err) => {
           return throwError(err);
@@ -64,35 +64,13 @@ export class RequestService {
       );
     };
   
-    getallRequestDetails = (data: any): Observable<any> => {
-      const endpoint = environment.baseUrl + '/api/request/getAllRequest';
+    getallPositionDetails = (data: any): Observable<any> => {
+      const endpoint = environment.baseUrl + '/api/position/getAllPosition';
       return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
         catchError((err) => {
           return throwError(err);
         })
       );
-    };
-
-    getExistedRequest = (moreData: any): Observable<any> => {
-      const endpoint = environment.baseUrl + '/api/request/getExistedRequest';
-      return this.http
-        .post(endpoint, moreData, this.getRequestHeaders())
-        .pipe(
-          catchError((err) => {
-            return throwError(err);
-          })
-        );
-    };
-
-    getServiceRequest = (moreData: any): Observable<any> => {
-      const endpoint = environment.baseUrl + '/api/request/getServiceRequest';
-      return this.http
-        .post(endpoint, moreData, this.getRequestHeaders())
-        .pipe(
-          catchError((err) => {
-            return throwError(err);
-          })
-        );
     };
   
     protected getRequestHeaders(): {

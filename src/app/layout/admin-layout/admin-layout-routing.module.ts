@@ -60,6 +60,11 @@ const routes: Routes = [
 		data: { title: 'Page Module' },
 	},
 	{
+		path: 'position',
+		loadChildren: () => import("./../../pages/position/position.module").then((m) => m.PositionModule),
+		data: { title: 'Position Module' },
+	},
+	{
 		path: 'report',
 		loadChildren: () => import("./../../pages/report/report.module").then((m) => m.ReportModule),
 		data: { title: 'Report' },

@@ -5,18 +5,18 @@
 		<div class="col">
 			<div class="card shadow">
 				<div class="card-header border-0">
-					<h3 class="mb-0">Employee List</h3>
+					<h3 class="mb-0">Position List</h3>
 				</div>
 				<div class="card-body">
 					<div class="col-md-12">
 						<div class="row">
 							<div class="col-md-6">
-								<!-- <input class="form-control mt-4" type="text" (keyup)="searchEmployee()" name="search" [(ngModel)]="searchText"
-                                        autocomplete="off" placeholder="&#61442;  Start searching a Employee by name"> -->
+								<!-- <input class="form-control mt-4" type="text" (keyup)="searchPosition()" name="search" [(ngModel)]="searchText"
+                                        autocomplete="off" placeholder="&#61442;  Start searching a Position by name"> -->
 							</div>
 							<div class="col-md-6">
 								<button type="button" class="btn btn-button pull-right ml-auto mb-4"
-									routerLink="/employee/add">Add Employee</button></div>
+									routerLink="/position/add">Add Position</button></div>
 						</div>
 						<div class="col-md-6">
 							<h4 class="title"></h4>
@@ -27,42 +27,34 @@
 							<thead>
 								<tr>
 									<th>SL No</th>
-									<th>Username</th>
-									<th>Email</th>
-									<th>File No</th>
+									<th>Position Name</th>
                   <th>Status</th>
-									<th>Department</th>
-									<th>Position</th>
-									<th>Employee ID</th>									
+									<th>Sequence Number</th>									
 									<th>Created At</th>
 									<th>Updated At</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<td colspan="5" *ngIf="EmployeeData.length == 0">
+								<td colspan="5" *ngIf="PositionData.length == 0">
 									<div class="alert alert-dismissable" style="text-align: center;">
-										Employee List is Empty
+										Position List is Empty
 									</div>
 								</td>
-								<tr *ngFor="let listEmployee of EmployeeData; let i = index">
+								<tr *ngFor="let listPosition of PositionData; let i = index">
 									<td *ngIf="currentPage == 1">{{i+1}}</td>
 									<td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
-									<td>{{listEmployee.username}}</td>
-									<td>{{listEmployee.email}}</td>
-									<td>{{listEmployee.file_no}}</td>
-									<td>{{listEmployee.status }}</td>
-									<td><p *ngIf="listEmployee.departments_data && listEmployee.departments_data.length > 0">{{listEmployee.departments_data[0].name}}</p></td>
-									<td><p *ngIf="listEmployee.position && listEmployee.position.length > 0">{{listEmployee.position[0].name}}</p></td>
-                  <td>{{listEmployee.employee_id}}</td>
-									<!-- <td>{{listEmployee.isApproved == true ? 'Yes':'No'}}</td> -->
-									<td>{{listEmployee.created_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
-									<td>{{listEmployee.updated_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listPosition.name}}</td>
+									<td>{{listPosition.status == true ? 'Enabled':'Disable' }}</td>
+                  <td>{{listPosition.sequence_number}}</td>
+									<!-- <td>{{listPosition.isApproved == true ? 'Yes':'No'}}</td> -->
+									<td>{{listPosition.created_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listPosition.updated_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
 									<td>
-										<a routerLink="/employee/edit/{{listEmployee._id}}" style="cursor:pointer"><i
+										<a routerLink="/position/edit/{{listPosition._id}}" style="cursor:pointer"><i
 												class="mdi mdi-lead-pencil" aria-hidden="true"></i>
 										</a>
-										<a style="cursor:pointer;padding-left: 15px;" (click)="open(content,listEmployee)"><i
+										<a style="cursor:pointer;padding-left: 15px;" (click)="open(content,listPosition)"><i
 												class="mdi mdi-close-box" aria-hidden="true"></i></a>
 									</td>
 								</tr>
@@ -81,22 +73,22 @@
 
 	<ng-template #content let-modal style="z-index: 0;">
 		<div class="modal-header">
-			<h4 class="modal-title" id="modal-title">Employee</h4>
+			<h4 class="modal-title" id="modal-title">Position</h4>
 			<button type="button" class="btn btn-button" aria-describedby="modal-title"
 				(click)="modal.dismiss('Cross click')">close</button>
 		</div>
 		<div class="modal-body">
-			<p *ngIf="selectedEmployee">
-				<strong>Are you sure you want to delete <span class="text-primary">"{{selectedEmployee.name}}"</span>
-					Employee?</strong>
+			<p *ngIf="selectedPosition">
+				<strong>Are you sure you want to delete <span class="text-primary">"{{selectedPosition.name}}"</span>
+					Position?</strong>
 			</p>
 			<p>
-				All information associated to this Employee will be permanently deleted.
+				All information associated to this Position will be permanently deleted.
 				<span class="text-danger">This operation can not be undone.</span>
 			</p>
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-button" (click)="modal.dismiss('cancel click')">Cancel</button>
-			<button type="button" class="btn btn-button" (click)="deleteEmployee()">Ok</button>
+			<button type="button" class="btn btn-button" (click)="deletePosition()">Ok</button>
 		</div>
 	</ng-template>

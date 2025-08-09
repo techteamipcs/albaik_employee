@@ -52,6 +52,15 @@
 				<span class="menu-title">Certifications</span>
 			</a>
 		</li>
+		<li class="nav-item menu-items"
+			[class.active]="currentRoute === '/position' || currentLocation =='position'">
+			<a class="nav-link" [routerLink]="['/position/view']" routerLinkActive="router-link-active">
+				<span class="menu-icon">
+					<i class="mdi mdi-store"></i>
+				</span>
+				<span class="menu-title">Position</span>
+			</a>
+		</li>
 		<li class="nav-item menu-items" [class.active]="currentRoute === '/employee' || currentLocation =='employee'">
 			<a class="nav-link" [routerLink]="['/employee/view']" routerLinkActive="router-link-active">
 				<span class="menu-icon">

@@ -6,6 +6,7 @@ import { DepartmentService } from '../../../providers/department/department.serv
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { ManagerService } from 'src/app/providers/manager/manager.service';
 import { EmployeeService } from 'src/app/providers/employee/employee.service';
+import { PositionService } from 'src/app/providers/position/position.service';
 
 @Component({
 	selector: 'app-add-department',
@@ -36,6 +37,7 @@ export class AddDepartmentComponent {
 	employeeData: any = [];
 	managerList: any = [];
 	employeeList: any = [];
+	positionData: any = [];
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -43,7 +45,8 @@ export class AddDepartmentComponent {
 		private departmentService: DepartmentService,
 		private toastr: ToastrManager,
 		public managerService: ManagerService,
-		public employeeService: EmployeeService
+		public employeeService: EmployeeService,
+		public positionService: PositionService
 	) {
 		this.adddepartmentForm = this.formBuilder.group({
 			name: ['', Validators.required],
@@ -240,5 +243,28 @@ export class AddDepartmentComponent {
 			},
 		);
 	}
+
+	getPositionData()
+  {
+    const obj = {  };
+    this.positionService.getallPositionDetails(obj).subscribe(
+        (response)=> {
+          if (response.code == 200) 
+          {
+            if(response.result != null && response.result != '')
+            {
+              this.positionData = response.result; 
+            }
+            else
+            {
+              this.msg_danger   = true;
+            }
+           
+          } else {
+            this.toastr.errorToastr(response.message);
+          }
+        },
+      );
+  }
 
 }
