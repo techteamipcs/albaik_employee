@@ -13,6 +13,11 @@
   --progress-bar-bg:#f8f9fa;
   --background-color-header:#fff;
   --custom-text-color: #6c7293;
+  // new variable
+  --icon-color: rgba(71, 70, 68, 0.6);
+  // --text-color1:rgb(50, 48, 44);
+  --text-color1:#5f5e5b;
+  --menu-background-color:rgba(0, 0, 0, 0.03);
 }
 
 .dark-theme {
@@ -38,7 +43,7 @@
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--light-black);
   color: var(--text-color);
 }
 
@@ -57,13 +62,27 @@ body {
 }
 .sidebar{
   height: 100%;
-  background-color: var(--background-color-header);
+  // background-color: var(--background-color-header);
   color: var(--text-color);
   position: fixed;
+  background: rgb(249, 248, 247);
   .nav{
     height: 100%;
     overflow-y: visible;
+     background: rgb(249, 248, 247);
+    box-shadow: inset calc(var(--direction, 1) * -1px) 0px 0px 0px #EEEEEC;
   }
+}
+.sidebar .sidebar-brand-wrapper{
+  background: rgb(249, 248, 247);
+   box-shadow: inset calc(var(--direction, 1) * -1px) 0px 0px 0px #EEEEEC;
+}
+
+.sidebar .nav .nav-item .nav-link{
+color: var(--text-color1);
+}
+.sidebar .nav.sub-menu .nav-item .nav-link{
+  color: var(--text-color1);
 }
 .form-control, .asColorPicker-input, .dataTables_wrapper select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text], .jsgrid .jsgrid-table .jsgrid-filter-row select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number], .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint{
   background-color: #fff;
@@ -131,7 +150,7 @@ select.form-control:focus, select.form-control:hover {
   color: var(--text-color) !important; 
 }
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link{
-  color: var(--text-color);
+  color: var(--text-color1);
 }
 .navbar .navbar-menu-wrapper .search input{
   background-color: var(--background-color-light);
@@ -144,30 +163,33 @@ select.form-control:focus, select.form-control:hover {
 .card .card-title{
   color: var(--text-color);
 }
-.sidebar .sidebar-brand-wrapper{
-  background-color: var(--background-color-header);
-  color: var(--text-color);
-}
+// .sidebar .sidebar-brand-wrapper{
+//   background-color: var(--background-color-header);
+//   color: var(--text-color);
+// }
 .sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-category):not(.account-dropdown) > .nav-link{
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--menu-background-color);
+  color: var(--text-color1);
+  border-radius: 6px;
 }
 .sidebar .nav.sub-menu .nav-item .nav-link:hover{
-  // background-color: var(--background-color);
-  color: var(--text-color); 
+  background-color: var(--menu-background-color);
+  color: var(--text-color1); 
+   border-radius: 6px;
 }
 .sidebar .nav .nav-item.active > .nav-link{
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--menu-background-color);
+  color: var(--text-color1);
+  border-radius: 6px;
 }
 .sidebar .nav .nav-item.active > .nav-link .menu-title{
-  color: var(--text-color);
+  color: var(--text-color1);
 }
 .sidebar .nav .nav-item.active > .nav-link i{
-  color: var(--text-color);
+  color: var(--text-color1);
 }
 .sidebar .nav.sub-menu .nav-item .nav-link.active{
-  color: var(--text-color);
+  color: var(--text-color1);
   font-weight: 500;
 }
 .progress{
@@ -273,3 +295,42 @@ a{
   color: #fff;
   border: 1px solid #ff8800;
 }
+.cst-text{
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  padding: 10px;
+  position: relative;
+  display: block;
+}
+.navbar{
+  box-shadow: none !important;
+}
+.navbar-menu-wrapper {
+  box-shadow: none !important;
+}
+.menu-items {
+    .nav-link {
+      .menu-icon {
+        i { 
+          color: var(--icon-color) !important; 
+        }  
+      }  
+    }  
+ } 
+//  .sidebar .nav .nav-item{
+//   padding: 0px 10px;
+//   &:hover{
+//    padding: 0px 10px; 
+//   }
+// }
+ .sidebar .nav .nav-item .menu-icon{ 
+  background: transparent;
+ }
+ .sidebar .nav .nav-item.active > .nav-link:before{
+  content: none;
+ }
+ .sidebar .nav.sub-menu{
+  box-shadow: none;
+ }

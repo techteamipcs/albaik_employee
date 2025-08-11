@@ -136,16 +136,16 @@
         > .nav-link {
           background: $sidebar-dark-menu-active-bg;
           position: relative;
-          &:before {
-            content: "";
-            width: 3px;
-            height: 100%;
-            background: theme-color(primary);
-            display: inline-block;
-            position: absolute;
-            left: 0;
-            top: 0;
-          }
+          // &:before {
+          //   content: "";
+          //   width: 3px;
+          //   height: 100%;
+          //   background: theme-color(primary);
+          //   display: inline-block;
+          //   position: absolute;
+          //   left: 0;
+          //   top: 0;
+          // }
           .menu-title {
             color: $sidebar-dark-menu-active-color;        
           }
@@ -378,7 +378,7 @@
           .nav-link {
             .menu-icon {
               i {
-                color: theme-color(primary);
+                color: theme-color(--icon-color);
               }
             }
           }
@@ -388,7 +388,7 @@
           .nav-link {
             .menu-icon {
               i {
-                color: theme-color(success);
+                color: theme-color(--icon-color);
               }
             }
           }
@@ -398,7 +398,7 @@
           .nav-link {
             .menu-icon {
               i {
-                color: theme-color(info);
+                color: theme-color(--icon-color);
               }
             }
           }
@@ -408,7 +408,7 @@
           .nav-link {
             .menu-icon {
               i {
-                color: theme-color(warning);
+                color: theme-color(--icon-color);
               }
             }
           }
@@ -418,7 +418,7 @@
           .nav-link {
             .menu-icon {
               i {
-                color: theme-color(danger);
+                color: theme-color(--icon-color);
               }
             }
           }

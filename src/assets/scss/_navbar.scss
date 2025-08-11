@@ -59,19 +59,20 @@
     -webkit-transition: width $action-transition-duration $action-transition-timing-function;
     -moz-transition: width $action-transition-duration $action-transition-timing-function;
     -ms-transition: width $action-transition-duration $action-transition-timing-function;
-    box-shadow: $navbar-box-shadow;
-    -webkit-box-shadow: $navbar-box-shadow;
-    -moz-box-shadow: $navbar-box-shadow;  
+    // box-shadow: $navbar-box-shadow;
+    // -webkit-box-shadow: $navbar-box-shadow;
+    // -moz-box-shadow: $navbar-box-shadow;  
+    box-shadow: none;
     color: $navbar-menu-color;
     padding-left: 15px;
     padding-right: 15px;
     width: 100%;
     height: $navbar-height;
-    .rtl & {
-      box-shadow: $navbar-box-shadow-rtl;
-    -webkit-box-shadow: $navbar-box-shadow-rtl;
-    -moz-box-shadow: $navbar-box-shadow-rtl;  
-    }
+    // .rtl & {
+    //   box-shadow: $navbar-box-shadow-rtl;
+    // -webkit-box-shadow: $navbar-box-shadow-rtl;
+    // -moz-box-shadow: $navbar-box-shadow-rtl;  
+    // }
     @media (max-width: 991px) {
       width: auto;
       padding-left: 15px;
