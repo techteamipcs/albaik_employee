@@ -296,4 +296,65 @@ export class SupportRequestComponent {
 	sendEmail(data){
 		
 	}
+	onSubmit() {
+		this.submitted = true;
+		let obj = {
+			meals : this.selectedMealsList,
+			shifts: this.selectedshiftList,
+			orders: this.orders
+		};
+		let id = this.id;
+		obj['token'] = this.token;
+		if (this.selectedMealsList.length == 0 || this.selectedshiftList.length == 0) {
+			return;
+		}
+		if (!this.isEdit) {
+			this.requestService.addRequest(obj).subscribe(
+				(response) => {
+					if (response.code == 200) {
+						this.toastr.successToastr(response.message);
+
+						setTimeout(() => {
+							this.router.navigate(['/request/support-request']);
+						}, 2000);
+					}
+					else {
+						this.throw_msg = response.message
+						this.msg_danger = true;
+						this.toastr.errorToastr(response.message);
+					}
+				},
+			);
+		}
+		else {
+			this.requestService.editRequestdata(obj, id).subscribe(
+				(response) => {
+					if (response.code == 200) {
+						this.throw_msg = response.message
+						this.msg_success = true;
+						this.toastr.successToastr(response.message);
+						setTimeout(() => {
+							this.router.navigate(['/request/support-request']);
+						}, 2000);
+					} else {
+						this.throw_msg = response.message
+						this.msg_danger = true;
+						this.toastr.errorToastr(response.message);
+					}
+				},
+			);
+		}
+	}
+
+	calculateNoofOrders(){
+		if(this.mealsData && this.mealsData.length > 0){
+			let count: number = 0;
+			this.mealsData.forEach(meal => {
+				if(meal.nooforders){
+					count += +meal.nooforders;
+				}
+			});
+			this.orders = count;
+		}
+	}
 }

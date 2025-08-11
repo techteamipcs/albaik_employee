@@ -1,9 +1,9 @@
 /* Reset and base styles */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+  // margin: 0;
+  // padding: 0;
+  // font-family: 'Segoe UI', sans-serif;
 }
 
 body {
@@ -86,4 +86,86 @@ body {
 .check-btn:hover {
   background-color: #CE3737;
   color: white;
+}
+
+.box {
+	border: 1px solid #E4E4E4;
+	border-radius: 35px;
+	position: relative;
+	overflow: hidden;
+  padding: 10px;
+	img{
+		width: 50px;
+		height: 40px;
+		@media(max-width:1600px){
+			height: auto;
+			width: 33px;
+		}
+		@media(max-width:380px){
+			height: auto;
+			width: 26px;
+		}
+	}
+	.cst-text {
+		border-bottom: 1px solid #E4E4E4;
+		border-radius: 25px;
+		padding: 10px;
+		width: 70%;
+		left: 25%;
+		box-sizing: border-box;
+		text-align: center;
+		position: absolute;
+		box-shadow: none !important;
+		border: 0;
+    z-index: 3;
+    border-bottom: 1px solid #E4E4E4;
+    border-radius: 0;
+    padding: 0px 5px;
+    height: 36px;
+	}
+	.bergername {
+		width: 78%;
+		text-align: center;
+    padding: 0px 5px;
+    height: 100%;
+		// opacity: 1;
+	}
+	// &:hover,
+	// &:focus {
+	// 	.cst-text {
+	// 		opacity: 1;
+	// 	}
+	// 	.bergername {
+	// 		opacity: 0;
+	// 	}
+	// }
+}
+.output-box {
+	margin: 80px auto 50px;
+	border: 1px solid #ccc;
+	border-radius: 28px;
+	padding: 30px 0;
+	width: 551px;
+	input {
+		width: 100%;
+		text-align: center;
+		border: 0;
+	}
+}
+.check-btn {
+	padding: 10px 90px;
+	border-radius: 25px;
+	background-color: white;
+	color: #CE3737;
+	font-weight: bold;
+	border: 2px solid #CE3737;
+	cursor: pointer;
+	transition: 0.3s;
+	display: block;
+	margin: 0 auto;
+}
+
+.check-btn:hover {
+	background-color: #CE3737;
+	color: white;
 }

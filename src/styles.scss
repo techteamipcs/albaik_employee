@@ -19,6 +19,7 @@
   --text-color1:#5f5e5b;
   --menu-background-color:rgba(0, 0, 0, 0.03);
   --text-color2:#32302c;
+  --tabel-bordercolor:#f0efed;
 }
 
 .dark-theme {
@@ -47,12 +48,37 @@ body {
   background-color: var(--light-black);
   color: var(--text-color);
 }
+table{
+  tr{
+    th{
+      // border: 1px solid var(--tabel-bordercolor) !important;
+      border:0 !important;
+      border-bottom:0 !important;
+      border-top:0 !important;
+      border-width: 0 !important;
+    }
+  }
+  tr{
+    td{
+      border-top:1px solid var(--tabel-bordercolor) !important;
+      border: 1px solid var(--tabel-bordercolor);
+      &:first-child{
+        border-left: 0 !important;
+      }
+      &:last-child{
+        border-right: 0 !important;
+      }
+      
+    }
+  }
+}
 
 .card {
   background-color: var(--card-bg);
   color: var(--text-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 20, .08), 0 1px 2px rgba(0, 0, 20, .08);
-  border: 0;
+  // box-shadow: 0 2px 4px rgba(0, 0, 20, .08), 0 1px 2px rgba(0, 0, 20, .08);
+  // border: 0;
+  border: 1px solid #E4E4E4;
   border-radius: .5rem;
 }
 .footer{

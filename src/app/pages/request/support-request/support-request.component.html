@@ -3,69 +3,86 @@
   <!-- Table -->
   <div class="row">
     <div class="col">
-      <div class="card shadow">
+      <div class="card">
         <div class="card-body">
-          <div class="col-md-12">
             <div class="content-wrapper">
               <div class="row">
-                <div class="col-xl-12 col-sm-6 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body">
+                <div class="col-12">
+                  <div class=" cspb60 cspt60">
+                    <div class="">
                       <div class="row">
-                        <div class="container">
-                          <div class="button-group">
-                            <button class="btn {{isallMealsActive}}" (click)="selectMeals('all','')">All Meals</button>
-                            <button class="btn {{item.ismealsActive}}" (click)="selectMeals('meal',item)"
-                              *ngFor="let item of mealsData">{{item.name}}</button>
-                          </div>
-                          <div class="button-group">
-                            <button class="btn {{isallShiftsActive}}" (click)="selectShifts('all','')">All
-                              Shifts</button>
-                            <button class="btn {{item.isshiftActive}}" (click)="selectShifts('shift',item)"
-                              *ngFor="let item of shiftData">{{item.name}}</button>
-                          </div>
-                          <div class="output-box">
-                            <input class="output-number" [(ngModel)]="orders">
+                        <div class="container-fluid">
+                          <div class="col-md-11 mx-auto">
+                            <h1 class="greeting text-center mb-md-4 mb-4">Hi!</h1>
+                            <p class="subheading text-center mb-md-5 mb-4">Choose expected meals today!</p>
+                            <div class="row csmb60">
+                              <!-- <button class="primarybtn {{isallMealsActive}}" (click)="selectMeals('all','')">All Meals</button> -->
+                              <div class=" {{item.ismealsActive}} col-xl-3 col-sm-6 mb-xl-0 mb-4"
+                                (click)="selectMeals('meal',item)" *ngFor="let item of mealsData; let i = index">
+                                <div class="d-flex justify-content-between align-items-center box"
+                                  (mouseenter)="hoverIndex = i" (mouseleave)="hoverIndex = null">
+                                  <img src="{{url}}/images/home/berger.png" alt="" width="50" height="40">
+                                  <input *ngIf="hoverIndex === i" type="number" class="cst-text"
+                                    [(ngModel)]="item.nooforders" (keyup)="calculateNoofOrders()" min="0">
+                                  <p *ngIf="hoverIndex !== i && !item.nooforders" class="bergername mb-0 size16">
+                                    {{item.name}}</p>
+                                  <p *ngIf="hoverIndex !== i && item.nooforders" class="bergername mb-0 size16">
+                                    {{ item.nooforders }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="button-group">
+                              <!-- <button class="primarybtn {{isallShiftsActive}}" (click)="selectShifts('all','')">All Shifts</button> -->
+                              <button class="primarybtn {{item.isshiftActive}}" (click)="selectShifts('shift',item)"
+                                *ngFor="let item of shiftData">{{item.name}}</button>
+                            </div>
+                            <div class="output-box csmb60">
+                              <input class="output-number" [(ngModel)]="orders">
+                            </div>
+                            <button class="check-btn" (click)="onSubmit()">CHECK</button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <h4 class="title">Support Request</h4>
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="table align-items-center table-flush">
-              <thead>
-                <tr>
-                  <th>SL No</th>
-                  <th>Departments</th>
-                  <th>Profile type</th>
-                  <th>Head Count</th>
-                  <!-- <th>Time in</th>
+                <div class="col-md-6">
+                  <h4 class="title">Support Request</h4>
+                </div>
+                <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead>
+                      <tr>
+                        <th>SL No</th>
+                        <th>Departments</th>
+                        <th>Profile type</th>
+                        <th>Head Count</th>
+                        <!-- <th>Time in</th>
                   <th>Time out</th> -->
-                  <th>Action</th>
-                </tr>
-              </thead>
-             <tbody>
-								<td colspan="5" *ngIf="serviceRequestData.length == 0">
-									<div class="alert alert-dismissable" style="text-align: center;">
-										Support Request List is Empty
-									</div>
-								</td>
-								<tr *ngFor="let servicerequest of serviceRequestData; let i = index">
-									<td *ngIf="currentPage == 1">{{i+1}}</td>
-									<td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
-									<td>{{servicerequest.name}}</td>
-								 <td *ngIf="servicerequest.position && servicerequest.position.length > 0"><p *ngFor="let position of servicerequest.position">{{position.name}}</p></td>
-                 <td *ngIf="servicerequest.position && servicerequest.position.length > 0"><p *ngFor="let position of servicerequest.position">{{position.headcount.employees.length}}</p></td>
-								  <!-- <td><p *ngIf="servicerequest.position && servicerequest.position.length > 0">{{servicerequest.position[0].name}}</p></td> -->
-									<td><button class="btn" (click)="sendEmail(servicerequest)">send</button></td>
-                 <!--  <td>{{servicerequest.employee_id}}</td>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <td colspan="5" *ngIf="serviceRequestData.length == 0">
+                        <div class="alert alert-dismissable" style="text-align: center;">
+                          Support Request List is Empty
+                        </div>
+                      </td>
+                      <tr *ngFor="let servicerequest of serviceRequestData; let i = index">
+                        <td *ngIf="currentPage == 1">{{i+1}}</td>
+                        <td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+                        <td>{{servicerequest.name}}</td>
+                        <td *ngIf="servicerequest.position && servicerequest.position.length > 0">
+                          <p *ngFor="let position of servicerequest.position">{{position.name}}</p>
+                        </td>
+                        <td *ngIf="servicerequest.position && servicerequest.position.length > 0">
+                          <p *ngFor="let position of servicerequest.position">{{position.headcount.employees.length}}
+                          </p>
+                        </td>
+                        <!-- <td><p *ngIf="servicerequest.position && servicerequest.position.length > 0">{{servicerequest.position[0].name}}</p></td> -->
+                        <td align="center" ><button class="btn" (click)="sendEmail(servicerequest)">send</button></td>
+                        <!--  <td>{{servicerequest.employee_id}}</td>
 									<td>
 										<a routerLink="/employee/edit/{{listEmployee._id}}" style="cursor:pointer"><i
 												class="mdi mdi-lead-pencil" aria-hidden="true"></i>
@@ -73,10 +90,13 @@
 										<a style="cursor:pointer;padding-left: 15px;" (click)="open(content,listEmployee)"><i
 												class="mdi mdi-close-box" aria-hidden="true"></i></a>
 									</td> -->
-								</tr>
-							</tbody>
-            </table>
-          </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
         </div>
       </div>
     </div>
