@@ -23,6 +23,10 @@ export class SupportRequestComponent {
     submitted: boolean = false;
     msg_success: boolean = false;
     msg_danger: boolean = false;
+		currentPage: number = 1;
+    initialized: boolean = false;
+    currentLimit: number = 10;
+    totalRecord: number = 0;
     token: any;
     // Edit Action Here
     applyAction: any;
@@ -287,5 +291,9 @@ export class SupportRequestComponent {
 				}
 			}
 		}		
+	}
+
+	sendEmail(data){
+		
 	}
 }

@@ -30,6 +30,7 @@
 									<th>Name</th>
 									<th>Managers</th>
 									<th>Employee</th>
+									<th>Position</th>
                   <th>Status</th>
 									<th>Department Number</th>									
 									<th>Created At</th>
@@ -49,6 +50,7 @@
 									<td>{{listDepartment.name}}</td>
 									<td><p *ngFor="let item of listDepartment.managers">{{item.username}}</p></td>
 									<td><p *ngFor="let item of listDepartment.employees">{{item.username}}</p></td>
+									<td><p *ngFor="let item of listDepartment.position">{{item.name}}</p></td>
 									<td>{{listDepartment.status == true ? 'Enabled':'Disable' }}</td>
                   <td>{{listDepartment.department_id}}</td>
 									<!-- <td>{{listDepartment.isApproved == true ? 'Yes':'No'}}</td> -->

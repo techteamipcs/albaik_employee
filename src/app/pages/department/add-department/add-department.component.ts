@@ -38,6 +38,7 @@ export class AddDepartmentComponent {
 	managerList: any = [];
 	employeeList: any = [];
 	positionData: any = [];
+	positionList: any = [];
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -56,6 +57,7 @@ export class AddDepartmentComponent {
 			status: ['', Validators.required],
 			department_id: ['ALBKDEPT-'],
 			sequence_number: [''],
+			position:['']
 		});
 		this.token = localStorage.getItem('ghoastrental-token');
 		this.imagePath = environment.baseUrl + '/public/';
@@ -69,6 +71,7 @@ export class AddDepartmentComponent {
 	ngOnInit(): void {
 		this.getManagerData();
 		this.getEmployeeData();
+		this.getPositionData();
 		this.id = this.route.snapshot.paramMap.get('id');
 		if (this.isEdit) {
 			this.patchingdata(this.id);
@@ -122,13 +125,20 @@ export class AddDepartmentComponent {
               tempemployee.push({ _id: item._id, name: item.username });
             });
           }
+					let tempposition: any = [];
+          if (data?.position) {
+            data.position.forEach((item, index) => {
+              tempposition.push({ _id: item._id, name: item.name });
+            });
+          }
 					this.adddepartmentForm.patchValue({
 						name: data?.name,
 						managers: tempmanager,
 						employees: tempemployee,
 						status: data?.status,
 						department_id: data?.department_id,
-						sequence_number: data?.sequence_number
+						sequence_number: data?.sequence_number,
+						position:tempposition
 					});
 				} else {
 
@@ -254,6 +264,14 @@ export class AddDepartmentComponent {
             if(response.result != null && response.result != '')
             {
               this.positionData = response.result; 
+							this.positionList = [];
+							this.positionData.forEach((item) => {
+								const position = {
+									_id: item._id,
+									name: item.name
+								};
+								this.positionList.push(position);
+							});	
             }
             else
             {

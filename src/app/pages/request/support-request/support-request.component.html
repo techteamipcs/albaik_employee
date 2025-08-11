@@ -46,13 +46,35 @@
                   <th>Departments</th>
                   <th>Profile type</th>
                   <th>Head Count</th>
-                  <th>Time in</th>
-                  <th>Time out</th>
+                  <!-- <th>Time in</th>
+                  <th>Time out</th> -->
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-              </tbody>
+             <tbody>
+								<td colspan="5" *ngIf="serviceRequestData.length == 0">
+									<div class="alert alert-dismissable" style="text-align: center;">
+										Support Request List is Empty
+									</div>
+								</td>
+								<tr *ngFor="let servicerequest of serviceRequestData; let i = index">
+									<td *ngIf="currentPage == 1">{{i+1}}</td>
+									<td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+									<td>{{servicerequest.name}}</td>
+								 <td *ngIf="servicerequest.position && servicerequest.position.length > 0"><p *ngFor="let position of servicerequest.position">{{position.name}}</p></td>
+                 <td *ngIf="servicerequest.position && servicerequest.position.length > 0"><p *ngFor="let position of servicerequest.position">{{position.headcount.employees.length}}</p></td>
+								  <!-- <td><p *ngIf="servicerequest.position && servicerequest.position.length > 0">{{servicerequest.position[0].name}}</p></td> -->
+									<td><button class="btn" (click)="sendEmail(servicerequest)">send</button></td>
+                 <!--  <td>{{servicerequest.employee_id}}</td>
+									<td>
+										<a routerLink="/employee/edit/{{listEmployee._id}}" style="cursor:pointer"><i
+												class="mdi mdi-lead-pencil" aria-hidden="true"></i>
+										</a>
+										<a style="cursor:pointer;padding-left: 15px;" (click)="open(content,listEmployee)"><i
+												class="mdi mdi-close-box" aria-hidden="true"></i></a>
+									</td> -->
+								</tr>
+							</tbody>
             </table>
           </div>
         </div>
