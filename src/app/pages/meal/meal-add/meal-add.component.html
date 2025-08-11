@@ -69,7 +69,7 @@
 								<option value="{{item._id}}" *ngFor="let item of departmentData">{{item.name}}</option>
 							</select> -->
 							<ng-multiselect-dropdown id="select" [placeholder]="'Select Departments'" [settings]="dropdownSettings"
-								[data]="employeeList" [formControl]="f.departments">
+								[data]="departmentList" [formControl]="f.departments">
 							</ng-multiselect-dropdown>
 							<span *ngIf="submitted && hasError('departments','required')" class="alert-danger">Please Select
 								Department</span>
@@ -117,6 +117,15 @@
 								placeholder="No of Packaging Box">
 							<span *ngIf="submitted && hasError('package','required')" class="alert-danger">
 								Package is required
+							</span>
+						</div>
+
+						<div class="form-group">
+							<label for="meal_id">Meal id</label>
+							<input type="text" name="meal_id" autocomplete="off" formControlName="meal_id" class="form-control"
+								placeholder="Meal Id">
+							<span *ngIf="submitted && hasError('meal_id','required')" class="alert-danger">
+								Meal Id is required
 							</span>
 						</div>
 

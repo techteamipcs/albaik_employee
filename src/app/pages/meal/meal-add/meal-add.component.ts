@@ -56,6 +56,8 @@ export class MealAddComponent implements OnInit {
 			preparationTime: [''],
 			price: [''],
 			employees: [''],
+			departments: [''],
+			meal_id: ['ALBKMEAL-'],
 			isAvailable: ['', Validators.required],
 			requiredEmployees: [''],
 			package: [''],
@@ -64,7 +66,7 @@ export class MealAddComponent implements OnInit {
 
 		});
 
-		this.token = localStorage.getItem('albaik-token');
+		this.token = localStorage.getItem('albaik-admin-token');
 		this.imagePath = environment.baseUrl + '/public/';
 		this.url = environment.Url + '/assets';
 	}
@@ -108,7 +110,20 @@ export class MealAddComponent implements OnInit {
 				let tempemployee: any = [];
 				if (data?.employees) {
 					data.employees.forEach((item, index) => {
-						tempemployee.push({ _id: item._id, name: item.username });
+						tempemployee.push({
+							_id: item._id,
+							name: item.username
+						});
+					});
+				}
+
+				let tempDept: any = [];
+				if (data?.departments_data) {
+					data.departments_data.forEach((item, index) => {
+						tempDept.push({
+							_id: item._id,
+							name: item.name
+						});
 					});
 				}
 				// Patch values to form
@@ -123,6 +138,8 @@ export class MealAddComponent implements OnInit {
 					ingredients: data.ingredients || [],
 					employees: tempemployee,
 					sequence_number: data?.sequence_number,
+					departments: tempDept,
+					meal_id: data?.meal_id,
 					machine: data?.machine,
 					package: data?.package,
 				});
