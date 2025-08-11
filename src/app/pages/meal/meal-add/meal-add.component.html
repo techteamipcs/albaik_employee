@@ -156,3 +156,61 @@
 		</div>
 	</div>
 </div>
+
+<ng-template #related let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Add Department Need</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<!-- Page content -->
+		<div class="container">
+			<!-- Table -->
+			<div class="row">
+				<div class="col">
+					<div class="card shadow">
+						<div class="card-body">
+							<div class="table-responsive">
+								<form [formGroup]="certifiedObject" (ngSubmit)="onSubmitDept()" method="post" novalidate>
+									<div class="box-body">
+										<div class="form-group">
+											<label for="exampleInputEmail1">Select Departments</label>
+											<select name="department" formControlName="department" class="form-control">
+												<option value="">Select Department</option>
+												<option value="{{item.department}}" *ngFor="let item of departmentData">{{item.name}}</option>
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label for="exampleInputEmail1">Select positions</label>
+											<select name="position" formControlName="position" class="form-control">
+												<option value="">Select position</option>
+												<option value="{{item.position}}" *ngFor="let item of positionData">{{item.name}}</option>
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label for="exampleInputEmail1">employeesPerOrder</label>
+											<input type="text" name="employeesPerOrder" autocomplete="off" formControlName="scored"
+												class="form-control" placeholder="employeesPerOrder">
+											<span *ngIf="submitted && hasError('employeesPerOrder','required')" class="alert-danger">
+												EmployeesPerOrder is required</span>
+										</div>
+									</div>
+									<div class="box-footer d-flex">
+										<button type="submit" class="btn btn-button mr-2">Submit</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-smallbutton" (click)="modal.close('Close click')">Close</button>
+	</div>
+</ng-template>

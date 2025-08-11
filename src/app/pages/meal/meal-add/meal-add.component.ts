@@ -8,6 +8,8 @@ import { RoleService } from 'src/app/providers/role/role.service';
 import { MealService } from 'src/app/providers/meal/meal.service';
 import { EmployeeService } from 'src/app/providers/employee/employee.service';
 import { DepartmentService } from 'src/app/providers/department/department.service';
+import { PositionService } from 'src/app/providers/position/position.service';
+import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 @Component({
 	selector: 'app-meal-add',
 	templateUrl: './meal-add.component.html',
@@ -29,6 +31,8 @@ export class MealAddComponent implements OnInit {
 	mealData: any = [];
 	employeeList: any = [];
 	employeeData: any = [];
+	positionData: any = [];
+	closeResult = '';
 	// Ingredients list for the dropdown
 	ingredientsList: string[] = [
 		'Chickpeas', 'Onions', 'Garlic', 'Parsley', 'Cilantro',
@@ -39,6 +43,8 @@ export class MealAddComponent implements OnInit {
 	dropdownSettings = {};
 	departmentData: any = [];
 	departmentList: any = [];
+	deptObject: FormGroup;
+	selectedDeptData: any = [];
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -46,7 +52,9 @@ export class MealAddComponent implements OnInit {
 		private mealService: MealService,
 		private toastr: ToastrManager,
 		public departmentService: DepartmentService,
-		public employeeService: EmployeeService
+		public employeeService: EmployeeService,
+		public positionService: PositionService,
+		private modalService: NgbModal,
 	) {
 		this.addmealForm = this.formBuilder.group({
 			name: ['', Validators.required],
@@ -65,7 +73,12 @@ export class MealAddComponent implements OnInit {
 			sequence_number: ['']
 
 		});
-
+		this.deptObject = this.formBuilder.group({
+			id: [''],
+			department: [''],
+			position: [''],
+			employeesPerOrder: [''],
+		});
 		this.token = localStorage.getItem('albaik-admin-token');
 		this.imagePath = environment.baseUrl + '/public/';
 		this.url = environment.Url + '/assets';
@@ -74,6 +87,7 @@ export class MealAddComponent implements OnInit {
 	ngOnInit(): void {
 		this.getEmployeeData();
 		this.getDepartmentData();
+		this.getPositionData();
 		this.id = this.route.snapshot.paramMap.get('id');
 		if (this.isEdit) {
 			this.patchingdata(this.id);
@@ -143,6 +157,7 @@ export class MealAddComponent implements OnInit {
 					machine: data?.machine,
 					package: data?.package,
 				});
+				this.selectedDeptData = data?.department_needs;
 			} else {
 
 			}
@@ -153,7 +168,7 @@ export class MealAddComponent implements OnInit {
 		this.submitted = true;
 		const obj = this.addmealForm.value;
 		obj['token'] = this.token;
-
+		obj['department_needs'] = this.selectedDeptData;
 		if (this.addmealForm.invalid) {
 			return;
 		}
@@ -263,6 +278,70 @@ export class MealAddComponent implements OnInit {
 	// 		},
 	// 	);
 	// }
+
+
+
+	getPositionData() {
+		const obj = {};
+		this.positionService.getallPositionDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.positionData = response.result;
+					}
+					else {
+						this.msg_danger = true;
+					}
+
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
+
+	openRelatedProductModal(content: any) {
+		this.getDepartmentData();
+		this.getPositionData();
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: "myCustomModalClass", size: 'xl', backdrop: 'static' })
+			.result.then((result) => {
+				this.closeResult = `Closed with: ${result}`;
+			}, (reason) => {
+				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+			});
+	}
+
+	private getDismissReason(reason: any): string {
+		if (reason === ModalDismissReasons.ESC) {
+			return 'by pressing ESC';
+		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			return 'by clicking on a backdrop';
+		} else {
+			return `with: ${reason}`;
+		}
+	}
+
+	onSubmitDept() {
+		if (!this.deptObject.valid) {
+			return;
+		} else {
+			let title = '';
+			if (this.deptObject && this.deptObject.length > 0) {
+				let temp = this.deptObject.filter((cert) => cert._id == this.deptObject.value.id);
+				if (temp.length > 0) {
+					title = temp[0].title;
+					this.deptObject.value['title'] = title + '-' + temp[0].type;
+				}
+			}
+			this.selectedDeptData.push(this.deptObject.value);
+			this.modalService.dismissAll();
+		}
+
+	}
+
+	removeDept(index) {
+		this.selectedDeptData.splice(index, 1);
+	}
 
 	onCancel(): void {
 		this.router.navigate(['/meal/view']);
