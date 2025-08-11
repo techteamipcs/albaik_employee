@@ -76,10 +76,6 @@
                       <td *ngIf="servicerequest.position && servicerequest.position.length > 0">
                         <p *ngFor="let position of servicerequest.position">{{position.name}}</p>
                       </td>
-                      <td *ngIf="servicerequest.position && servicerequest.position.length > 0">
-                        <p *ngFor="let position of servicerequest.position">{{position.headcount.employees.length}}
-                        </p>
-                      </td>
                       <td
                         *ngIf="servicerequest.name == 'Productions' || servicerequest.name == 'Counter' || servicerequest.name == 'General Service' && servicerequest.position && servicerequest.position.length > 0">
                         <p *ngFor="let position of servicerequest.position"><span
