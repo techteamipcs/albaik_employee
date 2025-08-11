@@ -43,7 +43,7 @@ export class CheckComponent {
 	shiftList: any = [];
 	selectedMealsList: any = [];
 	selectedshiftList: any = [];
-	orders:any = 5000;
+	orders:any = 0;
 	isallMealsActive = 'active';
 	isallShiftsActive = 'active';
 	existedRequest:any;
@@ -307,6 +307,18 @@ export class CheckComponent {
 					}
 				},
 			);
+		}
+	}
+
+	calculateNoofOrders(){
+		if(this.mealsData && this.mealsData.length > 0){
+			let count: number = 0;
+			this.mealsData.forEach(meal => {
+				if(meal.nooforders){
+					count += +meal.nooforders;
+				}
+			});
+			this.orders = count;
 		}
 	}
  

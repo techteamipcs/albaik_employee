@@ -143,6 +143,9 @@ export class MealAddComponent implements OnInit {
 						});
 					});
 				}
+				if(data?.department_needs){
+					this.selectedDeptData = data?.department_needs;
+				}
 				// Patch values to form
 				this.addmealForm.patchValue({
 					name: data.name,
@@ -160,7 +163,7 @@ export class MealAddComponent implements OnInit {
 					machine: data?.machine,
 					package: data?.package,
 				});
-				this.selectedDeptData = data?.department_needs;
+				
 			} else {
 
 			}
