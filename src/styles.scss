@@ -104,7 +104,13 @@ table{
   background: rgb(249, 248, 247);
    box-shadow: inset calc(var(--direction, 1) * -1px) 0px 0px 0px #EEEEEC;
 }
-
+.sidebar .sidebar-brand-wrapper .sidebar-brand.brand-logo-mini img{
+  height: auto;
+  width: calc(90px - 50px);
+}
+.sidebar .sidebar-brand-wrapper .sidebar-brand img{
+  height: auto;
+}
 .sidebar .nav .nav-item .nav-link{
 color: var(--text-color1);
 }
@@ -364,3 +370,4 @@ a{
  .size16 {
    font-size: 16px;
  }
+ 
