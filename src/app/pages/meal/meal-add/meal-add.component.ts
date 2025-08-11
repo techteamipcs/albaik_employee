@@ -33,6 +33,9 @@ export class MealAddComponent implements OnInit {
 	employeeData: any = [];
 	positionData: any = [];
 	closeResult = '';
+	totalRecord: number = 0;
+	currentPage: number = 1;
+	currentLimit: number = 10;
 	// Ingredients list for the dropdown
 	ingredientsList: string[] = [
 		'Chickpeas', 'Onions', 'Garlic', 'Parsley', 'Cilantro',
@@ -300,7 +303,7 @@ export class MealAddComponent implements OnInit {
 		);
 	}
 
-	openRelatedProductModal(content: any) {
+	openModal(content: any) {
 		this.getDepartmentData();
 		this.getPositionData();
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: "myCustomModalClass", size: 'xl', backdrop: 'static' })
@@ -324,20 +327,26 @@ export class MealAddComponent implements OnInit {
 	onSubmitDept() {
 		if (!this.deptObject.valid) {
 			return;
-		} else {
-			let title = '';
-			if (this.deptObject && this.deptObject.length > 0) {
-				let temp = this.deptObject.filter((cert) => cert._id == this.deptObject.value.id);
-				if (temp.length > 0) {
-					title = temp[0].title;
-					this.deptObject.value['title'] = title + '-' + temp[0].type;
-				}
-			}
-			this.selectedDeptData.push(this.deptObject.value);
-			this.modalService.dismissAll();
 		}
 
+		// Find matching department title if needed
+		let title = '';
+		const deptId = this.deptObject.value.id;
+
+		if (Array.isArray(this.departmentData) && this.departmentData.length > 0) {
+			const match = this.departmentData.find((dept) => dept._id === deptId);
+			if (match) {
+				title = match.name;
+				this.deptObject.patchValue({
+					title: `${title}-${match.type || ''}`
+				});
+			}
+		}
+
+		this.selectedDeptData.push(this.deptObject.value);
+		this.modalService.dismissAll();
 	}
+
 
 	removeDept(index) {
 		this.selectedDeptData.splice(index, 1);

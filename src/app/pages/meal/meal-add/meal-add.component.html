@@ -146,6 +146,57 @@
 							</span>
 						</div>
 
+						<h4>Department Details</h4>
+						<hr>
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-6">
+									<!-- <input class="form-control mt-4 mb-4" type="text" (keyup)="searchProduct()"
+											formControlName="searchText" name="searchText" [(ngModel)]="searchText" autocomplete="off"
+											placeholder="&#61442;  Start searching a Product by name"> -->
+								</div>
+								<div class="col-md-6 mt-4 mb-4">
+									<button type="button" class="btn btn-button ml-auto" (click)="openModal(modal)">
+										Add Dept
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table align-items-center table-flush">
+								<thead>
+									<tr>
+										<th>SL No</th>
+										<th>Department</th>
+										<th>Position</th>
+										<th>EmployeesPerOrder</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<td colspan="5" *ngIf="selectedDeptData && selectedDeptData.length == 0">
+										<div class="alert alert-dismissable" style="text-align: center;">
+											Dept is Empty
+										</div>
+									</td>
+									<tr *ngFor="let cData of selectedDeptData; let i = index">
+										<td *ngIf="currentPage == 1">{{i+1}}</td>
+										<td *ngIf="currentPage != 1">
+											{{i+1+((currentPage - 1) *
+											currentLimit)}}</td>
+										<td>{{cData.department}}</td>
+										<td>{{cData.position}}</td>
+										<td>{{cData.employeesPerOrder}}</td>
+
+										<td>
+											<a style="cursor:pointer;padding-left: 15px;" (click)="removeDept(i)"><i class="mdi mdi-close-box"
+													aria-hidden="true"></i></a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
 						<div class="box-footer d-flex">
 							<button type="submit" class="btn btn-button mr-2">Submit</button>
 							<button type="cancel" (click)="onCancel()" class="btn btn-button">Cancel</button>
@@ -157,7 +208,7 @@
 	</div>
 </div>
 
-<ng-template #related let-modal>
+<ng-template #modal let-modal>
 	<div class="modal-header">
 		<h4 class="modal-title" id="modal-basic-title">Add Department Need</h4>
 		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -173,13 +224,13 @@
 					<div class="card shadow">
 						<div class="card-body">
 							<div class="table-responsive">
-								<form [formGroup]="certifiedObject" (ngSubmit)="onSubmitDept()" method="post" novalidate>
+								<form [formGroup]="deptObject" (ngSubmit)="onSubmitDept()" method="post" novalidate>
 									<div class="box-body">
 										<div class="form-group">
 											<label for="exampleInputEmail1">Select Departments</label>
 											<select name="department" formControlName="department" class="form-control">
 												<option value="">Select Department</option>
-												<option value="{{item.department}}" *ngFor="let item of departmentData">{{item.name}}</option>
+												<option [value]="item.name" *ngFor="let item of departmentData">{{item.name}}</option>
 											</select>
 										</div>
 
@@ -187,13 +238,13 @@
 											<label for="exampleInputEmail1">Select positions</label>
 											<select name="position" formControlName="position" class="form-control">
 												<option value="">Select position</option>
-												<option value="{{item.position}}" *ngFor="let item of positionData">{{item.name}}</option>
+												<option [value]="item.name" *ngFor="let item of positionData">{{item.name}}</option>
 											</select>
 										</div>
 
 										<div class="form-group">
 											<label for="exampleInputEmail1">employeesPerOrder</label>
-											<input type="text" name="employeesPerOrder" autocomplete="off" formControlName="scored"
+											<input type="text" name="employeesPerOrder" autocomplete="off" formControlName="employeesPerOrder"
 												class="form-control" placeholder="employeesPerOrder">
 											<span *ngIf="submitted && hasError('employeesPerOrder','required')" class="alert-danger">
 												EmployeesPerOrder is required</span>
