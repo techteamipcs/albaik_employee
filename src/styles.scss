@@ -285,16 +285,16 @@ a{
   width: 161px;
   height: 51px;
   &.active {
-    background-color: #ff8800;
+    background-color: #CE3737;
     color: #fff;
-    border: 1px solid #ff8800;
+    border: 1px solid #CE3737;
   }
 }
 
 .primarybtn:hover {
-  background-color: darken(#ff8800, 5%);
+  background-color: darken(#CE3737, 5%);
   color: #fff;
-  border: 1px solid #ff8800;
+  border: 1px solid #CE3737;
 }
 // .cst-text{
 //   background-color: transparent;

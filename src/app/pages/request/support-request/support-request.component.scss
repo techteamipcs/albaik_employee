@@ -23,7 +23,7 @@ body {
 
 .greeting {
   font-size: 48px;
-  color: #ff8800; /* Orange */
+  color: #CE3737; /* Orange */
   margin-bottom: 10px;
 }
 
@@ -53,7 +53,7 @@ body {
 }
 
 .btn.active {
-  background-color: #ff8800;
+  background-color: #CE3737;
   color: white;
   border: none;
 }
@@ -76,14 +76,14 @@ body {
   padding: 10px 30px;
   border-radius: 25px;
   background-color: white;
-  color: #ff8800;
+  color: #CE3737;
   font-weight: bold;
-  border: 2px solid #ff8800;
+  border: 2px solid #CE3737;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .check-btn:hover {
-  background-color: #ff8800;
+  background-color: #CE3737;
   color: white;
 }
