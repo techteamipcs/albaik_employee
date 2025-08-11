@@ -111,6 +111,18 @@
 	position: relative;
 	overflow: hidden;
   padding: 10px;
+	img{
+		width: 50px;
+		height: 40px;
+		@media(max-width:1600px){
+			height: auto;
+			width: 33px;
+		}
+		@media(max-width:380px){
+			height: auto;
+			width: 26px;
+		}
+	}
 	.cst-text {
 		border-bottom: 1px solid #ccc;
 		border-radius: 25px;
