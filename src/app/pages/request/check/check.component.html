@@ -14,7 +14,7 @@
                     *ngFor="let item of mealsData; let i = index">
                     <div class="d-flex justify-content-between align-items-center box" (mouseenter)="hoverIndex = i"  (mouseleave)="hoverIndex = null">
                       <img src="{{url}}/images/home/berger.png" alt="" width="50" height="40">
-                      <input *ngIf="hoverIndex === i" type="text" class="cst-text" [(ngModel)]="item.nooforders">
+                      <input *ngIf="hoverIndex === i" type="number" class="cst-text" [(ngModel)]="item.nooforders"   (keyup)="calculateNoofOrders()" min="0">
                       <p *ngIf="hoverIndex !== i && !item.nooforders" class="bergername mb-0 size16"> {{item.name}}</p>
                       <p *ngIf="hoverIndex !== i && item.nooforders" class="bergername mb-0 size16">
                         {{ item.nooforders }}
