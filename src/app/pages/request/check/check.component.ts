@@ -23,6 +23,8 @@ export class CheckComponent {
 	submitted: boolean = false;
 	msg_success: boolean = false;
 	msg_danger: boolean = false;
+	isEditing : boolean = false;
+	hoverIndex: number | null = null;
 	token: any;
 	// Edit Action Here
 	applyAction: any;
@@ -45,7 +47,7 @@ export class CheckComponent {
 	isallMealsActive = 'active';
 	isallShiftsActive = 'active';
 	existedRequest:any;
-	isPopupOpen = false;
+	
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -207,11 +209,18 @@ export class CheckComponent {
 			});
 		}
 		if(type != 'all'){
-			 this.isPopupOpen = true;
 			this.isallMealsActive = '';
 			this.mealsData.forEach((item) => {
 				if(data._id == item._id){
-					item['ismealsActive'] = 'active';
+					// item['ismealsActive'] = 'active';
+					  if (item['ismealsActive'] === 'active') {
+						item['ismealsActive'] = '';
+						// this.selectedMealsList = this.selectedMealsList.filter(meal => meal._id !== data._id);
+						}else {
+          // If inactive → activate & add to list
+          item['ismealsActive'] = 'active';
+          // this.selectedMealsList.push(data);
+       		 }
 				}
 			});
 			if(this.selectedMealsList.length == 0){
@@ -300,9 +309,7 @@ export class CheckComponent {
 			);
 		}
 	}
-closePopup() {
-    this.isPopupOpen = false;
-  }
+ 
 
 
 }

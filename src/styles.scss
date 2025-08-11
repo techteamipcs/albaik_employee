@@ -18,6 +18,7 @@
   // --text-color1:rgb(50, 48, 44);
   --text-color1:#5f5e5b;
   --menu-background-color:rgba(0, 0, 0, 0.03);
+  --text-color2:#32302c;
 }
 
 .dark-theme {
@@ -295,15 +296,15 @@ a{
   color: #fff;
   border: 1px solid #ff8800;
 }
-.cst-text{
-  background-color: transparent;
-  border: 0;
-  border-bottom: 1px solid #ccc;
-  outline: none;
-  padding: 10px;
-  position: relative;
-  display: block;
-}
+// .cst-text{
+//   background-color: transparent;
+//   border: 0;
+//   border-bottom: 1px solid #ccc;
+//   outline: none;
+//   padding: 10px;
+//   position: relative;
+//   display: block;
+// }
 .navbar{
   box-shadow: none !important;
 }
@@ -333,4 +334,7 @@ a{
  }
  .sidebar .nav.sub-menu{
   box-shadow: none;
+ }
+ .size16 {
+   font-size: 16px;
  }
