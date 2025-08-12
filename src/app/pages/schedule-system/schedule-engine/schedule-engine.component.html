@@ -1,0 +1,96 @@
+<section class="p-4" style="min-height: 100vh;">
+  <div class="container ">
+    <h4 class="mb-4 fw-bold">Multi-Question Form</h4>
+
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs mb-4" id="questionTabs" role="tablist">
+      <li class="nav-item" *ngFor="let step of steps; let i = index">
+        <a 
+          class="nav-link" 
+          [class.active]="currentStep === i"
+          (click)="goToStep(i)"
+          href="javascript:void(0)"
+          >
+          {{ i + 1 }}
+          
+        </a>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <form (ngSubmit)="onSubmitform()" #formRef="ngForm">
+      <div class="tab-content">
+        <!-- Question 1 -->
+        <div class="tab-pane fade" [class.show]="currentStep === 0" [class.active]="currentStep === 0">
+          <!-- <label class="form-label fw-semibold">1. What is your name?</label>
+          <input type="text" class="form-control mb-3" [(ngModel)]="formData.name" name="name" required> -->
+          <button type="button" class="btn btn-primary" (click)="goToStep(1)">Start 1</button>
+        </div>
+        <!-- Question 1 -->
+        <div class="tab-pane fade" [class.show]="currentStep === 1" [class.active]="currentStep === 1">
+          <label class="form-label fw-semibold">1. What is your name?</label>
+          <input type="text" class="form-control mb-3" [(ngModel)]="formData.name" name="name" required>
+          <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="tab-pane fade" [class.show]="currentStep === 2" [class.active]="currentStep === 2">
+          <label class="form-label fw-semibold">2. What is your email?</label>
+          <input type="email" class="form-control mb-3" [(ngModel)]="formData.email" name="email" required>
+          <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="tab-pane fade" [class.show]="currentStep === 3" [class.active]="currentStep === 3">
+          <label class="form-label fw-semibold">3. Select your gender</label>
+          <select class="form-select mb-3" [(ngModel)]="formData.gender" name="gender" required>
+            <option selected disabled>Choose...</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+          <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="tab-pane fade" [class.show]="currentStep === 4" [class.active]="currentStep === 4">
+          <label class="form-label fw-semibold">4. Rate our service</label>
+          <input type="range" class="form-range mb-3" min="1" max="5" [(ngModel)]="formData.rating" name="rating" required>
+          <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="tab-pane fade" [class.show]="currentStep === 5" [class.active]="currentStep === 5">
+          <label class="form-label fw-semibold">5. Which features do you use?</label>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="formData.features.dashboard" name="dashboard">
+            <label class="form-check-label">Dashboard</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="formData.features.reports" name="reports">
+            <label class="form-check-label">Reports</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="formData.features.settings" name="settings">
+            <label class="form-check-label">Settings</label>
+          </div>
+          <button type="button" class="btn btn-primary mt-3" (click)="nextStep()">Next</button>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="tab-pane fade" [class.show]="currentStep === 6" [class.active]="currentStep === 6">
+          <label class="form-label fw-semibold">6. Any additional comments?</label>
+          <textarea class="form-control mb-3" rows="3" [(ngModel)]="formData.comments" name="comments"></textarea>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+        <!-- Question 7 -->
+        <div class="tab-pane fade" [class.show]="currentStep === 7" [class.active]="currentStep === 7">
+          <label class="form-label fw-semibold">6. Any additional comments?</label>
+          <textarea class="form-control mb-3" rows="3" [(ngModel)]="formData.comments" name="comments"></textarea>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+

@@ -93,6 +93,11 @@ const routes: Routes = [
 		path: 'request',
 		loadChildren: () => import("./../../pages/request/request.module").then((m) => m.RequestModule),
 		data: { title: 'Request' },
+	},
+	{
+		path: 'schedule-system',
+		loadChildren: () => import("./../../pages/schedule-system/schedule-system.module").then((m) => m.ScheduleSystemModule),
+		data: { title: 'Schedule System' },
 	}
 ];
 
