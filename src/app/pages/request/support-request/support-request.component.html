@@ -38,7 +38,7 @@
                               *ngFor="let item of shiftData">{{item.name}}</button>
                           </div>
                           <div class="output-box csmb60">
-                            <input class="output-number" [(ngModel)]="orders">
+                            <input class="output-number" [(ngModel)]="orders"  disabled="">
                           </div>
                           <button class="check-btn" (click)="onSubmit()">CHECK</button>
                         </div>

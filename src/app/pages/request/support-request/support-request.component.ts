@@ -45,7 +45,7 @@ export class SupportRequestComponent {
     shiftList: any = [];
     selectedMealsList: any = [];
     selectedshiftList: any = [];
-    orders:any = 5000;
+    orders:any = 0;
     isallMealsActive = 'active';
     isallShiftsActive = 'active';
     existedRequest:any;
