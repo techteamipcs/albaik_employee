@@ -13,12 +13,12 @@ import { PositionService } from 'src/app/providers/position/position.service';
 import { DepartmentService } from 'src/app/providers/department/department.service';
 
 @Component({
-  selector: 'app-add-employee',
-  templateUrl: './add-employee.component.html',
-  styleUrls: ['./add-employee.component.scss']
+	selector: 'app-add-employee',
+	templateUrl: './add-employee.component.html',
+	styleUrls: ['./add-employee.component.scss']
 })
 export class AddEmployeeComponent {
-imagePath: any;
+	imagePath: any;
 	imageArr: any = [];
 	// Data Assign
 	artData: any;
@@ -35,19 +35,19 @@ imagePath: any;
 	isEdit = this.route.snapshot.data.title === 'edit' ? true : false;
 	dropdownSettings = {};
 	url: any;
-	managerData:any = [];
-	employeeData:any = [];
-	rolesData:any = [];
-	certificatesData:any = [];
-	selectedcertificatesData:any = [];
+	managerData: any = [];
+	employeeData: any = [];
+	rolesData: any = [];
+	certificatesData: any = [];
+	selectedcertificatesData: any = [];
 	closeResult = '';
 	searchText = '';
 	totalRecord: number = 0;
 	currentPage: number = 1;
-  currentLimit: number = 10;
+	currentLimit: number = 10;
 	certifiedObject: FormGroup;
-	positionData:any = [];
-	departmentData:any = [];
+	positionData: any = [];
+	departmentData: any = [];
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -65,13 +65,13 @@ imagePath: any;
 			username: ['', Validators.required],
 			role: [''],
 			email: [''],
-  		password: [''],
+			password: [''],
 			employee_id: ['ALBKEMP-'],
 			first_name: [''],
 			last_name: [''],
 			departments: [''],
 			certifications: [''],
-  		employmentType: [''],
+			employmentType: [''],
 			file_no: [''],
 			basic_orientation: [''],
 			position: [''],
@@ -86,7 +86,7 @@ imagePath: any;
 			city: [''],
 			country: [''],
 			postal_code: [''],
-			status:['']
+			status: ['']
 		});
 		this.certifiedObject = this.formBuilder.group({
 			id: [''],
@@ -194,8 +194,8 @@ imagePath: any;
 		obj['token'] = this.token;
 		obj['certifications'] = this.selectedcertificatesData;
 		let availability = [{
-			month:'jan',
-			daysAvailable:[1,2,3,4,5]
+			month: 'jan',
+			daysAvailable: [1, 2, 3, 4, 5]
 		}];
 		obj['availability'] = availability;
 		if (this.addemployeeForm.invalid) {
@@ -243,160 +243,140 @@ imagePath: any;
 		this.router.navigate(['/employee/view']);
 	}
 
-	get_roleData()
-  {
-    const obj = {  };
-    this.roleService.getallRoleDetails(obj).subscribe(
-        (response)=> {
-          if (response.code == 200) 
-          {
-            if(response.result != null && response.result != '')
-            {
-              this.rolesData = response.result; 
-            }
-            else
-            {
-              this.msg_danger   = true;
-            }
-           
-          } else {
-            this.toastr.errorToastr(response.message);
-          }
-        },
-      );
-  }
+	get_roleData() {
+		const obj = {};
+		this.roleService.getallRoleDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.rolesData = response.result;
+					}
+					else {
+						this.msg_danger = true;
+					}
 
-	getManagerData()
-  {
-    const obj = {  };
-    this.managerService.getallManagerDetails(obj).subscribe(
-        (response)=> {
-          if (response.code == 200) 
-          {
-            if(response.result != null && response.result != '')
-            {
-              this.managerData = response.result; 
-            }
-            else
-            {
-              this.msg_danger   = true;
-            }
-           
-          } else {
-            this.toastr.errorToastr(response.message);
-          }
-        },
-      );
-  }
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
 
-	get_Cirtifications()
-  {
-    const obj = {  };
-    this.certificationService.getallCertificationDetails(obj).subscribe(
-        (response)=> {
-          if (response.code == 200) 
-          {
-            if(response.result != null && response.result != '')
-            {
-              this.certificatesData = response.result; 
-            }
-            else
-            {
-              this.msg_danger   = true;
-            }
-           
-          } else {
-            this.toastr.errorToastr(response.message);
-          }
-        },
-      );
-  }
+	getManagerData() {
+		const obj = {};
+		this.managerService.getallManagerDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.managerData = response.result;
+					}
+					else {
+						this.msg_danger = true;
+					}
 
-	getDepartmentData()
-  {
-    const obj = {  };
-    this.departmentService.getallDepartmentDetails(obj).subscribe(
-        (response)=> {
-          if (response.code == 200) 
-          {
-            if(response.result != null && response.result != '')
-            {
-              this.departmentData = response.result; 
-            }
-            else
-            {
-              this.msg_danger   = true;
-            }
-           
-          } else {
-            this.toastr.errorToastr(response.message);
-          }
-        },
-      );
-  }
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
 
-	getPositionData()
-  {
-    const obj = {  };
-    this.positionService.getallPositionDetails(obj).subscribe(
-        (response)=> {
-          if (response.code == 200) 
-          {
-            if(response.result != null && response.result != '')
-            {
-              this.positionData = response.result; 
-            }
-            else
-            {
-              this.msg_danger   = true;
-            }
-           
-          } else {
-            this.toastr.errorToastr(response.message);
-          }
-        },
-      );
-  }
+	get_Cirtifications() {
+		const obj = {};
+		this.certificationService.getallCertificationDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.certificatesData = response.result;
+					}
+					else {
+						this.msg_danger = true;
+					}
+
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
+
+	getDepartmentData() {
+		const obj = {};
+		this.departmentService.getallDepartmentDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.departmentData = response.result;
+					}
+					else {
+						this.msg_danger = true;
+					}
+
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
+
+	getPositionData() {
+		const obj = {};
+		this.positionService.getallPositionDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.positionData = response.result;
+					}
+					else {
+						this.msg_danger = true;
+					}
+
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
 
 	openRelatedProductModal(content: any) {
-    this.get_Cirtifications();
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: "myCustomModalClass", size: 'xl',  backdrop: 'static' })
-      .result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
-  }
+		this.get_Cirtifications();
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: "myCustomModalClass", size: 'xl', backdrop: 'static' })
+			.result.then((result) => {
+				this.closeResult = `Closed with: ${result}`;
+			}, (reason) => {
+				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+			});
+	}
 
-		private getDismissReason(reason: any): string {
-			if (reason === ModalDismissReasons.ESC) {
-				return 'by pressing ESC';
-			} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-				return 'by clicking on a backdrop';
-			} else {
-				return `with: ${reason}`;
-			}
+	private getDismissReason(reason: any): string {
+		if (reason === ModalDismissReasons.ESC) {
+			return 'by pressing ESC';
+		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			return 'by clicking on a backdrop';
+		} else {
+			return `with: ${reason}`;
 		}
+	}
 
-		onSubmitCertificate(){
-			if(!this.certifiedObject.valid){
-				return;
-			} else {
-				let title = '';
-				if(this.certificatesData && this.certificatesData.length > 0){
-					let temp = this.certificatesData.filter((cert) => cert._id == this.certifiedObject.value.id);
-					if(temp.length > 0){
-						title = temp[0].title; 
-						this.certifiedObject.value['title'] = title+'-'+temp[0].type;
-					}
+	onSubmitCertificate() {
+		if (!this.certifiedObject.valid) {
+			return;
+		} else {
+			let title = '';
+			if (this.certificatesData && this.certificatesData.length > 0) {
+				let temp = this.certificatesData.filter((cert) => cert._id == this.certifiedObject.value.id);
+				if (temp.length > 0) {
+					title = temp[0].title;
+					this.certifiedObject.value['title'] = title + '-' + temp[0].type;
 				}
-				this.selectedcertificatesData.push(this.certifiedObject.value);
-				this.modalService.dismissAll();
 			}
-			
+			this.selectedcertificatesData.push(this.certifiedObject.value);
+			this.modalService.dismissAll();
 		}
 
-		removeCertificate(index){
-			this.selectedcertificatesData.splice(index, 1);
-		}
+	}
+
+	removeCertificate(index) {
+		this.selectedcertificatesData.splice(index, 1);
+	}
 }
