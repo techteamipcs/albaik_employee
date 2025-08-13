@@ -64,11 +64,11 @@ export class CheckComponent {
 		this.url = environment.Url + '/assets';
 	}
   ngOnInit(): void {
-		this.getExistedRequestData();
 		this.getManagerData();
 		this.getEmployeeData();
 		this.getMealsData();
 		this.getShiftData();
+		this.getExistedRequestData();
   }
 
 	getExistedRequestData() {
@@ -78,6 +78,21 @@ export class CheckComponent {
 				if (response.code == 200) {
 					if (response.result != null && response.result != '') {
 						this.existedRequest = response.result;
+							if(this.existedRequest && this.existedRequest.meals.length){
+								this.mealsData = this.existedRequest.meals;
+								this.mealsData.forEach((item) => {
+									this.orders += item.nooforders;
+								});
+							}
+							if(this.existedRequest && this.existedRequest.shifts.length){
+								this.shiftData.forEach((item) => {
+									let tempshift = this.existedRequest.shifts.filter((shift)=>shift._id == item._id);
+									if(tempshift && tempshift.length > 0){
+										item['isshiftActive'] = 'active';
+									}
+								});
+							}
+							
 					}
 					else {
 						this.msg_danger = true;
