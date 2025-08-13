@@ -76,7 +76,7 @@ export class AddEmployeeComponent {
 			basic_orientation: [''],
 			position: [''],
 			hireDate: [''],
-			availability: [''],
+			availability: this.formBuilder.array([]), // ✅ now a FormArray
 			shiftPreferences: [''],
 			skills: [''],
 			salary: [''],
@@ -168,7 +168,6 @@ export class AddEmployeeComponent {
 						basic_orientation: data?.basic_orientation,
 						position: data?.position_id,
 						hireDate: moment(data?.hireDate).format('YYYY-MM-DD'),
-						availability: data?.availability,
 						shiftPreferences: data?.shiftPreferences,
 						skills: data?.skills,
 						salary: data?.salary,
@@ -179,12 +178,43 @@ export class AddEmployeeComponent {
 						country: data?.country,
 						postal_code: data?.postal_code,
 					});
-					this.selectedcertificatesData = data?.certifications;
-				} else {
 
+					// Load availability into FormArray
+					if (data.availability && data.availability.length) {
+						data.availability.forEach(avail => {
+							this.addAvailability(avail.month, avail.daysAvailable);
+						});
+					}
+
+					this.selectedcertificatesData = data?.certifications;
 				}
-			},
+			}
 		);
+	}
+
+	get availabilityArray(): FormArray {
+		return this.addemployeeForm.get('availability') as FormArray;
+	}
+
+	addAvailability(month = '', days = []) {
+		this.availabilityArray.push(
+			this.formBuilder.group({
+				month: [month, Validators.required],
+				daysAvailable: [days, Validators.required]
+			})
+		);
+	}
+
+	removeAvailability(index: number) {
+		this.availabilityArray.removeAt(index);
+	}
+
+	onDaysChange(event: any, index: number) {
+		const days = event.target.value
+			.split(',')
+			.map(d => parseInt(d.trim()))
+			.filter(d => !isNaN(d));
+		this.availabilityArray.at(index).get('daysAvailable').setValue(days);
 	}
 
 	onSubmit() {
@@ -193,11 +223,13 @@ export class AddEmployeeComponent {
 		let id = this.id;
 		obj['token'] = this.token;
 		obj['certifications'] = this.selectedcertificatesData;
-		let availability = [{
-			month: 'jan',
-			daysAvailable: [1, 2, 3, 4, 5]
-		}];
-		obj['availability'] = availability;
+		obj['availability'] = this.addemployeeForm.value.availability;
+
+		// let availability = [{
+		// 	month: 'jan',
+		// 	daysAvailable: [1, 2, 3, 4, 5]
+		// }];
+		// obj['availability'] = availability;
 		if (this.addemployeeForm.invalid) {
 			return;
 		}
