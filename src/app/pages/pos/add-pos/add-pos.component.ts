@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { PosService } from '../../../providers/pos/pos.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-pos',
@@ -105,7 +106,7 @@ imagePath: any;
 					let data = response?.result;
 					this.posData = response?.result;
 					this.addposForm.patchValue({
-						date: data?.date,
+						date: moment(data?.date).format('YYYY-MM-DD'),
 						location: data?.location,
 						hours: data?.hours,
 						orders: data?.orders,
