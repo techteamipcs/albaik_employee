@@ -1,0 +1,119 @@
+<div class="container mt--7">
+	<div class="row">
+		<div class="col-xl-12 order-xl-1">
+			<div class="card  shadow">
+				<div class="card-header border-0">
+					<div class="row align-items-center">
+						<div class="col-md-8 col-sm-10 col-12">
+							<h3 class="mb-0">Edit Pos</h3>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<!-- form start -->
+					<form [formGroup]="addposForm" (ngSubmit)="onSubmit()" method="post" novalidate>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Select Status</label>
+							<select name="status" formControlName="status" class="form-control">
+								<option value="">Select Status</option>
+								<option value="true">Active</option>
+								<option value="false">Deactive</option>
+							</select>
+							<span *ngIf="submitted && hasError('status','required')" class="alert-danger">Please Select Status</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Date</label>
+							<input type="date" name="date" autocomplete="off" formControlName="date" class="form-control"
+								placeholder="Date">
+							<span *ngIf="submitted && hasError('date','required')" class="alert-danger">Date is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Location</label>
+							<input type="text" name="location" autocomplete="off" formControlName="location" class="form-control"
+								placeholder="Location">
+							<span *ngIf="submitted && hasError('location','required')" class="alert-danger">Location is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Hours</label>
+							<input type="text" name="hours" autocomplete="off" formControlName="hours" class="form-control"
+								placeholder="Hours">
+							<span *ngIf="submitted && hasError('hours','required')" class="alert-danger">Hours is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Orders</label>
+							<input type="text" name="orders" autocomplete="off" formControlName="orders" class="form-control"
+								placeholder="Orders">
+							<span *ngIf="submitted && hasError('orders','required')" class="alert-danger">Orders is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Sales</label>
+							<input type="text" name="sales" autocomplete="off" formControlName="sales" class="form-control"
+								placeholder="sales">
+							<span *ngIf="submitted && hasError('sales','required')" class="alert-danger">Orders is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">avarage_order_value</label>
+							<input type="text" name="sales" autocomplete="off" formControlName="sales" class="form-control"
+								placeholder="sales">
+							<span *ngIf="submitted && hasError('sales','required')" class="alert-danger">Orders is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Select Peak Hour</label>
+							<select name="ispeakhour" formControlName="ispeakhour" class="form-control">
+								<option value="">Select Status</option>
+								<option value="true">Yes</option>
+								<option value="false">No</option>
+							</select>
+							<span *ngIf="submitted && hasError('ispeakhour','required')" class="alert-danger">Please Select Ispeakhour</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Chef Count</label>
+							<input type="text" name="chef_count" autocomplete="off" formControlName="chef_count" class="form-control"
+								placeholder="Chef Count">
+							<span *ngIf="submitted && hasError('chef_count','required')" class="alert-danger">Chef Count is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Cashier Count</label>
+							<input type="text" name="cashier_count" autocomplete="off" formControlName="cashier_count" class="form-control"
+								placeholder="Cashier Count">
+							<span *ngIf="submitted && hasError('cashier_count','required')" class="alert-danger">Cashier Count is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">server_count</label>
+							<input type="text" name="server_count" autocomplete="off" formControlName="server_count" class="form-control"
+								placeholder="Server Count">
+							<span *ngIf="submitted && hasError('server_count','required')" class="alert-danger">Server Count is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Packer Count</label>
+							<input type="text" name="packer_count" autocomplete="off" formControlName="packer_count" class="form-control"
+								placeholder="Packer Count">
+							<span *ngIf="submitted && hasError('packer_count','required')" class="alert-danger">Packer Count is
+								required</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Sequence Number</label>
+							<input type="text" name="sequence_number" autocomplete="off" formControlName="sequence_number" class="form-control"
+								placeholder="Sequence Number">
+							<span *ngIf="submitted && hasError('sequence_number','required')" class="alert-danger">Sequence Number is
+								required</span>
+						</div>
+						<div class="box-footer d-flex">
+							<button type="submit" class="btn btn-button mr-2">Submit</button>
+							<button type="cancel" (click)="onCancel()" class="btn btn-button">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

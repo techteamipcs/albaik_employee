@@ -102,6 +102,15 @@
 				</span>
 				<span class="menu-title">Meal</span>
 			</a>
+		</li>
+		<li class="nav-item menu-items"
+			[class.active]="currentRoute === '/pos' || currentLocation =='pos'">
+			<a class="nav-link" [routerLink]="['/pos/view']" routerLinkActive="router-link-active">
+				<span class="menu-icon">
+					<i class="mdi mdi-store"></i>
+				</span>
+				<span class="menu-title">POS</span>
+			</a>
 		</li>		
 		<li class="nav-item menu-items"
 			[class.active]="currentRoute === '/leaverequest' || currentLocation =='leaverequest'">
