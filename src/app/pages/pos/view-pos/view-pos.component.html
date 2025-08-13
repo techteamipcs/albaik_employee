@@ -27,11 +27,20 @@
 							<thead>
 								<tr>
 									<th>SL No</th>
-									<th>POS Name</th>
+									<th>Location</th>
+									<th>Date</th>
+									<th>Sales Price</th>
+									<th>Orders</th>
+									<th>Avarage Order Value</th>
+									<th>ispeakhour</th>
+									<th>chef_count</th>
+									<th>cashier_count</th>
+									<th>server_count</th>
+									<th>packer_count</th>
                   <th>Status</th>
 									<th>Sequence Number</th>									
-									<th>Created At</th>
-									<th>Updated At</th>
+									<!-- <th>Created At</th>
+									<th>Updated At</th> -->
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -44,12 +53,21 @@
 								<tr *ngFor="let listPOS of PosData; let i = index">
 									<td *ngIf="currentPage == 1">{{i+1}}</td>
 									<td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
-									<td>{{listPOS.name}}</td>
+									<td>{{listPOS.location}}</td>
+									<td>{{listPOS.date | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listPOS.sales}}</td>
+									<td>{{listPOS.orders}}</td>
+									<td>{{listPOS.avarage_order_value}}</td>
+									<td>{{listPOS.ispeakhour}}</td>
+									<td>{{listPOS.chef_count}}</td>
+									<td>{{listPOS.cashier_count}}</td>
+									<td>{{listPOS.server_count}}</td>
+									<td>{{listPOS.packer_count}}</td>
 									<td>{{listPOS.status == true ? 'Enabled':'Disable' }}</td>
                   <td>{{listPOS.sequence_number}}</td>
 									<!-- <td>{{listPOS.isApproved == true ? 'Yes':'No'}}</td> -->
-									<td>{{listPOS.created_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
-									<td>{{listPOS.updated_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<!-- <td>{{listPOS.created_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listPOS.updated_at | date:'dd/MM/YYYY HH:MM:a'}}</td> -->
 									<td>
 										<a routerLink="/pos/edit/{{listPOS._id}}" style="cursor:pointer"><i
 												class="mdi mdi-lead-pencil" aria-hidden="true"></i>
