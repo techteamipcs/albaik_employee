@@ -1,18 +1,12 @@
 <section class="p-4" style="min-height: 100vh;">
-  <div class="container ">
-    <h4 class="mb-4 fw-bold">Multi-Question Form</h4>
+  <div class="container-fluid">
+    <h3 class="mb-5 fw-bold">Schedule System</h3>
 
     <!-- Tabs Navigation -->
     <ul class="nav nav-tabs mb-4" id="questionTabs" role="tablist">
       <li class="nav-item" *ngFor="let step of steps; let i = index">
-        <a 
-          class="nav-link" 
-          [class.active]="currentStep === i"
-          (click)="goToStep(i)"
-          href="javascript:void(0)"
-          >
+        <a class="nav-link" [class.active]="currentStep === i" (click)="goToStep(i)" href="javascript:void(0)">
           {{ i + 1 }}
-          
         </a>
       </li>
     </ul>
@@ -22,75 +16,303 @@
       <div class="tab-content">
         <!-- Question 1 -->
         <div class="tab-pane fade" [class.show]="currentStep === 0" [class.active]="currentStep === 0">
-          <!-- <label class="form-label fw-semibold">1. What is your name?</label>
-          <input type="text" class="form-control mb-3" [(ngModel)]="formData.name" name="name" required> -->
-          <button type="button" class="btn btn-primary" (click)="goToStep(1)">Start 1</button>
+
+          <button type="button" class="check-btn" (click)="goToStep(1)">Start</button>
         </div>
         <!-- Question 1 -->
-        <div class="tab-pane fade" [class.show]="currentStep === 1" [class.active]="currentStep === 1">
-          <label class="form-label fw-semibold">1. What is your name?</label>
-          <input type="text" class="form-control mb-3" [(ngModel)]="formData.name" name="name" required>
-          <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        <div class="tab-pane fade card" [class.show]="currentStep === 1" [class.active]="currentStep === 1">
+          <!-- ================================ pos tabel data ================================= -->
+          <!-- Page content -->
+          <div class="card-header border-0">
+            <h4 class="fw-bold  mb-0">POS / Sales Transaction Data</h4>
+          </div>
+          <div class="card-body">
+
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead>
+                  <tr>
+                    <th>SL No</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>Sales Price</th>
+                    <th>Orders</th>
+                    <th>Avarage Order Value</th>
+                    <th>ispeakhour</th>
+                    <th>chef_count</th>
+                    <th>cashier_count</th>
+                    <th>server_count</th>
+                    <th>packer_count</th>
+                    <th>Status</th>
+                    <th>Sequence Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <td colspan="5" *ngIf="PosData.length == 0">
+                    <div class="alert alert-dismissable" style="text-align: center;">
+                      POS List is Empty
+                    </div>
+                  </td>
+                  <tr *ngFor="let listPOS of PosData; let i = index">
+                    <td *ngIf="currentPage == 1">{{i+1}}</td>
+                    <td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+                    <td>{{listPOS.location}}</td>
+                    <td>{{listPOS.date | date:'dd/MM/YYYY HH:MM:a'}}</td>
+                    <td>{{listPOS.sales}}</td>
+                    <td>{{listPOS.orders}}</td>
+                    <td>{{listPOS.avarage_order_value}}</td>
+                    <td>{{listPOS.ispeakhour}}</td>
+                    <td>{{listPOS.chef_count}}</td>
+                    <td>{{listPOS.cashier_count}}</td>
+                    <td>{{listPOS.server_count}}</td>
+                    <td>{{listPOS.packer_count}}</td>
+                    <td>{{listPOS.status == true ? 'Enabled':'Disable' }}</td>
+                    <td>{{listPOS.sequence_number}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="pcommece-pagination" *ngIf="totalRecord > 0 ">
+                <app-pagination #pagination [initialPage]="currentPage" [count]="totalRecord"
+                  (changePage)="onListChangePage($event)"></app-pagination>
+              </div>
+            </div>
+          </div>
+          <ng-template #content let-modal style="z-index: 0;">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-title">POS</h4>
+              <button type="button" class="btn btn-button" aria-describedby="modal-title"
+                (click)="modal.dismiss('Cross click')">close</button>
+            </div>
+            <div class="modal-body">
+              <p *ngIf="selectedPOS">
+                <strong>Are you sure you want to delete <span class="text-primary">"{{selectedPOS.name}}"</span>
+                  POS?</strong>
+              </p>
+              <p>
+                All information associated to this POS will be permanently deleted.
+                <span class="text-danger">This operation can not be undone.</span>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-button" (click)="modal.dismiss('cancel click')">Cancel</button>
+              <button type="button" class="btn btn-button" (click)="deletePOS()">Ok</button>
+            </div>
+          </ng-template>
+          <!-- ================================ pos tabel data ================================= -->
+          <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
 
-        <!-- Question 2 -->
-        <div class="tab-pane fade" [class.show]="currentStep === 2" [class.active]="currentStep === 2">
-          <label class="form-label fw-semibold">2. What is your email?</label>
-          <input type="email" class="form-control mb-3" [(ngModel)]="formData.email" name="email" required>
-          <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        <!-- ****************************************** Question 2 **************************** -->
+        <div class="tab-pane fade card" [class.show]="currentStep === 2" [class.active]="currentStep === 2">
+          <div class="card-header border-0">
+            <h4 class="fw-bold mb-0">Determine Staffing Requirements</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead>
+                  <tr>
+                    <th>SL No</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>File No</th>
+                    <th>Status</th>
+                    <th>Department</th>
+                    <th>Position</th>
+                    <th>Employee ID</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <!-- <th>Action</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <td colspan="5" *ngIf="EmployeeData.length == 0">
+                    <div class="alert alert-dismissable" style="text-align: center;">
+                      Employee List is Empty
+                    </div>
+                  </td>
+                  <tr *ngFor="let listEmployee of EmployeeData; let i = index">
+                    <td *ngIf="currentPage == 1">{{i+1}}</td>
+                    <td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+                    <td>{{listEmployee.username}}</td>
+                    <td>{{listEmployee.email}}</td>
+                    <td>{{listEmployee.file_no}}</td>
+                    <td>{{listEmployee.status }}</td>
+                    <td>
+                      <p *ngIf="listEmployee.departments_data && listEmployee.departments_data.length > 0">
+                        {{listEmployee.departments_data[0].name}}</p>
+                    </td>
+                    <td>
+                      <p *ngIf="listEmployee.position && listEmployee.position.length > 0">
+                        {{listEmployee.position[0].name}}</p>
+                    </td>
+                    <td>{{listEmployee.employee_id}}</td>
+                    <!-- <td>{{listEmployee.isApproved == true ? 'Yes':'No'}}</td> -->
+                    <td>{{listEmployee.created_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+                    <td>{{listEmployee.updated_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="pcommece-pagination" *ngIf="totalRecord > 0 ">
+                <app-pagination #pagination [initialPage]="currentPage" [count]="totalRecord"
+                  (changePage)="onListChangePage($event)"></app-pagination>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
 
-        <!-- Question 3 -->
-        <div class="tab-pane fade" [class.show]="currentStep === 3" [class.active]="currentStep === 3">
-          <label class="form-label fw-semibold">3. Select your gender</label>
-          <select class="form-select mb-3" [(ngModel)]="formData.gender" name="gender" required>
-            <option selected disabled>Choose...</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </select>
-          <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        <!-- ****************************************** Question 3 ****************************************** -->
+        <div class="tab-pane fade card" [class.show]="currentStep === 3" [class.active]="currentStep === 3">
+          <div class="card-header border-0">
+            <h4 class="fw-bold mb-0">Get Employee Availability</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead>
+                  <tr>
+                    <th>SL No</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>File No</th>
+                    <th>Status</th>
+                    <th>Department</th>
+                    <th>Position</th>
+                    <th>Employee ID</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Availability</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <td colspan="5" *ngIf="EmployeeData.length == 0">
+                    <div class="alert alert-dismissable" style="text-align: center;">
+                      Employee List is Empty
+                    </div>
+                  </td>
+                  <ng-container *ngFor="let listEmployee of EmployeeData; let i = index">
+
+                    <tr *ngIf="listEmployee.status == 'Active'">
+                      <td *ngIf="currentPage == 1">{{i+1}}</td>
+                      <td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+                      <td>{{listEmployee.username}}</td>
+                      <td>{{listEmployee.email}}</td>
+                      <td>{{listEmployee.file_no}}</td>
+                      <td>{{listEmployee.status }}</td>
+                      <td>
+                        <p *ngIf="listEmployee.departments_data && listEmployee.departments_data.length > 0">
+                          {{listEmployee.departments_data[0].name}}</p>
+                      </td>
+                      <td>
+                        <p *ngIf="listEmployee.position && listEmployee.position.length > 0">
+                          {{listEmployee.position[0].name}}</p>
+                      </td>
+                      <td>{{listEmployee.employee_id}}</td>
+                      <td>{{listEmployee.created_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+                      <td>{{listEmployee.updated_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+                      <td>
+                        <div *ngFor="let avail of listEmployee.availability; let i = index" [formGroupName]="i"
+                          class="mb-2">
+                          <!-- <input formControlName="month" placeholder="Month-Year" type="text" />
+                          <input formControlName="daysAvailable" placeholder="Days (comma separated)"
+                            (change)="onDaysChange($event, i)" /> -->
+                          {{avail.daysAvailable}}
+                          <!-- <button type="button" (click)="removeAvailability(i)">Remove</button> -->
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <div class="pcommece-pagination" *ngIf="totalRecord > 0 ">
+                <app-pagination #pagination [initialPage]="currentPage" [count]="totalRecord"
+                  (changePage)="onListChangePage($event)"></app-pagination>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
 
         <!-- Question 4 -->
-        <div class="tab-pane fade" [class.show]="currentStep === 4" [class.active]="currentStep === 4">
-          <label class="form-label fw-semibold">4. Rate our service</label>
-          <input type="range" class="form-range mb-3" min="1" max="5" [(ngModel)]="formData.rating" name="rating" required>
-          <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        <div class="tab-pane fade card" [class.show]="currentStep === 4" [class.active]="currentStep === 4">
+          <div class="card-header border-0">
+            <h4 class="fw-bold mb-0">Rules list</h4>
+          </div>
+          <!-- <label class="form-label fw-semibold">4. Rate our service</label>
+          <input type="range" class="form-range mb-3" min="1" max="5" [(ngModel)]="formData.rating" name="rating"
+            required> -->
+          <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
 
         <!-- Question 5 -->
-        <div class="tab-pane fade" [class.show]="currentStep === 5" [class.active]="currentStep === 5">
-          <label class="form-label fw-semibold">5. Which features do you use?</label>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" [(ngModel)]="formData.features.dashboard" name="dashboard">
-            <label class="form-check-label">Dashboard</label>
+        <div class="tab-pane fade card" [class.show]="currentStep === 5" [class.active]="currentStep === 5">
+          <div class="card-header border-0">
+            <h4 class="fw-bold mb-0">Shifts list</h4>
           </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" [(ngModel)]="formData.features.reports" name="reports">
-            <label class="form-check-label">Reports</label>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead>
+                  <tr>
+                    <th>SL No</th>
+                    <th>Shift Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Duration</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <td colspan="5" *ngIf="msg_danger">
+                    <div class="alert alert-dismissable" style="text-align: center;">
+                      Shift List is Empty
+                    </div>
+                  </td>
+                  <tr *ngFor="let listShift of shiftData ; let i = index">
+                    <td *ngIf="currentPage == 1">{{i+1}}</td>
+                    <td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+                    <td>{{listShift.name}}</td>
+                    <td>{{listShift.startTime}}</td>
+                    <td>{{listShift.endTime}}</td>
+                    <td>{{listShift.breakDuration}}</td>
+                    <td>{{listShift.department}}</td>
+                    <td>{{listShift.status == true ? 'Active':'Inactive' }}</td>
+                    <td>
+                      <a routerLink="/shift/edit/{{listShift._id}}" style="cursor:pointer"><i
+                          class="mdi mdi-lead-pencil" aria-hidden="true"></i>
+                      </a>
+                      <a style="cursor:pointer;padding-left: 15px;" (click)="deleteShift(listShift._id)"><i
+                          class="mdi mdi-close-box" aria-hidden="true"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- <div class="pcommece-pagination" *ngIf="totalRecord > 0 && !searchText">
+              <app-pagination #pagination [initialPage]="currentPage" [count]="totalRecord"
+                (changePage)="onListChangeShift($event)"></app-pagination>
+            </div> -->
+            </div>
           </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" [(ngModel)]="formData.features.settings" name="settings">
-            <label class="form-check-label">Settings</label>
-          </div>
-          <button type="button" class="btn btn-primary mt-3" (click)="nextStep()">Next</button>
+
+          <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
 
         <!-- Question 6 -->
         <div class="tab-pane fade" [class.show]="currentStep === 6" [class.active]="currentStep === 6">
-          <label class="form-label fw-semibold">6. Any additional comments?</label>
+          <label class="form-label fw-semibold">6. Any additional comments? 6</label>
           <textarea class="form-control mb-3" rows="3" [(ngModel)]="formData.comments" name="comments"></textarea>
-          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="submit" class="check-btn ">Submit</button>
         </div>
         <!-- Question 7 -->
         <div class="tab-pane fade" [class.show]="currentStep === 7" [class.active]="currentStep === 7">
-          <label class="form-label fw-semibold">6. Any additional comments?</label>
+          <label class="form-label fw-semibold">6. Any additional comments? 7</label>
           <textarea class="form-control mb-3" rows="3" [(ngModel)]="formData.comments" name="comments"></textarea>
-          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="submit" class="check-btn ">Submit</button>
         </div>
       </div>
     </form>
   </div>
 </section>
-

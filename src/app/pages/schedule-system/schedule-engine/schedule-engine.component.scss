@@ -8,10 +8,10 @@ form input, form select, form textarea {
   border-color: #ddd;
 }
 
-form input:focus, form select:focus, form textarea:focus {
-  box-shadow: 0 0 0 2px rgba(46,170,220,0.3);
-  border-color: #2eaadc;
-}
+// form input:focus, form select:focus, form textarea:focus {
+//   // box-shadow: 0 0 0 2px rgba(46,170,220,0.3);
+//   // border-color: #CE3737;
+// }
 
 .nav-tabs{
   justify-content: space-around;
@@ -26,8 +26,9 @@ form input:focus, form select:focus, form textarea:focus {
 }
 
 .nav-tabs .nav-link.active {
-  background-color: #2eaadc;
+  background-color: #CE3737;
   color: #fff;
+  border-color: #CE3737;
 }
 .nav-tabs{
   border-bottom: 0;
