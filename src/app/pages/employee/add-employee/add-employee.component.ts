@@ -18,6 +18,7 @@ import { DepartmentService } from 'src/app/providers/department/department.servi
 	styleUrls: ['./add-employee.component.scss']
 })
 export class AddEmployeeComponent {
+
 	imagePath: any;
 	imageArr: any = [];
 	// Data Assign
@@ -48,6 +49,10 @@ export class AddEmployeeComponent {
 	certifiedObject: FormGroup;
 	positionData: any = [];
 	departmentData: any = [];
+	currentMonth = moment(); // Current month
+	daysInMonth: number[] = [];
+	selectedDays: number[] = [];
+
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -104,6 +109,8 @@ export class AddEmployeeComponent {
 		this.getManagerData();
 		this.getPositionData();
 		this.getDepartmentData();
+		this.generateDays();
+
 	}
 
 	public hasError = (controlName: string, errorName: string) => {
@@ -192,30 +199,6 @@ export class AddEmployeeComponent {
 		);
 	}
 
-	get availabilityArray(): FormArray {
-		return this.addemployeeForm.get('availability') as FormArray;
-	}
-
-	addAvailability(month = '', days = []) {
-		this.availabilityArray.push(
-			this.formBuilder.group({
-				month: [month, Validators.required],
-				daysAvailable: [days, Validators.required]
-			})
-		);
-	}
-
-	removeAvailability(index: number) {
-		this.availabilityArray.removeAt(index);
-	}
-
-	onDaysChange(event: any, index: number) {
-		const days = event.target.value
-			.split(',')
-			.map(d => parseInt(d.trim()))
-			.filter(d => !isNaN(d));
-		this.availabilityArray.at(index).get('daysAvailable').setValue(days);
-	}
 
 	onSubmit() {
 		this.submitted = true;
@@ -411,4 +394,83 @@ export class AddEmployeeComponent {
 	removeCertificate(index) {
 		this.selectedcertificatesData.splice(index, 1);
 	}
+
+
+	addAvailability(month = '', days = []) {
+		this.availabilityArray.push(
+			this.formBuilder.group({
+				month: [month, Validators.required],
+				daysAvailable: [days, Validators.required]
+			})
+		);
+	}
+
+	removeAvailability(index: number) {
+		this.availabilityArray.removeAt(index);
+	}
+
+	onDaysChange(event: any, index: number) {
+		const days = event.target.value
+			.split(',')
+			.map(d => parseInt(d.trim()))
+			.filter(d => !isNaN(d));
+		this.availabilityArray.at(index).get('daysAvailable').setValue(days);
+	}
+
+	get availabilityArray(): FormArray {
+		return this.addemployeeForm.get('availability') as FormArray;
+	}
+
+	generateDays() {
+		const totalDays = this.currentMonth.daysInMonth();
+		this.daysInMonth = Array.from({ length: totalDays }, (_, i) => i + 1);
+	}
+
+	prevMonth() {
+		this.currentMonth = this.currentMonth.clone().subtract(1, 'month');
+		this.selectedDays = [];
+		this.generateDays();
+		this.updateFormArray();
+	}
+
+	nextMonth() {
+		this.currentMonth = this.currentMonth.clone().add(1, 'month');
+		this.selectedDays = [];
+		this.generateDays();
+		this.updateFormArray();
+	}
+
+	toggleDay(day: number) {
+		if (this.selectedDays.includes(day)) {
+			this.selectedDays = this.selectedDays.filter(d => d !== day);
+		} else {
+			this.selectedDays.push(day);
+		}
+		this.updateFormArray();
+	}
+
+	updateFormArray() {
+		const monthKey = this.currentMonth.format('MMM-YYYY');
+
+		// Remove entry for this month if exists
+		const index = this.availabilityArray.value.findIndex((a: any) => a.month === monthKey);
+		if (index >= 0) {
+			this.availabilityArray.removeAt(index);
+		}
+
+		// Add if there are selected days
+		if (this.selectedDays.length) {
+			this.availabilityArray.push(
+				this.formBuilder.group({
+					month: [monthKey, Validators.required],
+					daysAvailable: [this.selectedDays, Validators.required]
+				})
+			);
+		}
+	}
+
+	isSelected(day: number): boolean {
+		return this.selectedDays.includes(day);
+	}
+
 }
