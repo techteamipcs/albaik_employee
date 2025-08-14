@@ -308,8 +308,23 @@ export class SupportRequestComponent {
 	}
 
 	sendEmail(data){
-		
+		const obj = {};
+		this.requestService.sendRequestEmail(data).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.departments = response.result;
+					}
+					else {
+						this.msg_danger = true;
+					}
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
 	}
+
 	onSubmit() {
 		this.submitted = true;
 		let obj = {

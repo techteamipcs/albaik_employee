@@ -80,6 +80,8 @@
                         *ngIf="servicerequest.name == 'Productions' || servicerequest.name == 'Counter' || servicerequest.name == 'General Service' && servicerequest.position && servicerequest.position.length > 0">
                         <p *ngFor="let position of servicerequest.position"><span
                             *ngIf="position.headcount.employees && position.headcount.employees.length > 0">{{position.headcount.employees[0].employeesNeeded}}</span>
+                            <span
+                            *ngIf="position.headcount.employees && position.headcount.employees.length == 0">0</span>
                         </p>
                       </td>
                       <td

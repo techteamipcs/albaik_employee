@@ -95,6 +95,25 @@
 				<span class="menu-title">Shift</span>
 			</a>
 		</li>
+		<li class="nav-item menu-items" [class.active]="currentRoute === '/schedule-system' || currentLocation =='schedule-system'">
+			<a class="nav-link" href="#schedule" data-toggle="collapse" aria-expanded="false" aria-controls="auth">
+				<span class="menu-icon">
+					<i class="mdi mdi-account-multiple"></i>
+				</span>
+				<span class="menu-title">Schedule System</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="schedule">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"> <a class="nav-link"
+							[class.active]="currentRoute === '/schedule-system/engine'"
+							[routerLink]="['/schedule-system/engine']" routerLinkActive="router-link-active"> Schedule-Engine </a></li>
+					<li class="nav-item"> <a class="nav-link"
+						[class.active]="currentRoute === '/schedule-system/list' || currentLocation =='schedule-system'"
+						[routerLink]="['/schedule-system/list']" routerLinkActive="router-link-active"> Schedule-List  </a></li>
+				</ul>
+			</div>
+		</li>
 		<li class="nav-item menu-items" [class.active]="currentRoute === '/meal' || currentLocation =='meal'">
 			<a class="nav-link" [routerLink]="['/meal/view']" routerLinkActive="router-link-active" >
 				<span class="menu-icon">

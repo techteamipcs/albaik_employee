@@ -12,10 +12,12 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 
 @NgModule({
   declarations: [
-    ScheduleEngineComponent
+    ScheduleEngineComponent,
+    ScheduleListComponent
   ],
   imports: [
     CommonModule,
