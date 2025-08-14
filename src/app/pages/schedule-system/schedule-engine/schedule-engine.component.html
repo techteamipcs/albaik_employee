@@ -1,10 +1,11 @@
-<section class="p-4" style="min-height: 100vh;">
+<section class="p-4" style="min-height: 80vh;">
   <div class="container-fluid">
-    <h3 class="mb-5 fw-bold">Schedule System</h3>
+    <h1 class=""><a  href="index.html" class="d-inline-block text-decoration-none dashicon"><i class="mdi mdi-speedometer"></i><span class="menu-title ml-3">Dashboard</span></a></h1>
+    <h3 class="mb-5 fw-bold text-center"><span class="text-center"> Schedule System </span> </h3>
 
     <!-- Tabs Navigation -->
     <ul class="nav nav-tabs mb-4" id="questionTabs" role="tablist">
-      <li class="nav-item" *ngFor="let step of steps; let i = index">
+      <li class="nav-item" *ngFor="let step of steps; let i = index" [ngClass]="{ 'completed': i <= currentStep }">
         <a class="nav-link" [class.active]="currentStep === i" (click)="goToStep(i)" href="javascript:void(0)">
           {{ i + 1 }}
         </a>
