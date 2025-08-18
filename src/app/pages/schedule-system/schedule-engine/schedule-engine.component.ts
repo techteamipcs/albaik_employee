@@ -37,6 +37,7 @@ export class ScheduleEngineComponent {
   searchText = '';
   completedSteps: boolean[] = [false, false, false, false, false, false, false];
   token: any;
+  serviceRequestData: any = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -58,6 +59,7 @@ export class ScheduleEngineComponent {
   ngOnInit(): void {
     this.get_PosData();
     // this.get_VendorData();
+    this.get_RequestData();
     this.get_EmployeeData();
     this.get_shiftData();
   }
@@ -126,6 +128,25 @@ export class ScheduleEngineComponent {
       },
     );
   }
+
+  get_RequestData() {
+		const obj = {};
+		this.requestService.getServiceRequest(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.serviceRequestData = response.result;
+					}
+					else {
+						this.msg_danger = true;
+					}
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
+
   deletePos() {
     if (this.selectedPos) {
       var mylist = { id: this.selectedPos._id };
@@ -196,7 +217,7 @@ export class ScheduleEngineComponent {
       page: this.currentPage,
       token: this.token,
     };
-    this.employeeService.getEmployeeDetails(obj).subscribe(
+    this.employeeService.getallEmployeeDetails(obj).subscribe(
       (response) => {
         if (response.code == 200) {
           if (response.result != null && response.result != '') {

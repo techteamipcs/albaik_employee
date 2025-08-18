@@ -1,6 +1,7 @@
 <section class="p-4" style="min-height: 80vh;">
   <div class="container-fluid">
-    <h1 class=""><a  href="index.html" class="d-inline-block text-decoration-none dashicon"><i class="mdi mdi-keyboard-backspace"></i><span class="menu-title ml-3">Dashboard</span></a></h1>
+    <h1 class=""><a href="index.html" class="d-inline-block text-decoration-none dashicon"><i
+          class="mdi mdi-keyboard-backspace"></i><span class="menu-title ml-3">Dashboard</span></a></h1>
     <h3 class="mb-5 fw-bold text-center"><span class="text-center"> Schedule System </span> </h3>
 
     <!-- Tabs Navigation -->
@@ -106,7 +107,7 @@
         <!-- ****************************************** Question 2 **************************** -->
         <div class="tab-pane fade card" [class.show]="currentStep === 2" [class.active]="currentStep === 2">
           <div class="card-header border-0">
-            <h4 class="fw-bold mb-0">Determine Staffing Requirements</h4>
+            <h4 class="fw-bold mb-0">Request For the Day</h4>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -114,50 +115,44 @@
                 <thead>
                   <tr>
                     <th>SL No</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>File No</th>
-                    <th>Status</th>
-                    <th>Department</th>
-                    <th>Position</th>
-                    <th>Employee ID</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <!-- <th>Action</th> -->
+                    <th>Departments</th>
+                    <th>Profile type</th>
+                    <th>Head Count</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <td colspan="5" *ngIf="EmployeeData.length == 0">
+                  <td colspan="5" *ngIf="serviceRequestData.length == 0">
                     <div class="alert alert-dismissable" style="text-align: center;">
-                      Employee List is Empty
+                      Support Request List is Empty
                     </div>
                   </td>
-                  <tr *ngFor="let listEmployee of EmployeeData; let i = index">
+                  <tr *ngFor="let servicerequest of serviceRequestData; let i = index">
                     <td *ngIf="currentPage == 1">{{i+1}}</td>
                     <td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
-                    <td>{{listEmployee.username}}</td>
-                    <td>{{listEmployee.email}}</td>
-                    <td>{{listEmployee.file_no}}</td>
-                    <td>{{listEmployee.status }}</td>
-                    <td>
-                      <p *ngIf="listEmployee.departments_data && listEmployee.departments_data.length > 0">
-                        {{listEmployee.departments_data[0].name}}</p>
+                    <td>{{servicerequest.name}}</td>
+                    <td *ngIf="servicerequest.position && servicerequest.position.length > 0">
+                      <p *ngFor="let position of servicerequest.position">{{position.name}}</p>
                     </td>
-                    <td>
-                      <p *ngIf="listEmployee.position && listEmployee.position.length > 0">
-                        {{listEmployee.position[0].name}}</p>
+                    <td
+                      *ngIf="servicerequest.name == 'Productions' || servicerequest.name == 'Counter' || servicerequest.name == 'General Service' && servicerequest.position && servicerequest.position.length > 0">
+                      <p *ngFor="let position of servicerequest.position"><span
+                          *ngIf="position.headcount.employees && position.headcount.employees.length > 0">{{position.headcount.employees[0].employeesNeeded}}</span>
+                        <span *ngIf="position.headcount.employees && position.headcount.employees.length == 0">0</span>
+                      </p>
                     </td>
-                    <td>{{listEmployee.employee_id}}</td>
-                    <!-- <td>{{listEmployee.isApproved == true ? 'Yes':'No'}}</td> -->
-                    <td>{{listEmployee.created_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
-                    <td>{{listEmployee.updated_at | date:'dd/MM/YYYY HH:MM:a'}}</td>
+                    <td
+                      *ngIf="servicerequest.name == 'Cooking' && servicerequest.position && servicerequest.position.length > 0">
+                      <p *ngFor="let position of servicerequest.position"><span
+                          *ngIf="position.headcount.machines">{{position.headcount.machines}}</span></p>
+                    </td>
+                    <td
+                      *ngIf="servicerequest.name == 'Packaging' && servicerequest.position && servicerequest.position.length > 0">
+                      <p *ngFor="let position of servicerequest.position"><span
+                          *ngIf="position.headcount.boxes">{{position.headcount.boxes}}</span></p>
+                    </td>
                   </tr>
                 </tbody>
               </table>
-              <div class="pcommece-pagination" *ngIf="totalRecord > 0 ">
-                <app-pagination #pagination [initialPage]="currentPage" [count]="totalRecord"
-                  (changePage)="onListChangePage($event)"></app-pagination>
-              </div>
             </div>
           </div>
           <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
