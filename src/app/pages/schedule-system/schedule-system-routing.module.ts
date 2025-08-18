@@ -3,8 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { ScheduleEngineComponent } from './schedule-engine/schedule-engine.component';
 import { AuthGuard } from 'src/app/guard/auth.guard';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
+import { ScheduleEditComponent } from './schedule-edit/schedule-edit.component';
 
 const routes: Routes = [
+  {
+    path: 'edit',
+    component: ScheduleEditComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'engine',
     component: ScheduleEngineComponent,

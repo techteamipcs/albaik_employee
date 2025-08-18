@@ -13,11 +13,13 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
+import { ScheduleEditComponent } from './schedule-edit/schedule-edit.component';
 
 @NgModule({
   declarations: [
     ScheduleEngineComponent,
-    ScheduleListComponent
+    ScheduleListComponent,
+    ScheduleEditComponent
   ],
   imports: [
     CommonModule,
