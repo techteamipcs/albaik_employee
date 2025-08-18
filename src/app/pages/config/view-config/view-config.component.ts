@@ -90,7 +90,20 @@ export class ViewConfigComponent {
       orders_email: [''],
       tax_rate: [''],
       currency_type: [''],
-      inclusive_tax:[true]
+      inclusive_tax:[true],
+
+      maxDailyHours: [''],
+      maxWeeklyHours: [''],
+      minRestHours: [''],
+      minShiftLength: [''],
+      maxShiftLength: [''],
+      consecutiveWorkDays: [''],
+      minDaysOffPerWeek: [''],
+      overtimeRate: [''],
+      overtimeallowed: [''],
+      minChefsPerShift: [''],
+      minCashiersPerShift: [''],
+      maxInternsPerShift: [''],
      });
      this.token = localStorage.getItem('miniaar-token');
      this.imagePath = environment.baseUrl+'/public/';
@@ -146,7 +159,19 @@ export class ViewConfigComponent {
 								orders_email: data?.orders_email,
                 inclusive_tax: data?.inclusive_tax,
 								tax_rate: data?.tax_rate,
-								currency_type: data?.currency_type
+								currency_type: data?.currency_type,
+                maxDailyHours: data?.maxDailyHours,
+                maxWeeklyHours: data?.maxWeeklyHours,
+                minRestHours: data?.minRestHours,
+                minShiftLength: data?.minShiftLength,
+                maxShiftLength: data?.maxShiftLength,
+                consecutiveWorkDays: data?.consecutiveWorkDays,
+                minDaysOffPerWeek: data?.minDaysOffPerWeek,
+                overtimeRate: data?.overtimeRate,
+                overtimeallowed: data?.overtimeallowed,
+                minChefsPerShift: data?.minChefsPerShift,
+                minCashiersPerShift: data?.minCashiersPerShift,
+                maxInternsPerShift: data?.maxInternsPerShift,
               });
               window.scroll(0,0);
             }

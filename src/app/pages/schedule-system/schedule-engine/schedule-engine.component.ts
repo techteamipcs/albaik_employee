@@ -11,6 +11,7 @@ import { ShiftService } from 'src/app/providers/shift/shift.service';
 import { RequestService } from 'src/app/providers/request/request.service';
 import { PosService } from '../../../providers/pos/pos.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfigService } from 'src/app/providers/config/config.service';
 @Component({
   selector: 'app-schedule-engine',
   templateUrl: './schedule-engine.component.html',
@@ -38,6 +39,7 @@ export class ScheduleEngineComponent {
   completedSteps: boolean[] = [false, false, false, false, false, false, false];
   token: any;
   serviceRequestData: any = [];
+  ConfigData: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -51,6 +53,7 @@ export class ScheduleEngineComponent {
     private posService: PosService,
     private modalService: NgbModal,
     private activeModal: NgbActiveModal,
+    private configService: ConfigService
   ) {
     this.token = localStorage.getItem('ghoastrental-token');
     this.imagePath = environment.baseUrl + '/public/';
@@ -62,6 +65,7 @@ export class ScheduleEngineComponent {
     this.get_RequestData();
     this.get_EmployeeData();
     this.get_shiftData();
+    this.get_ConfigData();
   }
   formData = {
     name: '',
@@ -130,22 +134,22 @@ export class ScheduleEngineComponent {
   }
 
   get_RequestData() {
-		const obj = {};
-		this.requestService.getServiceRequest(obj).subscribe(
-			(response) => {
-				if (response.code == 200) {
-					if (response.result != null && response.result != '') {
-						this.serviceRequestData = response.result;
-					}
-					else {
-						this.msg_danger = true;
-					}
-				} else {
-					this.toastr.errorToastr(response.message);
-				}
-			},
-		);
-	}
+    const obj = {};
+    this.requestService.getServiceRequest(obj).subscribe(
+      (response) => {
+        if (response.code == 200) {
+          if (response.result != null && response.result != '') {
+            this.serviceRequestData = response.result;
+          }
+          else {
+            this.msg_danger = true;
+          }
+        } else {
+          this.toastr.errorToastr(response.message);
+        }
+      },
+    );
+  }
 
   deletePos() {
     if (this.selectedPos) {
@@ -251,14 +255,41 @@ export class ScheduleEngineComponent {
       },
     );
   }
-  	searchShift() {
-		if (this.searchText) {
-			this.currentLimit = 1000;
-			this.currentPage = 1;
-		} else {
-			this.currentLimit = 10;
-		}
-		this.get_shiftData();
-	}
+  searchShift() {
+    if (this.searchText) {
+      this.currentLimit = 1000;
+      this.currentPage = 1;
+    } else {
+      this.currentLimit = 10;
+    }
+    this.get_shiftData();
+  }
+
+  get_ConfigData()
+  {
+    const obj = {
+      limit: this.currentLimit,
+      page: this.currentPage,
+      token: this.token,
+    };
+    this.configService.getConfigDetails(obj).subscribe(
+        (response)=> {
+          if (response.code == 200)
+          {
+            if(response.result != null && response.result != '')
+            {
+              this.ConfigData = response.result;
+              this.totalRecord = response?.count;
+              this.ConfigData = this.ConfigData[0];
+            }
+            else
+            {
+              this.msg_danger   = true;
+            }
+
+          }
+        },
+      );
+  }
 
 }

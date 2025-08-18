@@ -15,7 +15,6 @@
 					<h4 class="card-title mb-0">Edit Config</h4>
 				</div>
 				<div class="card-body">
-				
 					<div class="alert alert-success alert-dismissable" style="margin-left: 0;" *ngIf="msg_success">
 						{{throw_msg}}
 					</div>
@@ -24,18 +23,93 @@
 					</div>
 					<form [formGroup]="addconfigForm" (ngSubmit)="onSubmit()" method="post" novalidate>
 						<div class="box-body">
-							<h4 class="mt-4">Contact Form Email Config</h4>
+							<h4 class="mt-4">Schedule Basic Rules </h4>
 							<hr>
 							<div class="form-group col-lg-12">
 								<label for="exampleInputEmail1">Name</label>
 								<input type="text" name="name" autocomplete="off" formControlName="name" class="form-control"
 									placeholder="Config Name">
-								<span *ngIf="submitted && hasError('name','required')" class="alert-danger">Config Name
-									is
+								<span *ngIf="submitted && hasError('name','required')" class="alert-danger">Config Name is
 									required</span>
 							</div>
-
 							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Max Daily Hours</label>
+								<input type="text" name="maxDailyHours" autocomplete="off" formControlName="maxDailyHours"
+									class="form-control" placeholder="Max Daily Hours">
+								<span *ngIf="submitted && hasError('maxDailyHours','required')" class="alert-danger">max Daily Hours is
+									required</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Max Weekly Hours</label>
+								<input type="text" name="maxWeeklyHours" autocomplete="off" formControlName="maxWeeklyHours"
+									class="form-control" placeholder="Max Weekly Hours">
+								<span *ngIf="submitted && hasError('maxWeeklyHours','required')" class="alert-danger">Max Weekly Hours</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Min Rest Hours</label>
+								<input type="text" name="minRestHours" autocomplete="off" formControlName="minRestHours"
+									class="form-control" placeholder="Min Rest Hours">
+								<span *ngIf="submitted && hasError('minRestHours','required')" class="alert-danger">Min Rest Hours</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Min Shift Length</label>
+								<input type="text" name="minShiftLength" autocomplete="off" formControlName="minShiftLength"
+									class="form-control" placeholder="Min Shift Hours">
+								<span *ngIf="submitted && hasError('minShiftLength','required')" class="alert-danger">Min Shift Length</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Max Shift Length</label>
+								<input type="text" name="maxShiftLength" autocomplete="off" formControlName="maxShiftLength"
+									class="form-control" placeholder="Min Shift Hours">
+								<span *ngIf="submitted && hasError('maxShiftLength','required')" class="alert-danger">Max Shift Length</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Consecutive Work Days</label>
+								<input type="text" name="consecutiveWorkDays" autocomplete="off" formControlName="consecutiveWorkDays"
+									class="form-control" placeholder="Consecutive Work Days">
+								<span *ngIf="submitted && hasError('consecutiveWorkDays','required')" class="alert-danger">Consecutive Work Days</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Min Days Off Per Week</label>
+								<input type="text" name="minDaysOffPerWeek" autocomplete="off" formControlName="minDaysOffPerWeek"
+									class="form-control" placeholder="Min Days Off Per Week">
+								<span *ngIf="submitted && hasError('minDaysOffPerWeek','required')" class="alert-danger">Min Days Off Per Week</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="overtimeallowed"> Over Time Allowed</label>
+								<select name="overtimeallowed" formControlName="overtimeallowed" class="form-control">
+									<option value="">Select Over Time Allowed</option>
+									<option value="true">Yes</option>
+									<option value="false">No</option>
+								</select>
+								<span *ngIf="submitted && hasError('overtimeallowed','required')" class="alert-danger">Please Over time allowed
+									Secure</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Over Time Rate</label>
+								<input type="text" name="overtimeRate" autocomplete="off" formControlName="overtimeRate"
+									class="form-control" placeholder="Over Time Rate">
+								<span *ngIf="submitted && hasError('overtimeRate','required')" class="alert-danger">Over Time Rate</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Min Chefs Per Shift</label>
+								<input type="text" name="minChefsPerShift" autocomplete="off" formControlName="minChefsPerShift"
+									class="form-control" placeholder="Min Chefs Per Shift">
+								<span *ngIf="submitted && hasError('minChefsPerShift','required')" class="alert-danger">Min Chefs Per Shift</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Min Cashiers Per Shift</label>
+								<input type="text" name="minCashiersPerShift" autocomplete="off" formControlName="minCashiersPerShift"
+									class="form-control" placeholder="Min Cashiers Per Shift">
+								<span *ngIf="submitted && hasError('minCashiersPerShift','required')" class="alert-danger">Min Cashiers Per Shift</span>
+							</div>
+							<div class="form-group col-lg-12">
+								<label for="exampleInputEmail1">Max Interns Per Shift</label>
+								<input type="text" name="maxInternsPerShift" autocomplete="off" formControlName="maxInternsPerShift"
+									class="form-control" placeholder="Max Interns Per Shift">
+								<span *ngIf="submitted && hasError('maxInternsPerShift','required')" class="alert-danger">Max Interns Per Shift</span>
+							</div>
+							<!-- <div class="form-group col-lg-12">
 								<label for="exampleInputEmail1">Contact Email</label>
 								<input type="text" name="contactEmail" autocomplete="off" formControlName="contactEmail"
 									class="form-control" placeholder="Contact Email">
@@ -55,9 +129,9 @@
 									class="form-control" placeholder="Contact Email Subject">
 								<span *ngIf="submitted && hasError('contactEmailSubject','required')" class="alert-danger">contact Email
 									Subject is required</span>
-							</div>
-							<h4 class="mt-4">Career Form Email Config</h4>
-							<hr>
+							</div>  -->
+							<h4 class="mt-4">Email Config</h4>
+							<!-- <hr>
 							<div class="form-group col-lg-12">
 								<label for="exampleInputEmail1">Career Email</label>
 								<input type="text" name="careerEmail" autocomplete="off" formControlName="careerEmail"
@@ -78,7 +152,7 @@
 									class="form-control" placeholder="Career Email Subject">
 								<span *ngIf="submitted && hasError('careerEmailSubject','required')" class="alert-danger">Career Email
 									Subject is required</span>
-							</div>
+							</div> -->
 							<hr>
 							<div class="form-group col-lg-12">
 								<label for="exampleInputEmail1">Gmail User</label>
@@ -176,7 +250,7 @@
 									Mail</button>
 							</div>
 							<hr>
-							<div class="form-group col-lg-12">
+							<!-- <div class="form-group col-lg-12">
 								<label for="contact_email">Contact Email</label>
 								<input type="text" name="contact_email" autocomplete="off" formControlName="contact_email"
 									class="form-control" placeholder="Contact Email">
@@ -215,7 +289,7 @@
 								<label for="currency_type">Currency Type</label>
 								<input type="text" name="currency_type" autocomplete="off" formControlName="currency_type"
 									class="form-control" placeholder="Currency Type">
-							</div>
+							</div> -->
 
 						</div>
 						<div class="box-footer col-lg-12">

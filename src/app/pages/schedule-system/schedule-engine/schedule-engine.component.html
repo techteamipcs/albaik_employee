@@ -238,6 +238,20 @@
           <!-- <label class="form-label fw-semibold">4. Rate our service</label>
           <input type="range" class="form-range mb-3" min="1" max="5" [(ngModel)]="formData.rating" name="rating"
             required> -->
+            <ul *ngIf="ConfigData">
+              <li>Max Daily Hours : {{ConfigData.maxDailyHours}}</li>
+              <li>Max Weekly Hours : {{ConfigData.maxWeeklyHours}}</li>
+              <li>Min Rest Hours : {{ConfigData.minRestHours}}</li>
+              <li>Min Shift Length : {{ConfigData.minShiftLength}}</li>
+              <li>Max Shift Length : {{ConfigData.maxShiftLength}}</li>
+              <li>Consecutive Work Days : {{ConfigData.consecutiveWorkDays}}</li>
+              <li>Min Days Off Per Week : {{ConfigData.minDaysOffPerWeek}}</li>
+              <li>Over Time Rate : {{ConfigData.overtimeRate}}</li>
+              <li>Over Time Allowed : {{ConfigData.overtimeallowed}}</li>
+              <li>Min Chefs Per Shift : {{ConfigData.minChefsPerShift}}</li>
+              <li>Min Cashiers Per Shift : {{ConfigData.minCashiersPerShift}}</li>
+              <li>Max Interns Per Shift : {{ConfigData.maxInternsPerShift}}</li>              
+            </ul>
           <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
 
