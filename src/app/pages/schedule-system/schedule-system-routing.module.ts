@@ -4,6 +4,7 @@ import { ScheduleEngineComponent } from './schedule-engine/schedule-engine.compo
 import { AuthGuard } from 'src/app/guard/auth.guard';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 import { ScheduleEditComponent } from './schedule-edit/schedule-edit.component';
+import { ScheduleGanttComponent } from './schedule-gantt/schedule-gantt.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: 'list',
     component: ScheduleListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'gantt',
+    component: ScheduleGanttComponent,
     canActivate: [AuthGuard],
   },
   {

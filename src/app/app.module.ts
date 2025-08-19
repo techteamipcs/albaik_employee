@@ -27,6 +27,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { CommonModule } from '@angular/common';
+import { NgGanttEditorModule } from 'ng-gantt';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { CommonModule } from '@angular/common';
     PipemoduleModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     ClipboardModule,
-    DragDropModule
+    DragDropModule,
+    NgGanttEditorModule
   ],
   declarations: [
     AppComponent,

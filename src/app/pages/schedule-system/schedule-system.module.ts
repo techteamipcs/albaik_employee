@@ -14,12 +14,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 import { ScheduleEditComponent } from './schedule-edit/schedule-edit.component';
+import { ScheduleGanttComponent } from './schedule-gantt/schedule-gantt.component';
+import { NgGanttEditorModule } from 'ng-gantt';
 
 @NgModule({
   declarations: [
     ScheduleEngineComponent,
     ScheduleListComponent,
-    ScheduleEditComponent
+    ScheduleEditComponent,
+    ScheduleGanttComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,8 @@ import { ScheduleEditComponent } from './schedule-edit/schedule-edit.component';
     PageModule,
     ClipboardModule,
     NgMultiSelectDropDownModule,
-    DatamoduleModule
+    DatamoduleModule,
+    NgGanttEditorModule
   ]
 })
 export class ScheduleSystemModule { }
