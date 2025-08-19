@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { GanttEditorComponent, GanttEditorOptions } from 'ng-gantt';
-
+import { EmployeeService } from 'src/app/providers/employee/employee.service';
 @Component({
   selector: 'app-schedule-gantt',
   templateUrl: './schedule-gantt.component.html',
@@ -9,17 +9,22 @@ import { GanttEditorComponent, GanttEditorOptions } from 'ng-gantt';
 })
 export class ScheduleGanttComponent {
 @ViewChild('editor') editor: GanttEditorComponent;
-  public editorOptions: GanttEditorOptions;
+  // public editorOptions: GanttEditorOptions;
   public data: any;
-
-  constructor(public fb: FormBuilder) {
+  public empdata: any;
+  public employeeData: any[] = [];
+  public msg_danger: boolean = false;
+  constructor(public fb: FormBuilder,
+    public employeeService: EmployeeService,
+  ) {
   }
 
   ngOnInit() {
-    this.data = this.initialData();
+    // this.data = this.initialData();
     this.editorOptions = {
       vFormat: 'day'
     }
+    this.getEmployeeData();
   }
 
 
@@ -365,4 +370,65 @@ export class ScheduleGanttComponent {
       'pNotes': ''
     }];
   }
+
+
+public editorOptions: object = {
+  taskFields: {
+    id: 'id',
+    name: 'name',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    duration: 'duration',
+    progress: 'progress',
+    child: 'subTasks'
+  },
+  editSettings: {
+    allowEditing: true,
+    allowAdding: true,
+    allowDeleting: true
+  }
+};
+
+
+  getEmployeeData() {
+  this.employeeService.getallEmployeeDetails({}).subscribe(
+    (response) => {
+      if (response.code === 200 && response.result?.length) {
+        this.data = response.result.map((item, index) => {
+          const today = new Date();
+          const start = today.toISOString().slice(0, 10); // 'YYYY-MM-DD'
+          const end = new Date(today.getTime() + 3 * 86400000)
+                        .toISOString().slice(0, 10);
+
+          return {
+            pID: item._id || index + 1,
+            pName: item.username,
+            // pStart: start,
+            pStart: item.hireDate,
+            pEnd: end,
+            pClass: 'gtaskblue',
+            pLink: '',
+            pMile: 0,
+            pRes: item.username,
+            pComp: 0,
+            pGroup: 0,
+            pParent: 0,
+            pOpen: 1,
+            pDepend: '',
+            pCaption: 'hi this is gantt chart',
+            pNotes: 'make any note'
+          };
+        });
+
+        console.log('Mapped Gantt data (jsgantt):', this.data);
+      } else {
+        this.msg_danger = true;
+      }
+    }
+  );
+}
+
+
+
+
 }
