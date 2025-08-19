@@ -33,6 +33,9 @@ export class ScheduleEngineComponent {
   modalReference = null;
   EmployeeData: any = [];
   msg_danger: boolean = false;
+  employeeData: any = [];
+  employeeList: any = [];
+  dropdownSettings = {};
   shiftData: any;
   closeResult = '';
   searchText = '';
@@ -66,6 +69,15 @@ export class ScheduleEngineComponent {
     this.get_EmployeeData();
     this.get_shiftData();
     this.get_ConfigData();
+     this.dropdownSettings = {
+			singleSelection: false,
+			idField: '_id',
+			textField: 'name',
+			selectAllText: 'Select All',
+			unSelectAllText: 'UnSelect All',
+			itemsShowLimit: 6,
+			allowSearchFilter: true
+		};
   }
   formData = {
     name: '',
@@ -291,5 +303,31 @@ export class ScheduleEngineComponent {
         },
       );
   }
+ getEmployeeData() {
+		const obj = {};
+		this.employeeService.getallEmployeeDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.employeeData = response.result;
+						this.employeeList = [];
 
+						this.employeeData.forEach((item) => {
+							const employee = {
+								_id: item._id,
+								name: item.username,
+							};
+							this.employeeList.push(employee);
+						});
+					}
+					else {
+						this.msg_danger = true;
+					}
+
+				} else {
+					this.toastr.errorToastr(response.message);
+				}
+			},
+		);
+	}
 }
