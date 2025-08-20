@@ -3,7 +3,6 @@
     <h1 class=""><a href="index.html" class="d-inline-block text-decoration-none dashicon"><i
           class="mdi mdi-keyboard-backspace"></i><span class="menu-title ml-3">Dashboard</span></a></h1>
     <h3 class="mb-5 fw-bold text-center"><span class="text-center"> Schedule System </span> </h3>
-
     <!-- Tabs Navigation -->
     <ul class="nav nav-tabs mb-4" id="questionTabs" role="tablist">
       <li class="nav-item" *ngFor="let step of steps; let i = index" [ngClass]="{ 'completed': i <= currentStep }">
@@ -12,13 +11,11 @@
         </a>
       </li>
     </ul>
-
     <!-- Tab Content -->
     <form (ngSubmit)="onSubmitform()" #formRef="ngForm">
       <div class="tab-content">
         <!-- Question 1 -->
         <div class="tab-pane fade" [class.show]="currentStep === 0" [class.active]="currentStep === 0">
-
           <button type="button" class="check-btn" (click)="goToStep(1)">Start</button>
         </div>
         <!-- Question 1 -->
@@ -103,7 +100,6 @@
           <!-- ================================ pos tabel data ================================= -->
           <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
-
         <!-- ****************************************** Question 2 **************************** -->
         <div class="tab-pane fade card" [class.show]="currentStep === 2" [class.active]="currentStep === 2">
           <div class="card-header border-0">
@@ -157,7 +153,6 @@
           </div>
           <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
-
         <!-- ****************************************** Question 3 ****************************************** -->
         <div class="tab-pane fade card" [class.show]="currentStep === 3" [class.active]="currentStep === 3">
           <div class="card-header border-0">
@@ -188,7 +183,6 @@
                     </div>
                   </td>
                   <ng-container *ngFor="let listEmployee of EmployeeData; let i = index">
-
                     <tr *ngIf="listEmployee.status == 'Active'">
                       <td *ngIf="currentPage == 1">{{i+1}}</td>
                       <td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
@@ -229,7 +223,6 @@
           </div>
           <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
-
         <!-- Question 4 -->
         <div class="tab-pane fade card" [class.show]="currentStep === 4" [class.active]="currentStep === 4">
           <div class="card-header border-0">
@@ -254,7 +247,6 @@
           </ul>
           <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
-
         <!-- Question 5 -->
         <div class="tab-pane fade card" [class.show]="currentStep === 5" [class.active]="currentStep === 5">
           <div class="card-header border-0">
@@ -270,7 +262,7 @@
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Duration</th>
-                    <th>Department</th>
+                    <th>Employee</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
@@ -288,20 +280,15 @@
                     <td>{{listShift.startTime}}</td>
                     <td>{{listShift.endTime}}</td>
                     <td>{{listShift.breakDuration}}</td>
-                    <td>{{listShift.department}}</td>
-                    <td>{{listShift.status == true ? 'Active':'Inactive' }}</td>
-
                     <td>
-                      <!-- <ng-multiselect-dropdown id="select" [placeholder]="'Select Ingredients'"
-                        [settings]="dropdownSettings" [data]="employeeList" [(ngModel)]="selectedEmployees">
-                      </ng-multiselect-dropdown> -->
-                      <ng-multiselect-dropdown id="select" [placeholder]="'Select Employee'"
-                        [settings]="dropdownSettings" [data]="employeeList" [(ngModel)]="employeeList">
-                      </ng-multiselect-dropdown>
-
+                        <ng-multiselect-dropdown id="select"
+                          name="listShift.employees" [placeholder]="'Select Employee'" [settings]="dropdownSettings"
+                          [data]="employeeList" [(ngModel)]="listShift.employees"
+                          (onSelect)="onItemSelect($event,listShift)" (onDeSelect)="onDeSelect($event,listShift)"
+                          (onSelectAll)="onSelectAll($event,listShift)" (onDeSelectAll)="onDeSelectAll($event,listShift)">
+                        </ng-multiselect-dropdown>
                     </td>
-
-
+                    <td>{{listShift.status == true ? 'Active':'Inactive' }}</td>
                     <td>
                       <a routerLink="/shift/edit/{{listShift._id}}" style="cursor:pointer"><i
                           class="mdi mdi-lead-pencil" aria-hidden="true"></i>
@@ -318,10 +305,8 @@
             </div> -->
             </div>
           </div>
-
           <button type="button" class="check-btn mb-4" (click)="nextStep()">Next</button>
         </div>
-
         <!-- Question 6 -->
         <div class="tab-pane fade" [class.show]="currentStep === 6" [class.active]="currentStep === 6">
           <label class="form-label fw-semibold">6. Any additional comments? 6</label>

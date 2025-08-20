@@ -33,9 +33,6 @@ export class ScheduleEngineComponent {
   modalReference = null;
   EmployeeData: any = [];
   msg_danger: boolean = false;
-  employeeData: any = [];
-  employeeList: any = [];
-  dropdownSettings = {};
   shiftData: any;
   closeResult = '';
   searchText = '';
@@ -43,6 +40,9 @@ export class ScheduleEngineComponent {
   token: any;
   serviceRequestData: any = [];
   ConfigData: any;
+  addempForm: FormGroup;
+  employeeList: any = [];
+  dropdownSettings = {};
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -58,9 +58,12 @@ export class ScheduleEngineComponent {
     private activeModal: NgbActiveModal,
     private configService: ConfigService
   ) {
-    this.token = localStorage.getItem('albaik-admin-token');
+    this.token = localStorage.getItem('ghoastrental-token');
     this.imagePath = environment.baseUrl + '/public/';
     this.url = environment.Url + '/assets';
+    this.addempForm = this.formBuilder.group({
+			employees: [''],
+		});
   }
   ngOnInit(): void {
     this.get_PosData();
@@ -69,7 +72,7 @@ export class ScheduleEngineComponent {
     this.get_EmployeeData();
     this.get_shiftData();
     this.get_ConfigData();
-     this.dropdownSettings = {
+    this.dropdownSettings = {
 			singleSelection: false,
 			idField: '_id',
 			textField: 'name',
@@ -239,6 +242,14 @@ export class ScheduleEngineComponent {
           if (response.result != null && response.result != '') {
             this.EmployeeData = response.result;
             this.totalRecord = response?.count;
+            this.employeeList = [];
+						this.EmployeeData.forEach((item) => {
+							const employee = {
+								_id: item._id,
+								name: item.username,
+							};
+							this.employeeList.push(employee);
+						});
           }
           else {
             this.msg_danger = true;
@@ -258,6 +269,9 @@ export class ScheduleEngineComponent {
           if (response.result != null && response.result != '') {
             this.shiftData = response.result;
             this.totalRecord = response?.count;
+            this.shiftData.forEach((item) => {
+							item['employees'] = [];
+						});
           }
           else {
             this.msg_danger = true;
@@ -303,31 +317,37 @@ export class ScheduleEngineComponent {
         },
       );
   }
- getEmployeeData() {
-		const obj = {};
-		this.employeeService.getallEmployeeDetails(obj).subscribe(
-			(response) => {
-				if (response.code == 200) {
-					if (response.result != null && response.result != '') {
-						this.employeeData = response.result;
-						this.employeeList = [];
 
-						this.employeeData.forEach((item) => {
-							const employee = {
-								_id: item._id,
-								name: item.username,
-							};
-							this.employeeList.push(employee);
-						});
-					}
-					else {
-						this.msg_danger = true;
-					}
-
-				} else {
-					this.toastr.errorToastr(response.message);
-				}
-			},
-		);
+  get f() {
+		return this.addempForm.controls;
 	}
+
+  onItemSelect(data,shiftdata){
+    // if(shiftdata){
+    //   shiftdata.employees.push(data);
+    // }
+    let tempEmp = [];
+    this.employeeList.forEach((item) => {
+        let tempdata = shiftdata.employees.filter((emp)=> item._id == emp._id);
+        if(tempdata.length == 0){
+          tempEmp.push(item);
+        }
+    });
+    this.employeeList = tempEmp;
+  }
+
+  onDeSelect(data,shiftdata){
+    this.employeeList.push(data);
+  }
+
+  onSelectAll(data,shiftdata){
+    this.employeeList = [];
+  }
+
+  onDeSelectAll(data,shiftdata){
+    this.employeeList.push(data);
+  }
+
+
+
 }
