@@ -88,18 +88,18 @@ export class AddManagerComponent {
 				issuedDate: [new Date()],
 				validTill: [new Date()],
 			});
-			this.token = localStorage.getItem('ghoastrental-token');
+			this.token = localStorage.getItem('albaik-admin-token');
 			this.imagePath = environment.baseUrl + '/public/';
 			this.url = environment.Url + '/assets';
 			this.get_roleData();
 			this.get_Cirtifications();
 			this.getManagerData();
 		}
-	
+
 		public hasError = (controlName: string, errorName: string) => {
 			return this.addmanagerForm.controls[controlName].hasError(errorName);
 		};
-	
+
 		ngOnInit(): void {
 			this.id = this.route.snapshot.paramMap.get('id');
 			if (this.isEdit) {
@@ -119,23 +119,23 @@ export class AddManagerComponent {
 				allowSearchFilter: true
 			};
 		}
-	
+
 		onItemSelect(item: any) {
 			console.log(item);
 		}
-	
+
 		onSelectAll(items: any) {
 			console.log(items);
 		}
-	
+
 		selectManager(data) {
 			console.log(data);
 		}
-	
+
 		get f() {
 			return this.addmanagerForm.controls;
 		}
-	
+
 		patchingdata(id: any) {
 			let obj = { id: id };
 			this.managerService.getManagerWithId(obj).subscribe(
@@ -171,12 +171,12 @@ export class AddManagerComponent {
 						});
 						this.selectedcertificatesData = data?.certifications;
 					} else {
-	
+
 					}
 				},
 			);
 		}
-	
+
 		onSubmit() {
 			this.submitted = true;
 			let obj = this.addmanagerForm.value;
@@ -196,7 +196,7 @@ export class AddManagerComponent {
 					(response) => {
 						if (response.code == 200) {
 							this.toastr.successToastr(response.message);
-	
+
 							setTimeout(() => {
 								this.router.navigate(['/manager/view']);
 							}, 2000);
@@ -228,80 +228,80 @@ export class AddManagerComponent {
 				);
 			}
 		}
-	
+
 		onCancel() {
 			this.router.navigate(['/manager/view']);
 		}
-	
+
 		get_roleData()
 		{
 			const obj = {  };
 			this.roleService.getallRoleDetails(obj).subscribe(
 					(response)=> {
-						if (response.code == 200) 
+						if (response.code == 200)
 						{
 							if(response.result != null && response.result != '')
 							{
-								this.rolesData = response.result; 
+								this.rolesData = response.result;
 							}
 							else
 							{
 								this.msg_danger   = true;
 							}
-						 
+
 						} else {
 							this.toastr.errorToastr(response.message);
 						}
 					},
 				);
 		}
-	
+
 		getManagerData()
 		{
 			const obj = {  };
 			this.managerService.getallManagerDetails(obj).subscribe(
 					(response)=> {
-						if (response.code == 200) 
+						if (response.code == 200)
 						{
 							if(response.result != null && response.result != '')
 							{
-								this.managerData = response.result; 
+								this.managerData = response.result;
 							}
 							else
 							{
 								this.msg_danger   = true;
 							}
-						 
+
 						} else {
 							this.toastr.errorToastr(response.message);
 						}
 					},
 				);
 		}
-	
+
 		get_Cirtifications()
 		{
 			const obj = {  };
 			this.certificationService.getallCertificationDetails(obj).subscribe(
 					(response)=> {
-						if (response.code == 200) 
+						if (response.code == 200)
 						{
 							if(response.result != null && response.result != '')
 							{
-								this.certificatesData = response.result; 
+								this.certificatesData = response.result;
 							}
 							else
 							{
 								this.msg_danger   = true;
 							}
-						 
+
 						} else {
 							this.toastr.errorToastr(response.message);
 						}
 					},
 				);
 		}
-	
+
 		openRelatedProductModal(content: any) {
 			this.get_Cirtifications();
 			this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: "myCustomModalClass", size: 'xl',  backdrop: 'static' })
@@ -311,7 +311,7 @@ export class AddManagerComponent {
 					this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
 				});
 		}
-	
+
 			private getDismissReason(reason: any): string {
 				if (reason === ModalDismissReasons.ESC) {
 					return 'by pressing ESC';
@@ -321,7 +321,7 @@ export class AddManagerComponent {
 					return `with: ${reason}`;
 				}
 			}
-	
+
 			onSubmitCertificate(){
 				if(!this.certifiedObject.valid){
 					return;
@@ -330,16 +330,16 @@ export class AddManagerComponent {
 					if(this.certificatesData && this.certificatesData.length > 0){
 						let temp = this.certificatesData.filter((cert) => cert._id == this.certifiedObject.value.id);
 						if(temp.length > 0){
-							title = temp[0].title; 
+							title = temp[0].title;
 							this.certifiedObject.value['title'] = title+'-'+temp[0].type;
 						}
 					}
 					this.selectedcertificatesData.push(this.certifiedObject.value);
 					this.modalService.dismissAll();
 				}
-				
+
 			}
-	
+
 			removeCertificate(index){
 				this.selectedcertificatesData.splice(index, 1);
 			}

@@ -34,7 +34,7 @@ export class ViewRoleComponent {
 		private activeModal: NgbActiveModal,
 	) {
 		this.imagePath = environment.baseUrl + '/public/';
-		this.token = localStorage.getItem('ghoastrental-token');
+		this.token = localStorage.getItem('albaik-admin-token');
 	}
 
 	ngOnInit(): void {
@@ -79,7 +79,7 @@ export class ViewRoleComponent {
 									this.deletMediaFilesData.push(image);
 								}
 							});
-						} 
+						}
 						if(this.selectedRole && this.selectedRole.gallery_image){
 							this.selectedRole.gallery_image.forEach(image => {
 								if(image && image.src){

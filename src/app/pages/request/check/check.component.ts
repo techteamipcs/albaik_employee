@@ -47,7 +47,7 @@ export class CheckComponent {
 	isallMealsActive = 'active';
 	isallShiftsActive = 'active';
 	existedRequest:any;
-	
+
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -59,7 +59,7 @@ export class CheckComponent {
 		public melasService: MealService,
 		public requestService: RequestService
 	) {
-		this.token = localStorage.getItem('ghoastrental-token');
+		this.token = localStorage.getItem('albaik-admin-token');
 		this.imagePath = environment.baseUrl + '/public/';
 		this.url = environment.Url + '/assets';
 	}
@@ -92,7 +92,7 @@ export class CheckComponent {
 									}
 								});
 							}
-							
+
 					}
 					else {
 						this.msg_danger = true;
@@ -202,7 +202,7 @@ export class CheckComponent {
 									name: item.username,
 								};
 								this.employeeList.push(employee);
-							});	
+							});
 					}
 					else {
 						this.msg_danger = true;
@@ -246,7 +246,7 @@ export class CheckComponent {
 					this.selectedMealsList.push(data);
 				}
 			}
-		}		
+		}
 	}
 
 	selectShifts(type,data){
@@ -272,7 +272,7 @@ export class CheckComponent {
 					this.selectedshiftList.push(data);
 				}
 			}
-		}		
+		}
 	}
 
 	onSubmit() {
@@ -336,7 +336,7 @@ export class CheckComponent {
 			this.orders = count;
 		}
 	}
- 
+
 
 
 }

@@ -32,7 +32,7 @@ export class ViewTopSearchComponent {
     private dashboardService: DataService
   ) {
     this.imagePath = environment.baseUrl + '/public/';
-    this.token = localStorage.getItem('miniaar-token');
+    this.token = localStorage.getItem('albaik-admin-token');
    }
 
   ngOnInit(): void {

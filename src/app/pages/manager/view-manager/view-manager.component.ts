@@ -34,14 +34,14 @@ export class ViewManagerComponent {
       private activeModal: NgbActiveModal,
     ) {
       this.imagePath = environment.baseUrl + '/public/';
-      this.token = localStorage.getItem('ghoastrental-token');
+      this.token = localStorage.getItem('albaik-admin-token');
     }
-  
+
     ngOnInit(): void {
       this.get_ManagerData();
       // this.get_VendorData();
     }
-  
+
     get_ManagerData() {
       const obj = {
         limit: this.currentLimit,
@@ -62,7 +62,7 @@ export class ViewManagerComponent {
         },
       );
     }
-  
+
     deleteManager()
     {
       if (this.selectedManager) {
@@ -79,7 +79,7 @@ export class ViewManagerComponent {
                     this.deletMediaFilesData.push(image);
                   }
                 });
-              } 
+              }
               if(this.selectedManager && this.selectedManager.gallery_image){
                 this.selectedManager.gallery_image.forEach(image => {
                   if(image && image.src){
@@ -96,12 +96,12 @@ export class ViewManagerComponent {
         );
       }
     }
-  
+
     onListChangePage(event: any) {
       this.currentPage = event;
       this.get_ManagerData();
     }
-  
+
     open(content,data) {
       this.selectedManager = data;
       if (this.selectedManager) {
@@ -116,7 +116,7 @@ export class ViewManagerComponent {
       );
       }
     }
-  
+
     private getDismissReason(reason: any): string {
       if (reason === ModalDismissReasons.ESC) {
         return 'by pressing ESC';
@@ -126,7 +126,7 @@ export class ViewManagerComponent {
         return `with: ${reason}`;
       }
     }
-  
+
     closeModal(){
       this.activeModal.close();
     }

@@ -36,7 +36,7 @@ export class AddUserComponent {
       confirmpassword: ['', Validators.required],
       role: ['', Validators.required]
     });
-    this.token = localStorage.getItem('miniaar-token');
+    this.token = localStorage.getItem('albaik-admin-token');
   }
 
   ngOnInit(): void {
@@ -45,19 +45,19 @@ export class AddUserComponent {
   onSubmit() {
     this.submitted = true;
     let obj = this.addProfileForm.value;
-    obj['miniaar-token'] = this.token;
+    obj['albaik-admin-token'] = this.token;
     if (this.addProfileForm.value.password == this.addProfileForm.value.confirmpassword) {
       this.loginService.createrofile(obj).subscribe(
         (response) => {
           if (response.code == 200) {
-            // this.throw_msg = response.message 
+            // this.throw_msg = response.message
             this.msg_success = true;
             this.msg_danger = false;
             this.toastr.successToastr(response.message);
             this.router.navigate(['/auth/view-user']);
           } else {
             this.msg_success = false;
-            // this.throw_msg = response.message 
+            // this.throw_msg = response.message
             // this.msg_danger = true;
             this.toastr.errorToastr(response.message);
           }

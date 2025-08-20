@@ -36,7 +36,7 @@ export class EditProfileComponent {
       confirmpassword: ['', Validators.required],
       role: ['', Validators.required]
     });
-    this.token = localStorage.getItem('miniaar-token');
+    this.token = localStorage.getItem('albaik-admin-token');
 
   }
 
@@ -73,7 +73,7 @@ export class EditProfileComponent {
       this.loginService.editProfile(obj).subscribe(
         (response) => {
           if (response.code == 200) {
-            // this.throw_msg = response.message 
+            // this.throw_msg = response.message
             // this.msg_success = true;
             this.toastr.successToastr(response.message);
             setTimeout(() => {

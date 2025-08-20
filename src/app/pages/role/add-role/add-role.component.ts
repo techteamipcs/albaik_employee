@@ -43,7 +43,7 @@ export class AddRoleComponent {
 			status: ['', Validators.required],
 			sequence_number: [''],
 		});
-		this.token = localStorage.getItem('ghoastrental-token');
+		this.token = localStorage.getItem('albaik-admin-token');
 		this.imagePath = environment.baseUrl + '/public/';
 		this.url = environment.Url + '/assets';
 	}

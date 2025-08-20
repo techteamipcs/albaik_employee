@@ -84,7 +84,7 @@ export class EditMediaComponent {
 			full_screen: [''],
 			additional_params:['']
 		});
-		this.token = localStorage.getItem('miniaar-token');
+		this.token = localStorage.getItem('albaik-admin-token');
 		this.imagePath = environment.baseUrl + '/public/';
 	}
 

@@ -105,7 +105,7 @@ export class ViewConfigComponent {
       minCashiersPerShift: [''],
       maxInternsPerShift: [''],
      });
-     this.token = localStorage.getItem('miniaar-token');
+     this.token = localStorage.getItem('albaik-admin-token');
      this.imagePath = environment.baseUrl+'/public/';
      let tempuser = localStorage.getItem('user');
     this.user = JSON.parse(tempuser);
@@ -193,7 +193,7 @@ export class ViewConfigComponent {
     this.submitted = true;
     let obj = this.addconfigForm.value;
     let id  = this.ConfigData[0]._id;
-    obj['miniaar-token'] = this.token;
+    obj['albaik-admin-token'] = this.token;
     obj['image'] = this.configImage;
     obj['qrcode_image'] = this.QRcodeImage;
     obj['documents'] = this.document;

@@ -63,7 +63,7 @@ export class SupportRequestComponent {
       public requestService: RequestService,
       public departmentService: DepartmentService
     ) {
-      this.token = localStorage.getItem('ghoastrental-token');
+      this.token = localStorage.getItem('albaik-admin-token');
       this.imagePath = environment.baseUrl + '/public/';
       this.url = environment.Url + '/assets';
     }
@@ -242,7 +242,7 @@ export class SupportRequestComponent {
 									name: item.username,
 								};
 								this.employeeList.push(employee);
-							});	
+							});
 					}
 					else {
 						this.msg_danger = true;
@@ -278,7 +278,7 @@ export class SupportRequestComponent {
 					this.selectedMealsList.push(data);
 				}
 			}
-		}		
+		}
 	}
 
 	selectShifts(type,data){
@@ -304,7 +304,7 @@ export class SupportRequestComponent {
 					this.selectedshiftList.push(data);
 				}
 			}
-		}		
+		}
 	}
 
 	sendEmail(data){

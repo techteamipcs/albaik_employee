@@ -58,7 +58,7 @@ export class ScheduleEngineComponent {
     private activeModal: NgbActiveModal,
     private configService: ConfigService
   ) {
-    this.token = localStorage.getItem('ghoastrental-token');
+    this.token = localStorage.getItem('albaik-admin-token');
     this.imagePath = environment.baseUrl + '/public/';
     this.url = environment.Url + '/assets';
   }

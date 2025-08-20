@@ -101,7 +101,7 @@ export class AddEmployeeComponent {
 			issuedDate: [new Date()],
 			validTill: [new Date()],
 		});
-		this.token = localStorage.getItem('ghoastrental-token');
+		this.token = localStorage.getItem('albaik-admin-token');
 		this.imagePath = environment.baseUrl + '/public/';
 		this.url = environment.Url + '/assets';
 		this.get_roleData();

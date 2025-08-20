@@ -34,7 +34,7 @@ msg_danger: boolean = false;
     private activeModal: NgbActiveModal,
   ) {
     this.imagePath = environment.baseUrl + '/public/';
-    this.token = localStorage.getItem('ghoastrental-token');
+    this.token = localStorage.getItem('albaik-admin-token');
   }
 
   ngOnInit(): void {
@@ -79,7 +79,7 @@ msg_danger: boolean = false;
                   this.deletMediaFilesData.push(image);
                 }
               });
-            } 
+            }
             if(this.selectedPos && this.selectedPos.gallery_image){
               this.selectedPos.gallery_image.forEach(image => {
                 if(image && image.src){

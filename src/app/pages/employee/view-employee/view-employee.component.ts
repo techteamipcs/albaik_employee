@@ -34,14 +34,14 @@ export class ViewEmployeeComponent {
       private activeModal: NgbActiveModal,
     ) {
       this.imagePath = environment.baseUrl + '/public/';
-      this.token = localStorage.getItem('ghoastrental-token');
+      this.token = localStorage.getItem('albaik-admin-token');
     }
-  
+
     ngOnInit(): void {
       this.get_EmployeeData();
       // this.get_VendorData();
     }
-  
+
     get_EmployeeData() {
       const obj = {
         limit: this.currentLimit,
@@ -62,7 +62,7 @@ export class ViewEmployeeComponent {
         },
       );
     }
-  
+
     deleteEmployee()
     {
       if (this.selectedEmployee) {
@@ -79,7 +79,7 @@ export class ViewEmployeeComponent {
                     this.deletMediaFilesData.push(image);
                   }
                 });
-              } 
+              }
               if(this.selectedEmployee && this.selectedEmployee.gallery_image){
                 this.selectedEmployee.gallery_image.forEach(image => {
                   if(image && image.src){
@@ -96,12 +96,12 @@ export class ViewEmployeeComponent {
         );
       }
     }
-  
+
     onListChangePage(event: any) {
       this.currentPage = event;
       this.get_EmployeeData();
     }
-  
+
     open(content,data) {
       this.selectedEmployee = data;
       if (this.selectedEmployee) {
@@ -116,7 +116,7 @@ export class ViewEmployeeComponent {
       );
       }
     }
-  
+
     private getDismissReason(reason: any): string {
       if (reason === ModalDismissReasons.ESC) {
         return 'by pressing ESC';
@@ -126,7 +126,7 @@ export class ViewEmployeeComponent {
         return `with: ${reason}`;
       }
     }
-  
+
     closeModal(){
       this.activeModal.close();
     }

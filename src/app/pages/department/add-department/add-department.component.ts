@@ -59,7 +59,7 @@ export class AddDepartmentComponent {
 			sequence_number: [''],
 			position:['']
 		});
-		this.token = localStorage.getItem('ghoastrental-token');
+		this.token = localStorage.getItem('albaik-admin-token');
 		this.imagePath = environment.baseUrl + '/public/';
 		this.url = environment.Url + '/assets';
 	}
@@ -241,7 +241,7 @@ export class AddDepartmentComponent {
 									name: item.username,
 								};
 								this.employeeList.push(employee);
-							});	
+							});
 					}
 					else {
 						this.msg_danger = true;
@@ -259,11 +259,11 @@ export class AddDepartmentComponent {
     const obj = {  };
     this.positionService.getallPositionDetails(obj).subscribe(
         (response)=> {
-          if (response.code == 200) 
+          if (response.code == 200)
           {
             if(response.result != null && response.result != '')
             {
-              this.positionData = response.result; 
+              this.positionData = response.result;
 							this.positionList = [];
 							this.positionData.forEach((item) => {
 								const position = {
@@ -271,13 +271,13 @@ export class AddDepartmentComponent {
 									name: item.name
 								};
 								this.positionList.push(position);
-							});	
+							});
             }
             else
             {
               this.msg_danger   = true;
             }
-           
+
           } else {
             this.toastr.errorToastr(response.message);
           }

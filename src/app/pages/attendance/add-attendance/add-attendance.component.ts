@@ -46,17 +46,17 @@ export class AddAttendanceComponent {
 	) {
 		this.addattendanceForm = this.formBuilder.group({
 			userType: ['', Validators.required],
-			userId: ['', Validators.required],			
+			userId: ['', Validators.required],
 			date: ['', Validators.required],
-			checkIn: [''],			
+			checkIn: [''],
 			checkOut: [''],
 			status: ['', Validators.required],
 			reason: [''],
 		});
-		this.token = localStorage.getItem('ghoastrental-token');
+		this.token = localStorage.getItem('albaik-admin-token');
 		this.imagePath = environment.baseUrl + '/public/';
 		this.url = environment.Url + '/assets';
-		
+
 	}
 
 	public hasError = (controlName: string, errorName: string) => {
@@ -83,7 +83,7 @@ export class AddAttendanceComponent {
 			itemsShowLimit: 6,
 			allowSearchFilter: true
 		};
-		
+
 	}
 
 	onItemSelect(item: any) {
@@ -118,7 +118,7 @@ export class AddAttendanceComponent {
 						userId: data?.userId,
 						date: moment(data?.date).format('YYYY-MM-DD'),
 						checkIn: data?.checkIn,
-						checkOut: data?.checkOut,	
+						checkOut: data?.checkOut,
 						status: data?.status,
 						reason: data?.reason
 					});
@@ -185,17 +185,17 @@ export class AddAttendanceComponent {
 			const obj = {  };
 			this.managerService.getallManagerDetails(obj).subscribe(
 					(response)=> {
-						if (response.code == 200) 
+						if (response.code == 200)
 						{
 							if(response.result != null && response.result != '')
 							{
-								this.managerData = response.result; 
+								this.managerData = response.result;
 							}
 							else
 							{
 								this.msg_danger   = true;
 							}
-						 
+
 						} else {
 							this.toastr.errorToastr(response.message);
 						}
@@ -208,17 +208,17 @@ export class AddAttendanceComponent {
 			const obj = {  };
 			this.employeeService.getallEmployeeDetails(obj).subscribe(
 					(response)=> {
-						if (response.code == 200) 
+						if (response.code == 200)
 						{
 							if(response.result != null && response.result != '')
 							{
-								this.employeeData = response.result; 
+								this.employeeData = response.result;
 							}
 							else
 							{
 								this.msg_danger   = true;
 							}
-						 
+
 						} else {
 							this.toastr.errorToastr(response.message);
 						}
