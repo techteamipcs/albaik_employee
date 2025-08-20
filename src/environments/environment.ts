@@ -3,13 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  baseUrl: 'http://localhost:5016',
-  Url: 'http://localhost:4316',
-  // Url: 'https://build.pixtar.ae/admin',
-  // baseUrl:'https://build.pixtar.ae:5012',
-  // Url: 'https://www.arovan.com/admin',
-  // baseUrl:'https://www.arovan.com:5011',
+	production: false,
+	baseUrl: 'http://localhost:5016',
+	Url: 'http://localhost:4216',
 };
 
 /*
