@@ -3,6 +3,11 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+export interface Availability {
+  month: string;
+  days: number[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +16,7 @@ export class EmployeeService {
   constructor(
       private http: HttpClient
     ) { }
-  
+
     getEmployeeDetails = (data: any): Observable<any> => {
       const endpoint = environment.baseUrl + '/api/employee/viewEmployee';
       return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
@@ -20,7 +25,7 @@ export class EmployeeService {
         })
       );
     };
-  
+
     getEmployeeWithId = (moreData: any): Observable<any> => {
       const endpoint = environment.baseUrl + '/api/employee/getEmployeeById';
       return this.http
@@ -31,7 +36,7 @@ export class EmployeeService {
           })
         );
     };
-  
+
     addEmployee = (moreData: any): Observable<any> => {
       const endpoint = environment.baseUrl + '/api/employee/addEmployee';
       return this.http
@@ -42,7 +47,7 @@ export class EmployeeService {
           })
         );
     };
-  
+
     editEmployeedata = (moreData: any, Id: any): Observable<any> => {
       let endpoint = environment.baseUrl + '/api/employee/editEmployee';
       if (Id) {
@@ -54,7 +59,7 @@ export class EmployeeService {
         })
       );
     };
-  
+
     deleteemployee = (data: any): Observable<any> => {
       const endpoint = environment.baseUrl + '/api/employee/deleteEmployee';
       return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
@@ -63,7 +68,7 @@ export class EmployeeService {
         })
       );
     };
-  
+
     getallEmployeeDetails = (data: any): Observable<any> => {
       const endpoint = environment.baseUrl + '/api/employee/getAllEmployee';
       return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
@@ -72,7 +77,7 @@ export class EmployeeService {
         })
       );
     };
-  
+
     protected getRequestHeaders(): {
       headers: HttpHeaders | { [header: string]: string | string[] };
     } {

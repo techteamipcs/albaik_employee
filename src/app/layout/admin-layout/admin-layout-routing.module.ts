@@ -103,6 +103,11 @@ const routes: Routes = [
 		path: 'schedule-system',
 		loadChildren: () => import("./../../pages/schedule-system/schedule-system.module").then((m) => m.ScheduleSystemModule),
 		data: { title: 'Schedule System' },
+	},
+	{
+		path: 'employee-availability',
+		loadChildren: () => import("./../../pages/employee-availability/employee-availability.module").then((m) => m.EmployeeAvailabilityModule),
+		data: { title: 'Avalibility' },
 	}
 ];
 
