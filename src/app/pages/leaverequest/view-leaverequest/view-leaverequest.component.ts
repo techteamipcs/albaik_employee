@@ -22,7 +22,19 @@ export class ViewLeaverequestComponent {
 	currentLimit: number = 10;
 	totalRecord: number = 0;
 	searchText = '';
-
+	empdetails = [{
+		'name'	: 'Asad',
+		'empId':'ALBKEMP-123',
+		'position': 'Level A',
+		'department': 'Production',
+		'location': 'dubai',
+		'email': 'asadipcs@gmail.com',
+		'phone': '123-456-7890',
+		'photo': 'path/to/photo.jpg',
+		'shift': 'Morning',
+		'leaves': 12,
+		'joiningDate': '2020-01-15'
+	}];
 	constructor(
 		private router: Router,
 		private leaveRequestService: LeaverequestService,
