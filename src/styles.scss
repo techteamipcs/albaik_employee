@@ -159,7 +159,13 @@ select.form-control:focus, select.form-control:hover {
   border: 0;
 }
 .main-panel{
-  padding: 8rem 1.75rem 0 1.75rem;
+  padding: 8rem 1.75rem 0 1.75rem;   
+    @media (max-width: 768px) {
+      padding: 5rem 1rem 0 1rem;    
+    }
+		 @media (max-width: 575px) {
+      padding: 5rem 0rem 0 0rem;    
+    }
 }
 .navbar{
   background-color: var(--background-color-header);
