@@ -18,7 +18,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NgToggleModule } from 'ng-toggle-button';
 
 //Created modules
 import { PipemoduleModule } from './pipes/pipemodule.module';
@@ -48,7 +47,6 @@ import { NgGanttEditorModule } from 'ng-gantt';
     // NgxQrcodeStylingModule,
     NgSelectModule,
     Ng2SearchPipeModule,
-    NgToggleModule.forRoot(),
     PipemoduleModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     ClipboardModule,

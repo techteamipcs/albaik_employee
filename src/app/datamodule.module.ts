@@ -9,7 +9,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { NgToggleModule } from 'ng-toggle-button';
 import { PipemoduleModule } from './pipes/pipemodule.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -28,7 +27,6 @@ import { RouterModule } from '@angular/router';
     AngularEditorModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    NgToggleModule,
     PipemoduleModule,
     DragDropModule,
     NgMultiSelectDropDownModule.forRoot(),

@@ -60,17 +60,6 @@
         </div>
       </li> -->
       <li class="nav-item nav-settings d-none d-lg-block">
-        <!-- Toggle Button -->
-        <!-- <button (click)="toggleTheme()" class="btn btn-outline-light">
-          {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
-        </button> -->
-        <ng-toggle name="isFilterActive" [(ngModel)]="isFilterActive" class="toogle_btn"
-        [disabled]="config.disabled" [width]="config.width" [height]="config.height" [margin]="config.margin"
-        [labels]="config.labels" [color]="config.color" [switchColor]="config.switchColor"
-        [fontColor]="config.fontColor" [fontSize]="config.fontSize" (click)="toggelFilter()"
-        required></ng-toggle>
-      </li>
-      <li class="nav-item nav-settings d-none d-lg-block">
         <a class="nav-link" href="#">
           <i class="mdi mdi-view-grid"></i>
         </a>

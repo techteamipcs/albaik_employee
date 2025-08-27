@@ -4,7 +4,6 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
-import { NgToggleModule } from 'ng-toggle-button';
 // import { PaginationComponent } from './pagination/pagination.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -12,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule,
-    NgToggleModule.forRoot(),
     FormsModule,
     ReactiveFormsModule
     // NgbModule
