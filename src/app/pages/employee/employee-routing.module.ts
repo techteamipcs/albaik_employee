@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guard/auth.guard';
 import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { ShiftScheduleComponent } from './shift-schedule/shift-schedule.component';
 
 const routes: Routes = [
   {
@@ -27,10 +28,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path:'shift-schedule',
+    component: ShiftScheduleComponent
+  },
+  {
     path: '**',
     component: ViewEmployeeComponent,
     canActivate: [AuthGuard],
-  }
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,42 @@
+.cstback {
+	background-color: #fd7f02;
+	// border: 1px solid #dee2e6;
+	// border-radius: 0.5rem;
+}
+.shift-dashboard {
+	.header-section {
+		background: linear-gradient(180deg, #ff8000, #ff6600);
+		// border-bottom-left-radius: 20px;
+		// border-bottom-right-radius: 20px;
+	}
+
+	.shift-card {
+		border-radius: 15px;
+		.card-body {
+			padding: 15px;
+		}
+		margin-bottom: 15px;
+	}
+
+	.upcoming-section {
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		margin-top: -20px;
+	}
+
+	.text-orange {
+		color: #ff6600;
+	}
+
+	.shift-item:last-child {
+		border-bottom: none;
+	}
+	.arrow {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+    a{
+      color: #6c7293;
+    }
+	}
+}

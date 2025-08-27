@@ -13,12 +13,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ViewEmployeeComponent } from './view-employee/view-employee.component';
+import { ShiftScheduleComponent } from './shift-schedule/shift-schedule.component';
 
 
 @NgModule({
   declarations: [
     AddEmployeeComponent,
-    ViewEmployeeComponent
+    ViewEmployeeComponent,
+    ShiftScheduleComponent
   ],
   imports: [
     CommonModule,
