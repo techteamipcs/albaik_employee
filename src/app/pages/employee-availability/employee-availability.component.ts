@@ -86,7 +86,7 @@ export class EmployeeAvailabilityComponent implements OnInit {
 		};
 
 		// Replace with your actual API endpoint
-		this.http.post<ApiResponse>(`${this.apiBaseUrl}/api/availability/getallempdep`, requestBody)
+		this.http.post<ApiResponse>(`${this.apiBaseUrl}/api/availability/getempavail`, requestBody)
 			.subscribe({
 				next: (response) => {
 					this.loading = false;
@@ -107,26 +107,29 @@ export class EmployeeAvailabilityComponent implements OnInit {
 			});
 	}
 
-	private processAvailabilityData(apiData: any[]): void {
-		const allDays: DayAvailability[] = [];
+	private processAvailabilityData(apiData: any): void {
+		// If result is a single object with availabilityData
+		if (apiData && apiData.availabilityData) {
+			this.availabilityData = apiData.availabilityData.map((day: any) => ({
+				date: new Date(day.date),
+				hourlyStatus: day.hourlyStatus || [],
+				notes: day.notes || ''
+			}));
+		}
+		// If result is already an array
+		else if (Array.isArray(apiData)) {
+			this.availabilityData = apiData.map((day: any) => ({
+				date: new Date(day.date),
+				hourlyStatus: day.hourlyStatus || [],
+				notes: day.notes || ''
+			}));
+		}
+		else {
+			this.availabilityData = [];
+		}
 
-		apiData.forEach(emp => {
-			if (Array.isArray(emp.availabilityData)) {
-				emp.availabilityData.forEach((day: any) => {
-					if (day.date) {
-						const dayData: DayAvailability = {
-							date: new Date(day.date),
-							hourlyStatus: day.hourlyStatus || [],
-							notes: day.notes || ''
-						};
-						allDays.push(dayData);
-					}
-				});
-			}
-		});
-
-		// sort by date
-		this.availabilityData = allDays.sort((a, b) => a.date.getTime() - b.date.getTime());
+		// Sort by date
+		this.availabilityData.sort((a, b) => a.date.getTime() - b.date.getTime());
 	}
 
 
