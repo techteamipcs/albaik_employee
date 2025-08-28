@@ -1,10 +1,17 @@
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title"> Leave </h3>
+		<h3 class="page-title">Leave</h3>
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Leave</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Edit Leave</li>
+				<li class="breadcrumb-item poppins-regular size14">
+					<a href="#">Leave</a>
+				</li>
+				<li
+					class="breadcrumb-item active poppins-regular size14"
+					aria-current="page"
+				>
+					Edit Leave
+				</li>
 			</ol>
 		</nav>
 	</div>
@@ -12,43 +19,91 @@
 		<div class="col-md-8 col-sm-10 col-12 grid-margin stretch-card">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title" *ngIf="id">Edit Leave</h4>
-					<h4 class="card-title" *ngIf="!id">Add New Leave</h4>
-					<div class="alert alert-success alert-dismissable" style="margin-left: 0;" *ngIf="msg_success">
-						{{throw_msg}}
+					<h4 class="card-title poppins-regular size14" *ngIf="id">
+						Edit Leave
+					</h4>
+					<h4 class="card-title poppins-regular size14" *ngIf="!id">
+						Add New Leave
+					</h4>
+					<div
+						class="alert alert-success alert-dismissable poppins-regular size14"
+						style="margin-left: 0"
+						*ngIf="msg_success"
+					>
+						{{ throw_msg }}
 					</div>
-					<div class="alert alert-danger alert-dismissable" style="margin-left: 0;" *ngIf="msg_danger">
-						{{throw_msg}}
+					<div
+						class="alert alert-danger alert-dismissable poppins-regular size14"
+						style="margin-left: 0"
+						*ngIf="msg_danger"
+					>
+						{{ throw_msg }}
 					</div>
 					<!-- form start -->
-					<form [formGroup]="addLeaveForm" (ngSubmit)="onSubmit()" method="post" novalidate>
+					<form
+						[formGroup]="addLeaveForm"
+						(ngSubmit)="onSubmit()"
+						method="post"
+						novalidate
+					>
 						<div class="box-body">
-
 							<div class="form-group">
-								<label for="first_name">First Name</label>
-								<input type="text" name="first_name" autocomplete="off" formControlName="first_name"
-									class="form-control" placeholder="" disabled="true">
+								<label for="first_name" class="poppins-medium size14"
+									>First Name</label
+								>
+								<input
+									type="text"
+									name="first_name"
+									autocomplete="off"
+									formControlName="first_name"
+									class="form-control"
+									placeholder=""
+									disabled="true"
+								/>
 							</div>
 							<div class="form-group">
-								<label for="last_name">Last Name</label>
-								<input type="text" name="last_name" autocomplete="off" formControlName="last_name" class="form-control"
-									placeholder="" disabled="true">
+								<label for="last_name" class="poppins-medium size14"
+									>Last Name</label
+								>
+								<input
+									type="text"
+									name="last_name"
+									autocomplete="off"
+									formControlName="last_name"
+									class="form-control"
+									placeholder=""
+									disabled="true"
+								/>
 							</div>
 
 							<div class="form-group">
-								<label for="title">Message</label>
-								<textarea name="title" autocomplete="off" formControlName="title" class="form-control"
-									placeholder="Enter Leave Title"></textarea>
-								<span *ngIf="submitted && hasError('title','required')" class="alert-danger">
+								<label for="title" class="poppins-medium size14">Message</label>
+								<textarea
+									name="title"
+									autocomplete="off"
+									formControlName="title"
+									class="form-control"
+									placeholder="Enter Leave Title"
+								></textarea>
+								<span
+									*ngIf="submitted && hasError('title', 'required')"
+									class="alert-danger"
+								>
 									Title is required
 								</span>
 							</div>
 
 							<!-- Leave Type Selection -->
 							<div class="form-group">
-								<label for="leaveType">Leave Type</label>
-								<select name="leaveType" formControlName="leaveType" class="form-control"
-									(change)="onLeaveTypeChange($event)">
+								<label for="leaveType" class="poppins-medium size14"
+									>Leave Type</label
+								>
+								<select
+									name="leaveType"
+									formControlName="leaveType"
+									class="form-control"
+									(change)="onLeaveTypeChange($event)"
+								>
 									<option value="full">Full Day</option>
 									<option value="half">Half Day</option>
 									<option value="custom">Custom Hours</option>
@@ -59,20 +114,41 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="startDate">Date from</label>
-										<input type="date" name="startDate" formControlName="startDate" class="form-control"
-											placeholder="Enter Date">
-										<span *ngIf="submitted && hasError('startDate','required')" class="alert-danger">
+										<label for="startDate" class="poppins-medium size14"
+											>Date from</label
+										>
+										<input
+											type="date"
+											name="startDate"
+											formControlName="startDate"
+											class="form-control"
+											placeholder="Enter Date"
+										/>
+										<span
+											*ngIf="submitted && hasError('startDate', 'required')"
+											class="alert-danger"
+										>
 											Date is required
 										</span>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="endDate">Date to</label>
-										<input type="date" name="endDate" autocomplete="off" formControlName="endDate" class="form-control"
-											placeholder="Enter Date">
-										<span *ngIf="submitted && hasError('endDate','required')" class="alert-danger">
+										<label for="endDate" class="poppins-medium size14"
+											>Date to</label
+										>
+										<input
+											type="date"
+											name="endDate"
+											autocomplete="off"
+											formControlName="endDate"
+											class="form-control"
+											placeholder="Enter Date"
+										/>
+										<span
+											*ngIf="submitted && hasError('endDate', 'required')"
+											class="alert-danger poppins-medium size14"
+										>
 											Date is required
 										</span>
 									</div>
@@ -83,20 +159,48 @@
 							<div class="row" *ngIf="showTimeFields">
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="startTime">Start Time</label>
-										<input type="time" name="startTime" formControlName="startTime" class="form-control"
-											placeholder="Enter Start Time">
-										<span *ngIf="submitted && showTimeFields && hasError('startTime','required')" class="alert-danger">
+										<label for="startTime" class="poppins-medium size14"
+											>Start Time</label
+										>
+										<input
+											type="time"
+											name="startTime"
+											formControlName="startTime"
+											class="form-control"
+											placeholder="Enter Start Time"
+										/>
+										<span
+											*ngIf="
+												submitted &&
+												showTimeFields &&
+												hasError('startTime', 'required')
+											"
+											class="alert-danger poppins-regular size14"
+										>
 											Start time is required for partial day leave
 										</span>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="endTime">End Time</label>
-										<input type="time" name="endTime" formControlName="endTime" class="form-control"
-											placeholder="Enter End Time">
-										<span *ngIf="submitted && showTimeFields && hasError('endTime','required')" class="alert-danger">
+										<label for="endTime" class="poppins-medium size14"
+											>End Time</label
+										>
+										<input
+											type="time"
+											name="endTime"
+											formControlName="endTime"
+											class="form-control"
+											placeholder="Enter End Time"
+										/>
+										<span
+											*ngIf="
+												submitted &&
+												showTimeFields &&
+												hasError('endTime', 'required')
+											"
+											class="alert-danger poppins-regular size14"
+										>
 											End time is required for partial day leave
 										</span>
 									</div>
@@ -105,9 +209,9 @@
 
 							<!-- Display calculated duration -->
 							<div class="form-group" *ngIf="calculatedDuration">
-								<label>Duration</label>
-								<div class="alert alert-info">
-									{{calculatedDuration}}
+								<label class="poppins-medium size14">Duration</label>
+								<div class="alert alert-info poppins-regular size14">
+									{{ calculatedDuration }}
 								</div>
 							</div>
 
@@ -117,14 +221,20 @@
 								<input type="text" name="provider" formControlName="provider" class="form-control"
 									placeholder="Enter Provider">
 							</div> -->
-
 						</div>
 
 						<div class="box-footer d-flex">
-							<button type="submit" class="btn btn-button" [disabled]="addLeaveForm.invalid">Submit</button>
-							<button type="button" (click)="onCancel()" class="btn btn-button ml-2">Cancel</button>
+							<button
+								type="submit"
+								class="check-btn"
+								[disabled]="addLeaveForm.invalid"
+							>
+								Submit
+							</button>
+							<button type="button" (click)="onCancel()" class="check-btn ml-2">
+								Cancel
+							</button>
 						</div>
-
 					</form>
 				</div>
 			</div>

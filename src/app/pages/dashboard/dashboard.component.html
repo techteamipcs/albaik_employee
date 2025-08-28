@@ -5,7 +5,7 @@
 		<div class="col">
 			<div class="card shadow">
 				<div class="card-header border-0">
-					<h3 class="mb-0">Overview</h3>
+					<h3 class="mb-0 poppins-bold size20">Overview</h3>
 				</div>
 				<!-- <div class="card-body">
 					<div class="col-md-12 mb-4">
@@ -71,13 +71,29 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col-12">
-										<div class="d-flex align-items-center align-self-start justify-content-center">
-											<img [src]="empdetails[0].photo" [alt]="empdetails[0].name" class="img-fluid mr-md-3 mb-sm-3"
-												width="80" height="80">
+										<div
+											class="d-flex align-items-center align-self-start justify-content-center"
+										>
+											<img
+												[src]="empdetails[0].photo"
+												[alt]="empdetails[0].name"
+												class="img-fluid mr-md-3 mb-sm-3"
+												width="80"
+												height="80"
+											/>
 											<div class="detail">
-												<p><strong>ID:</strong> {{ empdetails[0].empId }}</p>
-												<p><strong>Name:</strong> {{empdetails[0].name}}</p>
-												<p class="mb-0"><strong>Email:</strong> {{ empdetails[0].email }}</p>
+												<p class="poppins-regular size14">
+													<strong class="poppins-bold size14">ID:</strong>
+													{{ empdetails[0].empId }}
+												</p>
+												<p class="poppins-regular size14">
+													<strong class="poppins-bold size14">Name:</strong>
+													{{ empdetails[0].name }}
+												</p>
+												<p class="poppins-regular size14 mb-0">
+													<strong class="poppins-bold size14">Email:</strong>
+													{{ empdetails[0].email }}
+												</p>
 											</div>
 										</div>
 									</div>
@@ -86,14 +102,19 @@
 						</div>
 					</div>
 
-
 					<div class="col-xl-4 col-sm-6 grid-margin">
 						<div class="card grid-margin">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-12">
-										<p><strong>Location:</strong> {{ empdetails[0].location }}</p>
-										<p class="mb-0"><strong>Phone:</strong> {{ empdetails[0].phone }}</p>
+										<p class="poppins-regular size14">
+											<strong class="poppins-bold size14">Location:</strong>
+											{{ empdetails[0].location }}
+										</p>
+										<p class="poppins-regular size14 mb-0">
+											<strong class="poppins-bold size14">Phone:</strong>
+											{{ empdetails[0].phone }}
+										</p>
 									</div>
 								</div>
 							</div>
@@ -103,8 +124,14 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col-12">
-										<p><strong>Joining Date:</strong> {{ empdetails[0].joiningDate | date }}</p>
-										<p class="mb-0"><strong>Position:</strong> {{ empdetails[0].position }}</p>
+										<p class="poppins-regular size14">
+											<strong class="poppins-bold size14">Joining Date:</strong>
+											{{ empdetails[0].joiningDate | date }}
+										</p>
+										<p class="poppins-regular size14 mb-0">
+											<strong class="poppins-bold size14">Position:</strong>
+											{{ empdetails[0].position }}
+										</p>
 									</div>
 								</div>
 							</div>
@@ -113,8 +140,14 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col-lg-12">
-										<p><strong>Shift:</strong> {{ empdetails[0].shift }}</p>
-										<p class="mb-0"><strong>Department:</strong> {{ empdetails[0].department }}</p>
+										<p class="poppins-regular size14">
+											<strong class="poppins-bold size14">Shift:</strong>
+											{{ empdetails[0].shift }}
+										</p>
+										<p class="poppins-regular size14 mb-0">
+											<strong class="poppins-bold size14">Department:</strong>
+											{{ empdetails[0].department }}
+										</p>
 									</div>
 								</div>
 							</div>

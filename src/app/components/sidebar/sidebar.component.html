@@ -1,50 +1,94 @@
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-	<div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top text-center">
-		<a class="sidebar-brand brand-logo text-decoration-none  pl-0" href="index.html"><img
-				src="assets/images/albaik-logo-black.png" alt="logo" /> </a>
+	<div
+		class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top text-center"
+	>
+		<a
+			class="sidebar-brand brand-logo text-decoration-none pl-0"
+			href="index.html"
+			><img src="assets/images/albaik-logo-black.png" alt="logo" />
+		</a>
 		<!-- <img src="assets/images/logo.svg" alt="logo" /> -->
-		<a class="sidebar-brand brand-logo-mini pl-0" href="index.html"><img src="assets/images/hat-logo.png"
-				alt="logo" /></a>
+		<a class="sidebar-brand brand-logo-mini pl-0" href="index.html"
+			><img src="assets/images/hat-logo.png" alt="logo"
+		/></a>
 	</div>
 	<ul class="nav">
 		<li class="nav-item nav-category">
-			<span class="nav-link">Navigation</span>
+			<span class="nav-link size16 poppins-semibold">Navigation</span>
 		</li>
-		<li class="nav-item menu-items" [class.active]="currentRoute === '/' || currentLocation =='dashboard'">
+		<li
+			class="nav-item menu-items"
+			[class.active]="currentRoute === '/' || currentLocation == 'dashboard'"
+		>
 			<a class="nav-link" href="index.html">
 				<span class="menu-icon">
-					<i class="mdi mdi-speedometer"></i>
+					<i class="mdi mdi-view-dashboard"></i>
 				</span>
-				<span class="menu-title">Dashboard</span>
+				<span class="menu-title poppins-medium size14 menu-title-left"
+					>Dashboard</span
+				>
 			</a>
 		</li>
-		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/employee-availability' || currentLocation =='employee-availability'">
-			<a class="nav-link" [routerLink]="['/employee-availability/view']" routerLinkActive="router-link-active">
+		<li
+			class="nav-item menu-items"
+			[class.active]="
+				currentRoute === '/employee-availability' ||
+				currentLocation == 'employee-availability'
+			"
+		>
+			<a
+				class="nav-link"
+				[routerLink]="['/employee-availability/view']"
+				routerLinkActive="router-link-active"
+			>
 				<span class="menu-icon">
-					<i class="mdi mdi-account"></i>
+					<i class="mdi mdi-calendar-check"></i>
 				</span>
-				<span class="menu-title">Availibity</span>
+				<span class="menu-title poppins-medium size14 menu-title-left"
+					>Availibity</span
+				>
 			</a>
 		</li>
-		<li class="nav-item" [class.active]="currentRoute === '/leaverequest' || currentLocation =='leaverequest'">
-			<a class="nav-link" [routerLink]="['/leaverequest/view']" routerLinkActive="router-link-active">
+		<li
+			class="nav-item"
+			[class.active]="
+				currentRoute === '/leaverequest' || currentLocation == 'leaverequest'
+			"
+		>
+			<a
+				class="nav-link"
+				[routerLink]="['/leaverequest/view']"
+				routerLinkActive="router-link-active"
+			>
 				<span class="menu-icon">
-					<i class="mdi mdi-backup-restore"></i>
+					<i class="mdi mdi-calendar-remove"></i>
 				</span>
-				<span class="menu-title">Leave Requests</span>
+				<span class="menu-title poppins-medium size14 menu-title-left"
+					>Leave Requests</span
+				>
 			</a>
 		</li>
-		<li class="nav-item menu-items"
-			[class.active]="currentRoute === '/employee/shift-schedule' || currentLocation =='shift-schedule'">
-			<a class="nav-link" [routerLink]="['/employee/shift-schedule']" routerLinkActive="router-link-active">
+		<li
+			class="nav-item menu-items"
+			[class.active]="
+				currentRoute === '/employee/shift-schedule' ||
+				currentLocation == 'shift-schedule'
+			"
+		>
+			<a
+				class="nav-link"
+				[routerLink]="['/employee/shift-schedule']"
+				routerLinkActive="router-link-active"
+			>
 				<span class="menu-icon">
-					<i class="mdi mdi-account"></i>
+					<i class="mdi mdi-timetable"></i>
 				</span>
-				<span class="menu-title">Shift Schedule</span>
+				<span class="menu-title poppins-medium size14 menu-title-left"
+					>Shift Schedule</span
+				>
 			</a>
-		</li>	
+		</li>
 		<!-- <li class="nav-item menu-items" [class.active]="currentRoute === '/request' || currentLocation =='request'">
 			<a class="nav-link" href="#request" data-toggle="collapse" aria-expanded="false" aria-controls="auth">
 				<span class="menu-icon">
