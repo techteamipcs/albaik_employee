@@ -1,0 +1,270 @@
+/* Employee Availability Styles */
+
+.availability-calendar {
+	.table {
+		font-size: 0.85rem;
+	}
+
+	.hour-header {
+		writing-mode: vertical-rl;
+		text-orientation: mixed;
+		padding: 8px 4px;
+		font-size: 0.75rem;
+		min-width: 25px;
+		max-width: 25px;
+		text-align: center;
+	}
+
+	.date-cell {
+		min-width: 80px;
+		background-color: #f8f9fa;
+		font-weight: 500;
+	}
+
+	.hour-cell {
+		width: 25px;
+		height: 40px;
+		padding: 2px;
+		text-align: center;
+		position: relative;
+		cursor: pointer;
+		transition: all 0.2s ease;
+
+		&:hover {
+			transform: scale(1.1);
+			z-index: 10;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+		}
+
+		.status-indicator {
+			display: block;
+			width: 100%;
+			height: 100%;
+			border-radius: 2px;
+		}
+	}
+}
+
+/* Status Colors */
+.status-available {
+	background-color: #28a745;
+	.status-indicator {
+		background-color: #28a745;
+	}
+}
+
+.status-unavailable {
+	background-color: #6c757d;
+	.status-indicator {
+		background-color: #6c757d;
+	}
+}
+
+.status-leave {
+	background-color: #ffc107;
+	.status-indicator {
+		background-color: #ffc107;
+	}
+}
+
+.status-sick {
+	background-color: #dc3545;
+	.status-indicator {
+		background-color: #dc3545;
+	}
+}
+
+.status-holiday {
+	background-color: #17a2b8;
+	.status-indicator {
+		background-color: #17a2b8;
+	}
+}
+
+.status-overtime {
+	background-color: #343a40;
+	.status-indicator {
+		background-color: #343a40;
+	}
+}
+
+/* Legend Styles */
+.legend {
+	.legend-dot {
+		display: inline-block;
+		width: 12px;
+		height: 12px;
+		border-radius: 2px;
+		margin-right: 5px;
+
+		&.available {
+			background-color: #28a745;
+		}
+		&.unavailable {
+			background-color: #6c757d;
+		}
+		&.leave {
+			background-color: #ffc107;
+		}
+		&.sick {
+			background-color: #dc3545;
+		}
+		&.holiday {
+			background-color: #17a2b8;
+		}
+		&.overtime {
+			background-color: #343a40;
+		}
+	}
+}
+
+/* List View Styles */
+.availability-list {
+	.card {
+		border-left: 4px solid #007bff;
+
+		&:hover {
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+	}
+
+	.card-header {
+		background-color: #f8f9fa;
+		border-bottom: 1px solid #dee2e6;
+	}
+
+	h6 {
+		font-size: 0.9rem;
+		margin-bottom: 0.5rem;
+	}
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.availability-calendar {
+		.hour-header {
+			font-size: 0.6rem;
+			padding: 4px 2px;
+			min-width: 20px;
+			max-width: 20px;
+		}
+
+		.hour-cell {
+			width: 20px;
+			height: 30px;
+		}
+
+		.date-cell {
+			min-width: 60px;
+			font-size: 0.75rem;
+		}
+	}
+
+	.row .col-md-2 {
+		margin-bottom: 1rem;
+	}
+}
+
+/* Loading Animation */
+.spinner-border {
+	width: 3rem;
+	height: 3rem;
+}
+
+/* Button Group Active State */
+.btn-group .btn.active {
+	background-color: #007bff;
+	color: white;
+	border-color: #007bff;
+}
+
+/* Statistics Cards */
+.card-body .row .col-md-2 {
+	padding: 15px;
+
+	h4 {
+		font-weight: bold;
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	small {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+}
+
+/* Empty State */
+.text-center.py-4 {
+	.mdi {
+		opacity: 0.5;
+	}
+
+	h5 {
+		color: #6c757d;
+		margin-top: 1rem;
+	}
+
+	p.text-muted {
+		margin-bottom: 1.5rem;
+	}
+}
+
+/* Form Controls */
+.form-control {
+	font-size: 0.875rem;
+}
+
+label {
+	font-weight: 500;
+	color: #495057;
+	margin-bottom: 0.5rem;
+}
+
+/* Tooltips */
+[title] {
+	cursor: help;
+}
+
+/* Card Enhancements */
+.card {
+	border: 1px solid #e3e6f0;
+	box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.card-header {
+	background-color: #f8f9fa;
+	border-bottom: 1px solid #e3e6f0;
+	padding: 0.75rem 1.25rem;
+}
+
+.card-body {
+	padding: 1.25rem;
+}
+
+/* Breadcrumb Styling */
+.breadcrumb {
+	background-color: transparent;
+	padding: 0;
+	margin-bottom: 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+	content: "›";
+	color: #6c757d;
+}
+
+/* Page Header */
+.page-header {
+	margin-bottom: 2rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #e3e6f0;
+}
+
+.page-title {
+	font-weight: 300;
+	font-size: 1.5rem;
+	color: #495057;
+	margin-bottom: 0;
+}

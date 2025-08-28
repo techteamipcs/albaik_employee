@@ -1,14 +1,242 @@
-<div class="p-3">
-  <h2 class="text-xl font-bold">Availability</h2>
+<div class="content-wrapper">
+	<div class="page-header">
+		<h3 class="page-title">My Availability</h3>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Employee</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Availability</li>
+			</ol>
+		</nav>
+	</div>
 
-  <ng-container *ngIf="availability.length > 0; else noData">
-    <div *ngFor="let a of availability" class="mt-2 border rounded p-2">
-      <p class="font-semibold">{{ a.month | uppercase }}</p>
-      <p>Days: {{ a.days.join(', ') }}</p>
-    </div>
-  </ng-container>
+	<div class="row">
+		<div class="col-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
 
-  <ng-template #noData>
-    <p>No availability data found.</p>
-  </ng-template>
+					<!-- Date Range Filter -->
+					<div class="row mb-4">
+						<div class="col-md-3">
+							<label for="startDate">From Date</label>
+							<input type="date" class="form-control" [(ngModel)]="filterStartDate" (change)="loadAvailability()">
+						</div>
+						<div class="col-md-3">
+							<label for="endDate">To Date</label>
+							<input type="date" class="form-control" [(ngModel)]="filterEndDate" (change)="loadAvailability()">
+						</div>
+						<div class="col-md-3 d-flex align-items-end">
+							<button type="button" class="btn btn-primary" (click)="loadAvailability()">
+								<i class="mdi mdi-refresh"></i> Refresh
+							</button>
+						</div>
+						<div class="col-md-3 d-flex align-items-end">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-outline-secondary" [class.active]="viewMode === 'calendar'"
+									(click)="viewMode = 'calendar'">
+									<i class="mdi mdi-calendar"></i> Calendar
+								</button>
+								<button type="button" class="btn btn-outline-secondary" [class.active]="viewMode === 'list'"
+									(click)="viewMode = 'list'">
+									<i class="mdi mdi-format-list-bulleted"></i> List
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Loading State -->
+					<div *ngIf="loading" class="text-center py-4">
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+						<p class="mt-2">Loading availability data...</p>
+					</div>
+
+					<!-- Calendar View -->
+					<div *ngIf="!loading && viewMode === 'calendar'" class="availability-calendar">
+						<div class="row">
+							<div class="col-12">
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<thead class="table-light">
+											<tr>
+												<th>Date</th>
+												<th colspan="24" class="text-center">Hours (24-Hour Format)</th>
+											</tr>
+											<tr>
+												<th></th>
+												<th *ngFor="let hour of hours" class="hour-header">{{hour}}</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr *ngFor="let dayData of availabilityData">
+												<td class="date-cell">
+													<strong>{{ dayData.date | date:'EEE' }}</strong><br>
+													<small>{{ dayData.date | date:'MMM d' }}</small>
+												</td>
+												<td *ngFor="let hourStatus of dayData.hourlyStatus" class="hour-cell"
+													[class]="getStatusClass(hourStatus.status)"
+													[title]="getStatusTooltip(hourStatus.status, dayData.date, hourStatus.hour)">
+													<span class="status-indicator"></span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<!-- Legend -->
+						<div class="row mt-3">
+							<div class="col-12">
+								<div class="legend">
+									<h6>Status Legend:</h6>
+									<div class="d-flex flex-wrap">
+										<span class="badge badge-success mr-2 mb-1">
+											<span class="legend-dot available"></span> Available
+										</span>
+										<span class="badge badge-secondary mr-2 mb-1">
+											<span class="legend-dot unavailable"></span> Unavailable
+										</span>
+										<span class="badge badge-warning mr-2 mb-1">
+											<span class="legend-dot leave"></span> Leave
+										</span>
+										<span class="badge badge-danger mr-2 mb-1">
+											<span class="legend-dot sick"></span> Sick
+										</span>
+										<span class="badge badge-info mr-2 mb-1">
+											<span class="legend-dot holiday"></span> Holiday
+										</span>
+										<span class="badge badge-dark mr-2 mb-1">
+											<span class="legend-dot overtime"></span> Overtime
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- List View -->
+					<div *ngIf="!loading && viewMode === 'list'" class="availability-list">
+						<div *ngFor="let dayData of availabilityData" class="card mb-3">
+							<div class="card-header">
+								<h6 class="mb-0">
+									<strong>{{ dayData.date | date:'EEEE, MMMM d, y' }}</strong>
+									<span class="float-right">
+										<span class="badge badge-primary">{{ getDaySummary(dayData) }}</span>
+									</span>
+								</h6>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<!-- Available Hours -->
+									<div class="col-md-6" *ngIf="getHoursByStatus(dayData, 'Available').length > 0">
+										<h6 class="text-success">Available Hours</h6>
+										<p class="mb-2">{{ formatHourRanges(getHoursByStatus(dayData, 'Available')) }}</p>
+									</div>
+
+									<!-- Unavailable Hours -->
+									<div class="col-md-6" *ngIf="getHoursByStatus(dayData, 'Unavailable').length > 0">
+										<h6 class="text-secondary">Unavailable Hours</h6>
+										<p class="mb-2">{{ formatHourRanges(getHoursByStatus(dayData, 'Unavailable')) }}</p>
+									</div>
+
+									<!-- Leave Hours -->
+									<div class="col-md-6" *ngIf="getHoursByStatus(dayData, 'Leave').length > 0">
+										<h6 class="text-warning">Leave Hours</h6>
+										<p class="mb-2">{{ formatHourRanges(getHoursByStatus(dayData, 'Leave')) }}</p>
+									</div>
+
+									<!-- Sick Hours -->
+									<div class="col-md-6" *ngIf="getHoursByStatus(dayData, 'Sick').length > 0">
+										<h6 class="text-danger">Sick Hours</h6>
+										<p class="mb-2">{{ formatHourRanges(getHoursByStatus(dayData, 'Sick')) }}</p>
+									</div>
+
+									<!-- Holiday Hours -->
+									<div class="col-md-6" *ngIf="getHoursByStatus(dayData, 'Holiday').length > 0">
+										<h6 class="text-info">Holiday Hours</h6>
+										<p class="mb-2">{{ formatHourRanges(getHoursByStatus(dayData, 'Holiday')) }}</p>
+									</div>
+
+									<!-- Overtime Hours -->
+									<div class="col-md-6" *ngIf="getHoursByStatus(dayData, 'Overtime').length > 0">
+										<h6 class="text-dark">Overtime Hours</h6>
+										<p class="mb-2">{{ formatHourRanges(getHoursByStatus(dayData, 'Overtime')) }}</p>
+									</div>
+								</div>
+
+								<!-- Notes -->
+								<div *ngIf="dayData.notes" class="mt-2">
+									<h6>Notes:</h6>
+									<p class="text-muted">{{ dayData.notes }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- No Data State -->
+					<div *ngIf="!loading && availabilityData.length === 0" class="text-center py-4">
+						<i class="mdi mdi-calendar-blank-outline" style="font-size: 48px; color: #ccc;"></i>
+						<h5 class="mt-3">No Availability Data</h5>
+						<p class="text-muted">No availability records found for the selected date range.</p>
+						<button type="button" class="btn btn-primary" (click)="loadAvailability()">
+							<i class="mdi mdi-refresh"></i> Refresh
+						</button>
+					</div>
+
+					<!-- Summary Statistics -->
+					<div *ngIf="!loading && availabilityData.length > 0" class="row mt-4">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h6 class="mb-0">Summary Statistics</h6>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-2">
+											<div class="text-center">
+												<h4 class="text-success">{{ getStatistics().available }}</h4>
+												<small class="text-muted">Available Hours</small>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="text-center">
+												<h4 class="text-secondary">{{ getStatistics().unavailable }}</h4>
+												<small class="text-muted">Unavailable Hours</small>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="text-center">
+												<h4 class="text-warning">{{ getStatistics().leave }}</h4>
+												<small class="text-muted">Leave Hours</small>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="text-center">
+												<h4 class="text-danger">{{ getStatistics().sick }}</h4>
+												<small class="text-muted">Sick Hours</small>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="text-center">
+												<h4 class="text-info">{{ getStatistics().holiday }}</h4>
+												<small class="text-muted">Holiday Hours</small>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="text-center">
+												<h4 class="text-dark">{{ getStatistics().overtime }}</h4>
+												<small class="text-muted">Overtime Hours</small>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
