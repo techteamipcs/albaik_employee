@@ -22,6 +22,11 @@ export class AddLeaverequestComponent {
 	token: any;
 	id: any;
 	isEdit: boolean = false;
+	currentPage: number = 1;
+	initialized: boolean = false;
+	currentLimit: number = 10;
+	totalRecord: number = 0;
+	empData: any;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -32,13 +37,15 @@ export class AddLeaverequestComponent {
 	) {
 		this.token = localStorage.getItem('albaik-admin-token');
 		this.addLeaveForm = this.formBuilder.group({
-			employee: ['', Validators.required],
+			first_name: [{ value: '', disabled: true }],
+			last_name: [{ value: '', disabled: true }],
+			employee: [''],
 			title: ['', Validators.required],
-			provider: ['', Validators.required],
-			issuedDate: ['', Validators.required],
-			expiryDate: ['', Validators.required],
-			approved: ['', Validators.required],
-			approved_by: ['', Validators.required],
+			provider: [''],
+			startDate: ['', Validators.required],
+			endDate: ['', Validators.required],
+			status: [''],
+			approved_by: [''],
 
 		});
 	}
@@ -50,10 +57,35 @@ export class AddLeaverequestComponent {
 	ngOnInit(): void {
 		this.id = this.route.snapshot.paramMap.get('id');
 		this.isEdit = !!this.id;
-
+		this.getEmpData();
 		if (this.isEdit) {
 			this.patchingdata(this.id);
 		}
+	}
+
+	getEmpData() {
+		const obj = {};
+		obj['token'] = this.token;
+		this.leaveRequestService.getEmployeeDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						this.empData = response.result;
+						this.totalRecord = response?.count;
+						// ✅ Auto-fill form with employee first & last name
+						this.addLeaveForm.patchValue({
+							first_name: this.empData.first_name,
+							last_name: this.empData.last_name,
+							employee: this.empData.employee_id   // optional if you need employee ID
+						});
+					}
+					else {
+						this.msg_danger = true;
+					}
+
+				}
+			},
+		);
 	}
 
 	patchingdata(id: any) {
@@ -64,11 +96,13 @@ export class AddLeaverequestComponent {
 					let data = response?.result;
 					this.addLeaveForm.patchValue({
 						employee: data?.employee,
+						first_name: data?.first_name,
+						last_name: data?.last_name,
 						title: data?.title,
 						provider: data?.provider,
-						issuedDate: data?.issuedDate,
-						expiryDate: data?.expiryDate,
-						approved: data?.approved,
+						startDate: data?.startDate,
+						endDate: data?.endDate,
+						status: data?.status,
 						approved_by: data?.approved_by,
 					});
 				}

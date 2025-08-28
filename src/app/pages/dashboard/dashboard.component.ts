@@ -1,14 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import Chart from 'chart.js';
-
-// core components
-// import {
-//   chartOptions,
-//   parseOptions,
-//   chartExample1,
-//   chartExample2,
-//   chartExample3
-// } from "../../variables/charts";
 import { Router, ActivatedRoute } from '@angular/router';
 
 // Services
@@ -81,6 +71,19 @@ export class DashboardComponent {
 	orderData: any = [];
 	totalRecord: number = 10;
 	msg_danger = false;
+	empdetails = [{
+		'name': 'Asad',
+		'empId': 'ALBKEMP-123',
+		'position': 'Level A',
+		'department': 'Production',
+		'location': 'dubai',
+		'email': 'asadipcs@gmail.com',
+		'phone': '123-456-7890',
+		'photo': 'path/to/photo.jpg',
+		'shift': 'Morning',
+		'leaves': 12,
+		'joiningDate': '2020-01-15'
+	}];
 	constructor(private router: Router,
 		private dashboardService: DataService,
 		private toastr: ToastrManager) { }

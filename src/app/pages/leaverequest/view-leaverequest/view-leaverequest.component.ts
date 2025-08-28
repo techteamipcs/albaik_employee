@@ -22,25 +22,13 @@ export class ViewLeaverequestComponent {
 	currentLimit: number = 10;
 	totalRecord: number = 0;
 	searchText = '';
-	empdetails = [{
-		'name'	: 'Asad',
-		'empId':'ALBKEMP-123',
-		'position': 'Level A',
-		'department': 'Production',
-		'location': 'dubai',
-		'email': 'asadipcs@gmail.com',
-		'phone': '123-456-7890',
-		'photo': 'path/to/photo.jpg',
-		'shift': 'Morning',
-		'leaves': 12,
-		'joiningDate': '2020-01-15'
-	}];
+	token: any;
 	constructor(
 		private router: Router,
 		private leaveRequestService: LeaverequestService,
 		private toastr: ToastrManager
 	) {
-
+		this.token = localStorage.getItem('albaik-admin-token');
 	}
 
 	ngOnInit(): void {
@@ -52,7 +40,8 @@ export class ViewLeaverequestComponent {
 			limit: this.currentLimit,
 			page: this.currentPage,
 		};
-		this.leaveRequestService.getLeaveDetails(obj).subscribe(
+		obj['token'] = this.token;
+		this.leaveRequestService.getLeaverequestByEmp(obj).subscribe(
 			(response) => {
 				if (response.code == 200) {
 					if (response.result != null && response.result != '') {

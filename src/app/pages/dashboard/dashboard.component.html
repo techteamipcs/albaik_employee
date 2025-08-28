@@ -1,540 +1,127 @@
-<div class="content-wrapper">
+<!-- Page content -->
+<div class="container-fluid mt--7">
+	<!-- Table -->
 	<div class="row">
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{request_count}}</h3>
-								<!-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> -->
+		<div class="col">
+			<div class="card shadow">
+				<div class="card-header border-0">
+					<h3 class="mb-0">Overview</h3>
+				</div>
+				<!-- <div class="card-body">
+					<div class="col-md-12 mb-4">
+						<div class="row">
+							<div class="col-md-6">
+								<input class="form-control mt-4" type="text" (keyup)="searchLeave()" name="search"
+									[(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching by name">
 							</div>
-						</div>
-						<div class="col-3">
-							<a [routerLink]="['/leaverequest/view']">
-								<div class="icon icon-box-success">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
+							<div class="col-md-6"><button type="button" class="btn btn-button pull-right ml-auto mt-4"
+									routerLink="/leaverequest/add">Add Leave</button></div>
 						</div>
 					</div>
-					<h6 class="text-muted font-weight-normal">Leave Requests</h6>
-				</div>
-			</div>
-		</div>
-		<!-- <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{events_count}}</h3>
-							</div>
-						</div>
-						<div class="col-3">
-							<a [routerLink]="['/event/view']">
-								<div class="icon icon-box-success">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Event Items</h6>
-				</div>
-			</div>
-		</div> -->
-		<!-- <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{blog_count}}</h3>
-							</div>
-						</div>
-						<div class="col-3">
-							<a [routerLink]="['/blog/view']">
-								<div class="icon icon-box-success">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Blog Items</h6>
-				</div>
-			</div>
-		</div> -->
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{certification_count}}</h3>
-								<!-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> -->
-							</div>
-						</div>
-						<div class="col-3">
-							<a [routerLink]="['/product/view']">
-								<div class="icon icon-box-success ">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Certifications</h6>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{employee_count}}</h3>
-								<!-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> -->
-							</div>
-						</div>
-						<div class="col-3">
-							<a [routerLink]="['/collection-category/view']">
-								<div class="icon icon-box-success ">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Employee</h6>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{manager_count}}</h3>
-								<!-- <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p> -->
-							</div>
-						</div>
-						<div class="col-3">
-							<a [routerLink]="['/collection/view']">
-								<div class="icon icon-box-success">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Manager</h6>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{department_count}}</h3>
-								<!-- <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p> -->
-							</div>
-						</div>
-						<div class="col-3">
-							<a [routerLink]="['/category/view']">
-								<div class="icon icon-box-success">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Department</h6>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{shift_count}}</h3>
-								<!-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> -->
-							</div>
-						</div>
-						<div class="col-3">
-							<a [routerLink]="['/subcategory/view']">
-								<div class="icon icon-box-success ">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Shift</h6>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{meal_count}}</h3>
-								<!-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> -->
-							</div>
-						</div>
-						<div class="col-3">
-							<a href="/#/cart/view">
-								<div class="icon icon-box-success ">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Meal</h6>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{leave_count}}</h3>
-
-							</div>
-						</div>
-						<div class="col-3">
-							<a href="/#/order/view">
-								<div class="icon icon-box-success">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Leave Requests</h6>
-				</div>
-			</div>
-		</div>
-		 <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0"><span class="mdi mdi-calendar-multiple-check icon-item"></span></h3>
-
-							</div>
-						</div>
-						<div class="col-3">
-							<a href="/#/schedule-system">
-								<div class="icon icon-box-success">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Schedule System </h6>
-				</div>
-			</div>
-		</div>
-		<!-- <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{customer_count}}</h3>
-
-							</div>
-						</div>
-						<div class="col-3">
-							<a href="/#/customer/view">
-								<div class="icon icon-box-success ">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Customers</h6>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{allpage_count}}</h3>
-
-							</div>
-						</div>
-						<div class="col-3">
-							<a href="/#/page/view">
-								<div class="icon icon-box-success ">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Page</h6>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{testimonial_count}}</h3>
-							</div>
-						</div>
-						<div class="col-3">
-							<a href="/#/testimonial/view">
-								<div class="icon icon-box-success">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Testimonial Items</h6>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{colors_count}}</h3>
-							</div>
-						</div>
-						<div class="col-3">
-							<a href="/#/colour/view">
-								<div class="icon icon-box-success">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Colours</h6>
-				</div>
-			</div>
-		</div> -->
-		<!-- <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex align-items-center align-self-start">
-								<h3 class="mb-0">{{sizes_count}}</h3>
-							</div>
-						</div>
-						<div class="col-3">
-							<a href="/#/size/view">
-								<div class="icon icon-box-success ">
-									<span class="mdi mdi-arrow-top-right icon-item"></span>
-								</div>
-							</a>
-						</div>
-					</div>
-					<h6 class="text-muted font-weight-normal">Size Items</h6>
-				</div>
-			</div>
-		</div> -->
-	</div>
-	<!-- <div class="row ">
-		<div class="col-12 grid-margin">
-			<div class="card">
-				<div class="card-header">
-					<h4 class="card-title mb-0">Recent Orders</h4>
-				</div>
-				<div class="card-body">
-
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table align-items-center table-flush">
 							<thead>
 								<tr>
-									<th> Sl No</th>
-									<th> Client Name </th>
-									<th> Order No </th>
-									<th> Product Cost </th>
-									<th> Product </th>
-									<th> Payment Mode </th>
-									<th> Order Status </th>
-									<th> Start Date </th>
-									<th> Payment Status </th>
+									<th>SL No</th>
+									<th>Title</th>
+									<th>Provider</th>
+									<th>Issued Date</th>
+									<th>Expiry Date</th>
+									<th>Approved By</th>
+									<th>Employee</th>
+									<th>Status</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let order of orderData;let i=index;">
-									<td> {{i+1}} </td>
-									<td> {{order.firstname}} </td>
-									<td> {{order.order_id}} </td>
-									<td> {{order.order_amount}} </td>
-									<td> {{order.product_data[0].name}} </td>
-									<td> {{order.payment_type}} </td>
-									<td> {{order.order_status}} </td>
-									<td> {{order.created_at | date}} </td>
+								<td colspan="9" *ngIf="msg_danger">
+									<div class="alert alert-dismissable" style="text-align: center;">
+										Leave List is Empty
+									</div>
+								</td>
+								<tr *ngFor="let listLeave of leaveData | filter:searchText; let i = index">
+									<td *ngIf="currentPage == 1">{{i+1}}</td>
+									<td *ngIf="currentPage != 1">{{i+1+((currentPage - 1) * currentLimit)}}</td>
+									<td>{{listLeave.title}}</td>
+									<td>{{listLeave.provider}}</td>
+									<td>{{listLeave.issuedDate | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listLeave.expiryDate | date:'dd/MM/YYYY HH:MM:a'}}</td>
+									<td>{{listLeave.approved_by}}</td>
+									<td>{{listLeave.employee}}</td>
+									<td>{{listLeave.approved == true ? 'Active':'Inactive' }}</td>
 									<td>
-										<div *ngIf="order.order_status=='completed'" class="badge badge-outline-success">Completed</div>
-										<div *ngIf="order.order_status=='Pending'" class="badge badge-outline-info">Pending</div>
-										<div *ngIf="order.order_status=='cancel'" class="badge badge-outline-danger">Approved</div>
+										<a routerLink="/leaverequest/edit/{{listLeave._id}}" style="cursor:pointer"><i
+												class="mdi mdi-lead-pencil" aria-hidden="true"></i>
+										</a>
+										<a style="cursor:pointer;padding-left: 15px;" (click)="deleteLeave(listLeave._id)"><i
+												class="mdi mdi-close-box" aria-hidden="true"></i></a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+						<div class="pcommece-pagination" *ngIf="totalRecord > 0 && !searchText">
+							<app-pagination #pagination [initialPage]="currentPage" [count]="totalRecord"
+								(changePage)="onListChangeLeave($event)"></app-pagination>
+						</div>
+					</div>
+				</div> -->
+				<div class="row pl-md-4 pt-md-4">
+					<div class="col-xl-4 col-sm-6 grid-margin">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-12">
+										<div class="d-flex align-items-center align-self-start justify-content-center">
+											<img [src]="empdetails[0].photo" [alt]="empdetails[0].name" class="img-fluid mr-md-3 mb-sm-3"
+												width="80" height="80">
+											<div class="detail">
+												<p><strong>ID:</strong> {{ empdetails[0].empId }}</p>
+												<p><strong>Name:</strong> {{empdetails[0].name}}</p>
+												<p class="mb-0"><strong>Email:</strong> {{ empdetails[0].email }}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-xl-4 col-sm-6 grid-margin">
+						<div class="card grid-margin">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-12">
+										<p><strong>Location:</strong> {{ empdetails[0].location }}</p>
+										<p class="mb-0"><strong>Phone:</strong> {{ empdetails[0].phone }}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card grid-margin">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-12">
+										<p><strong>Joining Date:</strong> {{ empdetails[0].joiningDate | date }}</p>
+										<p class="mb-0"><strong>Position:</strong> {{ empdetails[0].position }}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-lg-12">
+										<p><strong>Shift:</strong> {{ empdetails[0].shift }}</p>
+										<p class="mb-0"><strong>Department:</strong> {{ empdetails[0].department }}</p>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div> -->
-	<div class="row">
-		<!-- <div class="col-md-6 col-xl-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-header">
-					<h4 class="card-title mb-0">Last Search Terms</h4>
-				</div>
-				<div class="card-body">
-
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th> Sequence Number </th>
-									<th> Search Term </th>
-									<th> Uses </th>
-									<th> Results </th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let term of topsearchtems | topsearch">
-									<td>
-										{{term.sequence_number}}
-									</td>
-									<td>{{term.search_term}}</td>
-									<td>{{term.uses}} </td>
-									<td>{{term.results}} </td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div> -->
-		<!-- <div class="col-md-6 col-xl-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-header">
-					<h4 class="card-title mb-0">Top Search Terms</h4>
-				</div>
-				<div class="card-body">
-
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th> Sequence Number </th>
-									<th> Search Term </th>
-									<th> Uses </th>
-									<th> Results </th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let term of topsearchtems">
-									<td scope="row">
-										{{term.sequence_number}}
-									</td>
-									<th>
-										{{term.search_term}}
-									</th>
-									<td>
-										{{term.uses}}
-									</td>
-									<td>
-										{{term.results}}
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div> -->
-		<!-- <div class="col-md-6 col-xl-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-header">
-					<h4 class="card-title mb-0">Most Viewed Products</h4>
-				</div>
-				<div class="card-body">
-
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th> Sequence Number </th>
-									<th> Product name </th>
-									<th> Product Cost </th>
-									<th> Visitors </th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let term of mostviewedProducts">
-									<td scope="row">
-										{{term.sequence_number}}
-									</td>
-									<th>
-										{{term.product.name}}
-									</th>
-									<td>
-										{{term.price}}
-									</td>
-									<td>
-										{{term.uses}}
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div> -->
-		<!-- <div class="col-md-6 col-xl-6 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-header">
-					<h4 class="card-title mb-0">Best Seller Products</h4>
-				</div>
-				<div class="card-body">
-
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th> Sequence Number </th>
-									<th> Product name </th>
-									<th> Price </th>
-									<th> Visitors </th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let product of bestsellerProducts; let i = index">
-									<td>
-										{{i+1}}
-									</td>
-									<td><span *ngIf="product.product">{{product.product.name}}</span></td>
-									<td class="text-right"> {{product.price}} </td>
-									<td class="text-right font-weight-medium"> {{product.uses}} </td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div> -->
 	</div>
 </div>
-<!-- content-wrapper ends -->
