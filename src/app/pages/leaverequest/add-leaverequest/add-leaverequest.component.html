@@ -24,7 +24,6 @@
 					<form [formGroup]="addLeaveForm" (ngSubmit)="onSubmit()" method="post" novalidate>
 						<div class="box-body">
 
-
 							<div class="form-group">
 								<label for="first_name">First Name</label>
 								<input type="text" name="first_name" autocomplete="off" formControlName="first_name"
@@ -33,13 +32,11 @@
 							<div class="form-group">
 								<label for="last_name">Last Name</label>
 								<input type="text" name="last_name" autocomplete="off" formControlName="last_name" class="form-control"
-									placeholder=""  disabled="true">
+									placeholder="" disabled="true">
 							</div>
 
 							<div class="form-group">
 								<label for="title">Message</label>
-								<!-- <input type="text" name="title" autocomplete="off" formControlName="title" class="form-control"
-									placeholder="Enter Leave Title"> -->
 								<textarea name="title" autocomplete="off" formControlName="title" class="form-control"
 									placeholder="Enter Leave Title"></textarea>
 								<span *ngIf="submitted && hasError('title','required')" class="alert-danger">
@@ -47,68 +44,85 @@
 								</span>
 							</div>
 
-							<!-- <div class="form-group">
-								<label for="employee">Employee</label>
-								<input type="text" name="employee" autocomplete="off" formControlName="employee" class="form-control"
-									placeholder="Enter Employee">
-								<span *ngIf="submitted && hasError('employee','required')" class="alert-danger">
-									Employee is required
-								</span>
-							</div> -->
+							<!-- Leave Type Selection -->
+							<div class="form-group">
+								<label for="leaveType">Leave Type</label>
+								<select name="leaveType" formControlName="leaveType" class="form-control"
+									(change)="onLeaveTypeChange($event)">
+									<option value="full">Full Day</option>
+									<option value="half">Half Day</option>
+									<option value="custom">Custom Hours</option>
+								</select>
+							</div>
 
+							<!-- Date Fields -->
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="startDate">Date from</label>
+										<input type="date" name="startDate" formControlName="startDate" class="form-control"
+											placeholder="Enter Date">
+										<span *ngIf="submitted && hasError('startDate','required')" class="alert-danger">
+											Date is required
+										</span>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="endDate">Date to</label>
+										<input type="date" name="endDate" autocomplete="off" formControlName="endDate" class="form-control"
+											placeholder="Enter Date">
+										<span *ngIf="submitted && hasError('endDate','required')" class="alert-danger">
+											Date is required
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<!-- Time Fields - Show/Hide based on leave type -->
+							<div class="row" *ngIf="showTimeFields">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="startTime">Start Time</label>
+										<input type="time" name="startTime" formControlName="startTime" class="form-control"
+											placeholder="Enter Start Time">
+										<span *ngIf="submitted && showTimeFields && hasError('startTime','required')" class="alert-danger">
+											Start time is required for partial day leave
+										</span>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="endTime">End Time</label>
+										<input type="time" name="endTime" formControlName="endTime" class="form-control"
+											placeholder="Enter End Time">
+										<span *ngIf="submitted && showTimeFields && hasError('endTime','required')" class="alert-danger">
+											End time is required for partial day leave
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<!-- Display calculated duration -->
+							<div class="form-group" *ngIf="calculatedDuration">
+								<label>Duration</label>
+								<div class="alert alert-info">
+									{{calculatedDuration}}
+								</div>
+							</div>
+
+							<!-- Provider field (optional) -->
 							<!-- <div class="form-group">
-								<label for="provider">Provider</label>
+								<label for="provider">Provider (Optional)</label>
 								<input type="text" name="provider" formControlName="provider" class="form-control"
 									placeholder="Enter Provider">
-								<span *ngIf="submitted && hasError('provider','required')" class="alert-danger">
-									Provider is required
-								</span>
-							</div> -->
-
-							<div class="form-group">
-								<label for="text">Date from</label>
-								<input type="date" name="startDate" formControlName="startDate" class="form-control"
-									placeholder="Enter Date">
-								<span *ngIf="submitted && hasError('startDate','required')" class="alert-danger">
-									Date is required
-								</span>
-							</div>
-
-							<div class="form-group">
-								<label for="endDate">Date to</label>
-								<input type="date" name="endDate" autocomplete="off" formControlName="endDate" class="form-control"
-									placeholder="Enter Date">
-								<span *ngIf="submitted && hasError('endDate','required')" class="alert-danger">
-									Date is required
-								</span>
-							</div>
-
-							<!-- <div class="form-group">
-								<label for="status">status Status</label>
-								<select name="status" formControlName="status" class="form-control">
-									<option value="">Select Status</option>
-									<option value="true">Active</option>
-									<option value="false">Inactive</option>
-								</select>
-								<span *ngIf="submitted && hasError('status','required')" class="alert-danger">
-									status Status is required
-								</span>
-							</div> -->
-
-							<!-- <div class="form-group">
-								<label for="approved_by">Approved By</label>
-								<input type="text" name="approved_by" autocomplete="off" formControlName="approved_by"
-									class="form-control" placeholder="Enter Approved By">
-								<span *ngIf="submitted && hasError('approved_by','required')" class="alert-danger">
-									Approved By is required
-								</span>
 							</div> -->
 
 						</div>
 
 						<div class="box-footer d-flex">
-							<button type="submit" class="btn btn-button">Submit</button>
-							<button type="cancel" (click)="onCancel()" class="btn btn-button ml-2">Cancel</button>
+							<button type="submit" class="btn btn-button" [disabled]="addLeaveForm.invalid">Submit</button>
+							<button type="button" (click)="onCancel()" class="btn btn-button ml-2">Cancel</button>
 						</div>
 
 					</form>
