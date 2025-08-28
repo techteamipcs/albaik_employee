@@ -75,8 +75,8 @@
 											class="d-flex align-items-center align-self-start justify-content-center"
 										>
 											<img
-												[src]="empdetails[0].photo"
-												[alt]="empdetails[0].name"
+												[src]="Data.photo"
+												[alt]="Data.name"
 												class="img-fluid mr-md-3 mb-sm-3"
 												width="80"
 												height="80"
@@ -84,15 +84,23 @@
 											<div class="detail">
 												<p class="poppins-regular size14">
 													<strong class="poppins-bold size14">ID:</strong>
-													{{ empdetails[0].empId }}
+													{{ Data.employee_id }}
 												</p>
 												<p class="poppins-regular size14">
-													<strong class="poppins-bold size14">Name:</strong>
-													{{ empdetails[0].name }}
+													<strong class="poppins-bold size14">User Name:</strong>
+													{{ Data.username }}
+												</p>
+												<p class="poppins-regular size14">
+													<strong class="poppins-bold size14">First Name:</strong>
+													{{ Data.first_name }}
+												</p>
+												<p class="poppins-regular size14">
+													<strong class="poppins-bold size14">Last Name:</strong>
+													{{ Data.last_name }}
 												</p>
 												<p class="poppins-regular size14 mb-0">
 													<strong class="poppins-bold size14">Email:</strong>
-													{{ empdetails[0].email }}
+													{{ Data.email }}
 												</p>
 											</div>
 										</div>
@@ -109,12 +117,13 @@
 									<div class="col-12">
 										<p class="poppins-regular size14">
 											<strong class="poppins-bold size14">Location:</strong>
-											{{ empdetails[0].location }}
+											{{ Data.address }}
+											{{ Data.city }}, {{ Data.country }}
 										</p>
-										<p class="poppins-regular size14 mb-0">
+										<!-- <p class="poppins-regular size14 mb-0">
 											<strong class="poppins-bold size14">Phone:</strong>
-											{{ empdetails[0].phone }}
-										</p>
+											{{ Data.phone }}
+										</p> -->
 									</div>
 								</div>
 							</div>
@@ -126,11 +135,11 @@
 									<div class="col-12">
 										<p class="poppins-regular size14">
 											<strong class="poppins-bold size14">Joining Date:</strong>
-											{{ empdetails[0].joiningDate | date }}
+											{{ Data.hireDate | date }}
 										</p>
 										<p class="poppins-regular size14 mb-0">
 											<strong class="poppins-bold size14">Position:</strong>
-											{{ empdetails[0].position }}
+											{{ Data.position[0].name }}
 										</p>
 									</div>
 								</div>
@@ -142,11 +151,11 @@
 									<div class="col-lg-12">
 										<p class="poppins-regular size14">
 											<strong class="poppins-bold size14">Shift:</strong>
-											{{ empdetails[0].shift }}
+											{{ Data.shiftPreferences[0] }}
 										</p>
 										<p class="poppins-regular size14 mb-0">
 											<strong class="poppins-bold size14">Department:</strong>
-											{{ empdetails[0].department }}
+											{{ Data.departments_data[0].name }}
 										</p>
 									</div>
 								</div>

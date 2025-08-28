@@ -79,7 +79,7 @@ export class EmployeeService {
 	};
 
 	getEmpDetails = (data: any): Observable<any> => {
-		const endpoint = environment.baseUrl + '/api/leaverequest/getempbytoken';
+		const endpoint = environment.baseUrl + '/api/employee/getempbytoken';
 		return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
 			catchError((err) => {
 				return throwError(err);
