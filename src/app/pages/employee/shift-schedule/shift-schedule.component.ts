@@ -1,29 +1,104 @@
 import { Component } from '@angular/core';
-
+import { EmployeeService } from '../../../providers/employee/employee.service';
 @Component({
-  selector: 'app-shift-schedule',
-  templateUrl: './shift-schedule.component.html',
-  styleUrls: ['./shift-schedule.component.scss']
+	selector: 'app-shift-schedule',
+	templateUrl: './shift-schedule.component.html',
+	styleUrls: ['./shift-schedule.component.scss']
 })
 export class ShiftScheduleComponent {
-empdetails = [{
-		'name'	: 'Asad',
-		'empId':'ALBKEMP-123',
-		'position': 'Level A',
-		'department': 'Production',
-		'location': 'dubai',
-		'email': 'asadipcs@gmail.com',
-		'phone': '123-456-7890',
-		'photo': 'path/to/photo.jpg',
-		'shift': 'Morning',
-		'leaves': 12,
-		'joiningDate': '2020-01-15'
-	}];
-  upcomingShifts = [
-    { day: 'Fri', date: '7 ', month: 'MAR', time: '5:00 AM - 10:00 PM', department: 'The Department of Reporting Manager' },
-    { day: 'Mon', date: '10 ', month: 'MAR', time: '5:00 AM - 10:00 PM', department: 'The Department of Reporting Manager' },
-    { day: 'Tue', date: '11 ', month: 'MAR', time: '5:00 AM - 10:00 PM', department: 'The Department of Reporting Manager' },
-    { day: 'Wed', date: '12 ', month: 'MAR', time: '5:00 AM - 10:00 PM', department: 'The Department of Reporting Manager' },
-    { day: 'Thu', date: '13 ', month: 'MAR', time: '5:00 AM - 10:00 PM', department: 'The Department of Reporting Manager' },
-  ];
+
+
+	Data: any;
+	upcomingShifts: any[] = [];
+	token: string | null;
+	today: Date = new Date();
+
+
+	constructor(private employeeService: EmployeeService) {
+		this.token = localStorage.getItem('albaik-admin-token');
+	}
+
+
+	ngOnInit() {
+		this.getEmpData();
+	}
+
+
+	getEmpData() {
+		const obj: any = { token: this.token };
+		this.employeeService.getEmpAvailDetails(obj).subscribe((response: any) => {
+			if (response.code === 200 && response.result) {
+				this.Data = response.result;
+
+
+				if (this.Data.availabilityData) {
+					this.upcomingShifts = this.generateShiftsFromAvailability(this.Data.availabilityData, this.Data.departmentDetails);
+				}
+			}
+		});
+	}
+
+
+	private generateShiftsFromAvailability(availabilityData: any[], deptDetails: any[]): any[] {
+		const shifts: any[] = [];
+		const department = deptDetails?.[0]?.name || 'Department';
+
+
+		availabilityData.forEach((dayData: any) => {
+			const dateObj = new Date(dayData.date);
+			const day = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+			const month = dateObj.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+
+
+			let startHour: number | null = null;
+			let endHour: number | null = null;
+
+
+			dayData.hourlyStatus.forEach((slot: any, index: number) => {
+				if (slot.status === 'Available') {
+					if (startHour === null) startHour = slot.hour;
+					endHour = slot.hour;
+				} else {
+					if (startHour !== null) {
+						shifts.push({
+							day: day,
+							date: dateObj.getDate(),
+							month: month,
+							time: this.formatTimeRange(startHour, endHour),
+							department: department
+						});
+						startHour = null;
+						endHour = null;
+					}
+				}
+
+
+				// Handle if last slot was available
+				if (index === dayData.hourlyStatus.length - 1 && startHour !== null) {
+					shifts.push({
+						day: day,
+						date: dateObj.getDate(),
+						month: month,
+						time: this.formatTimeRange(startHour, endHour),
+						department: department
+					});
+				}
+			});
+		});
+
+
+		return shifts;
+	}
+
+
+	private formatTimeRange(startHour: number, endHour: number): string {
+		const formatHour = (h: number) => {
+			const date = new Date();
+			date.setHours(h, 0, 0, 0);
+			return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+		};
+
+
+		return `${formatHour(startHour)} - ${formatHour(endHour + 1)}`;
+	}
 }

@@ -87,6 +87,15 @@ export class EmployeeService {
 		);
 	};
 
+	getEmpAvailDetails = (data: any): Observable<any> => {
+		const endpoint = environment.baseUrl + '/api/availability/getempavail';
+		return this.http.post(endpoint, data, this.getRequestHeaders()).pipe(
+			catchError((err) => {
+				return throwError(err);
+			})
+		);
+	};
+
 	protected getRequestHeaders(): {
 		headers: HttpHeaders | { [header: string]: string | string[] };
 	} {
