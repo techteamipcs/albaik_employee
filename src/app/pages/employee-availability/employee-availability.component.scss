@@ -268,3 +268,33 @@ label {
 	color: #495057;
 	margin-bottom: 0;
 }
+
+.check-btn{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	gap:10px;
+	padding: 5px 20px;
+}
+
+.btn-group{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap:10px;
+}
+.tabs{
+	color: white;
+	border:none;
+	background-color: #751822;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap:10px;
+	padding: 5px 20px;
+
+	&.active{
+	background-color: #dc3545;
+
+	}
+}
