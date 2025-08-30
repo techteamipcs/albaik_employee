@@ -40,30 +40,34 @@ export class ShiftScheduleComponent {
 
 
 	private generateShiftsFromAvailability(availabilityData: any[], deptDetails: any[]): any[] {
-		const shifts: any[] = [];
+		const groupedShifts: any = {};
 		const department = deptDetails?.[0]?.name || 'Department';
-
-
+	
 		availabilityData.forEach((dayData: any) => {
 			const dateObj = new Date(dayData.date);
 			const day = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
 			const month = dateObj.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
-
-
+			const dateKey = dateObj.toDateString();
+	
+			if (!groupedShifts[dateKey]) {
+				groupedShifts[dateKey] = {
+					day: day,
+					date: dateObj.getDate(),
+					month: month,
+					shifts: []
+				};
+			}
+	
 			let startHour: number | null = null;
 			let endHour: number | null = null;
-
-
+	
 			dayData.hourlyStatus.forEach((slot: any, index: number) => {
 				if (slot.status === 'Available') {
 					if (startHour === null) startHour = slot.hour;
 					endHour = slot.hour;
 				} else {
 					if (startHour !== null) {
-						shifts.push({
-							day: day,
-							date: dateObj.getDate(),
-							month: month,
+						groupedShifts[dateKey].shifts.push({
 							time: this.formatTimeRange(startHour, endHour),
 							department: department
 						});
@@ -71,24 +75,20 @@ export class ShiftScheduleComponent {
 						endHour = null;
 					}
 				}
-
-
-				// Handle if last slot was available
+	
+				// handle last slot
 				if (index === dayData.hourlyStatus.length - 1 && startHour !== null) {
-					shifts.push({
-						day: day,
-						date: dateObj.getDate(),
-						month: month,
+					groupedShifts[dateKey].shifts.push({
 						time: this.formatTimeRange(startHour, endHour),
 						department: department
 					});
 				}
 			});
 		});
-
-
-		return shifts;
+	
+		return Object.values(groupedShifts);
 	}
+	
 
 
 	private formatTimeRange(startHour: number, endHour: number): string {

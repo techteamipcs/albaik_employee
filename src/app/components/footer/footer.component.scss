@@ -4,3 +4,10 @@
 .cstfooter{
   border-top: 1px solid #dee2e6;
 }
+
+i{
+  font-size: 26px;
+  @media (max-width: 430px) {
+    font-size: 20px;
+  }
+}

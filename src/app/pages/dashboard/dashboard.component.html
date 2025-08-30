@@ -1,12 +1,11 @@
-<!-- Page content -->
 <div class="container-fluid mt--7">
-	<!-- Table -->
 	<div class="row">
 		<div class="col">
 			<div class="card shadow">
 				<div class="card-header border-0">
 					<h3 class="mb-0 poppins-bold size20">Overview</h3>
 				</div>
+
 				<!-- <div class="card-body">
 					<div class="col-md-12 mb-4">
 						<div class="row">
@@ -65,99 +64,165 @@
 						</div>
 					</div>
 				</div> -->
-				<div class="row pl-md-4 pt-md-4">
-					<div class="col-xl-4 col-sm-6 grid-margin">
-						<div class="card">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-12">
-										<div
-											class="d-flex align-items-center align-self-start justify-content-center"
-										>
-											<img
-												[src]="Data.photo"
-												[alt]="Data.name"
-												class="img-fluid mr-md-3 mb-sm-3"
-												width="80"
-												height="80"
-											/>
-											<div class="detail">
-												<p class="poppins-regular size14">
-													<strong class="poppins-bold size14">ID:</strong>
-													{{ Data.employee_id }}
-												</p>
-												<p class="poppins-regular size14">
-													<strong class="poppins-bold size14">User Name:</strong>
-													{{ Data.username }}
-												</p>
-												<p class="poppins-regular size14">
-													<strong class="poppins-bold size14">First Name:</strong>
-													{{ Data.first_name }}
-												</p>
-												<p class="poppins-regular size14">
-													<strong class="poppins-bold size14">Last Name:</strong>
-													{{ Data.last_name }}
-												</p>
-												<p class="poppins-regular size14 mb-0">
-													<strong class="poppins-bold size14">Email:</strong>
-													{{ Data.email }}
-												</p>
-											</div>
-										</div>
-									</div>
+
+				<div class="row p-4">
+					<!-- Employee Profile -->
+					<div class="col-xl-4 col-sm-6 mb-3">
+						<div class="card h-100 shade">
+							<div class="card-body d-flex flex-xl-column align-items-center">
+								<div class="photo">
+									<img
+										[src]="Data.photo"
+										[alt]="Data.name"
+										class="img-fluid w-100 h-100"
+									/>
+								</div>
+								<div class="detail">
+									<p class="poppins-regular mb-0 text-capitalize">
+										<strong class="poppins-bold">ID:</strong>
+										{{ Data.employee_id }}
+									</p>
+									<p class="poppins-regular mb-0 text-capitalize">
+										<strong class="poppins-bold">User Name:</strong>
+										{{ Data.username }}
+									</p>
+									<p class="poppins-regular mb-0 text-capitalize">
+										<strong class="poppins-bold">First Name:</strong>
+										{{ Data.first_name }}
+									</p>
+									<p class="poppins-regular mb-0 text-capitalize">
+										<strong class="poppins-bold">Last Name:</strong>
+										{{ Data.last_name }}
+									</p>
+									<p class="poppins-regular mb-0 text-capitalize">
+										<strong class="poppins-bold">Email:</strong>
+										{{ Data.email }}
+									</p>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-xl-4 col-sm-6 grid-margin">
-						<div class="card grid-margin">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-12">
-										<p class="poppins-regular size14">
-											<strong class="poppins-bold size14">Location:</strong>
-											{{ Data.address }}
-											{{ Data.city }}, {{ Data.country }}
-										</p>
-										<!-- <p class="poppins-regular size14 mb-0">
-											<strong class="poppins-bold size14">Phone:</strong>
-											{{ Data.phone }}
-										</p> -->
-									</div>
+					<!-- Location & Job Info -->
+					<div class="col-xl-4 col-sm-6">
+						<div class="d-flex flex-column h-100 justify-content-between">
+							<div class="card mb-3 shade">
+								<div class="card-body">
+									<p class="poppins-regular mb-0 text-capitalize">
+										<strong class="poppins-bold">Location:</strong>
+										{{ Data.address }}, {{ Data.city }}, {{ Data.country }}
+									</p>
 								</div>
 							</div>
-						</div>
 
-						<div class="card grid-margin">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-12">
-										<p class="poppins-regular size14">
-											<strong class="poppins-bold size14">Joining Date:</strong>
-											{{ Data.hireDate | date }}
-										</p>
-										<p class="poppins-regular size14 mb-0">
-											<strong class="poppins-bold size14">Position:</strong>
-											{{ Data.position[0].name }}
-										</p>
-									</div>
+							<div class="card mb-3 shade">
+								<div class="card-body">
+									<p class="poppins-regular mb-2 text-capitalize">
+										<strong class="poppins-bold">Joining Date:</strong>
+										{{ Data.hireDate | date }}
+									</p>
+									<p class="poppins-regular mb-0 text-capitalize">
+										<strong class="poppins-bold">Position:</strong>
+										{{ Data.position[0].name }}
+									</p>
+								</div>
+							</div>
+
+							<div class="card mb-3 shade">
+								<div class="card-body">
+									<p class="poppins-regular mb-2 text-capitalize">
+										<strong class="poppins-bold">Shift:</strong>
+										{{ Data.shiftPreferences[0] }}
+									</p>
+									<p class="poppins-regular mb-0 text-capitalize">
+										<strong class="poppins-bold">Department:</strong>
+										{{ Data.departments_data[0].name }}
+									</p>
 								</div>
 							</div>
 						</div>
-						<div class="card">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-lg-12">
-										<p class="poppins-regular size14">
-											<strong class="poppins-bold size14">Shift:</strong>
-											{{ Data.shiftPreferences[0] }}
-										</p>
-										<p class="poppins-regular size14 mb-0">
-											<strong class="poppins-bold size14">Department:</strong>
-											{{ Data.departments_data[0].name }}
-										</p>
+					</div>
+
+					<!-- Stats Section -->
+					<div class="col-xl-4 col-sm-12 mb-3">
+						<div class="row gx-3 gy-3">
+							<div class="col-6">
+								<div
+									class="shade p-2 text-center h-100 d-flex flex-column justify-content-center align-items-center"
+								>
+									<small class="poppins-bold mb-3">Total Hours</small>
+									<div
+										class="progress-circle"
+										[style.--progress]="(TotalHours / 24) * 100 + '%'"
+										[style.--fill-color]="'#28a745'"
+									>
+										<div class="inner-circle">{{ TotalHours }}h</div>
 									</div>
+								</div>
+							</div>
+
+							<div class="col-6">
+								<div
+									class="shade p-2 text-center h-100 d-flex flex-column justify-content-center align-items-center"
+								>
+									<small class="poppins-bold mb-3">Overtime</small>
+									<div
+										class="progress-circle"
+										[ngStyle]="{
+											background:
+												'conic-gradient(' +
+												'#28a745 0 ' +
+												((TotalHours - overtime) / 24) * 100 +
+												'%, ' +
+												'#0d0d0d ' +
+												((TotalHours - overtime) / 24) * 100 +
+												'% ' +
+												(TotalHours / 24) * 100 +
+												'%, ' +
+												'#e0e0e0 ' +
+												(TotalHours / 24) * 100 +
+												'% 100%)'
+										}"
+									>
+										<div class="inner-circle">{{ overtime }}h</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- <div class="col-6 border">
+								<div
+									class="p-2 bg-light rounded text-center d-flex flex-column align-items-center justify-content-center"
+								>
+									<small class="size14 poppins-medium">Leave / Remaining</small>
+									<h6 class="size14 poppins-bold">
+										{{ leaveHours }} / {{ remainingHours }}
+									</h6>
+									<div
+										class="progress-circle leave-progress"
+										[style.--progress]="
+											(leaveHours / remainingHours) * 100 + '%'
+										"
+										[style.--fill-color]="'#ffc107'"
+										title="{{ leaveHours }} / {{ remainingHours }}"
+									>
+										<div class="inner-circle">{{ leaveHours }}h</div>
+									</div>
+								</div>
+							</div> -->
+							<div class="col-6 mt-3">
+								<div
+									class="shade p-2 text-center h-100 d-flex flex-column justify-content-center align-items-center"
+								>
+									<small class="poppins-bold mb-3">leaves</small>
+									<h6 class="mb-0 poppins-bold">4</h6>
+								</div>
+							</div>
+							<div class="col-6 mt-3">
+								<div
+									class="shade p-2 text-center h-100 d-flex flex-column justify-content-center align-items-center"
+								>
+									<small class="poppins-bold mb-3">Earnings</small>
+									<h6 class="mb-0 poppins-bold">$2500</h6>
 								</div>
 							</div>
 						</div>

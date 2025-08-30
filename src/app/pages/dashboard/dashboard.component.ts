@@ -22,7 +22,11 @@ export class DashboardComponent {
 	totalRecord: number = 0;
 	Data: any;
 	token: any;
-
+	TotalHours: number = 0;
+	overtime: number = 0;
+	leaveHours: number = 0;
+	remainingHours: number = 0;
+	
 	empdetails = [{
 		'name': 'Asad',
 		'empId': 'ALBKEMP-123',
@@ -36,6 +40,13 @@ export class DashboardComponent {
 		'leaves': 12,
 		'joiningDate': '2020-01-15'
 	}];
+
+
+	totalHoursDemo: number = 24;
+	availabeHoursdemo: number = 10;
+	remainingHoursDemo: number = this.totalHoursDemo - this.availabeHoursdemo;
+	percentDemo: number = Math.round((this.remainingHoursDemo / this.totalHoursDemo) * 100 * 10) / 10;
+
 	constructor(
 		private employeeService: EmployeeService,
 	) {
@@ -44,6 +55,7 @@ export class DashboardComponent {
 
 	ngOnInit() {
 		this.getEmpData();
+		this.getEmpAvailData();
 	}
 
 	getEmpData() {
@@ -66,5 +78,45 @@ export class DashboardComponent {
 	}
 
 
+	getEmpAvailData() {
+		const obj: any = {};
+		obj['token'] = this.token;
+	
+		this.employeeService.getEmpAvailDetails(obj).subscribe(
+			(response) => {
+				if (response.code == 200) {
+					if (response.result != null && response.result != '') {
+						const availabilityData = response.result.availabilityData[0]?.hourlyStatus || [];
+						// ✅ Filter only "available" hours
+						const availableHours = availabilityData
+							.filter((hour: any) => hour.status === "Available" || hour.status === "available")
+							.map((hour: any) => hour.hour); // or whatever field holds the hour
+	
+						const leaveHours = availabilityData
+							.filter((hour: any) => hour.status === "Leave" || hour.status === "leave")
+							.map((hour: any) => hour.hour); // or whatever field holds the hour
+	
+						this.TotalHours = availableHours.length;
+						this.remainingHours = 24 - this.TotalHours;
+						this.leaveHours = leaveHours.length;
+						
+						if(this.TotalHours>=8){
+							this.overtime = this.TotalHours-8;
+						}else{
+							this.overtime = 0;
+						}
+					} else {
+						console.warn("No data found");
+					}
+				} else {
+					console.error("API Error:", response);
+				}
+			}
+		);
+	}
+	
 
+
+
+	
 }
